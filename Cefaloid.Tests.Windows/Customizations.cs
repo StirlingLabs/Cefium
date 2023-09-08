@@ -123,7 +123,8 @@ public static class Customizations {
     ("use-gl", "angle"),
     //("use-angle", "gl"), // see also, Vulkan in EnableFeatures
     ("use-angle", "d3d11"),
-    ("default-background-color", "00000000")
+    ("default-background-color", "00000000"),
+    ("v", "1")
   };
 
 }

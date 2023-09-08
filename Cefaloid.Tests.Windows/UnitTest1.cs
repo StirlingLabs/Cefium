@@ -1,8 +1,10 @@
 using System.Diagnostics;
 using System.IO;
+using System.IO.Pipes;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
+using System.Text;
 using FluentAssertions;
 using static Cefaloid.Cef;
 
@@ -11,9 +13,39 @@ namespace Cefaloid.Tests;
 public class Tests {
 
   [Test]
-  public void InitializeCefTest() {
+  public unsafe void InitializeCefTest() {
     //Environment.SetEnvironmentVariable("DXVK_LOG_PATH", @".");
     //Environment.SetEnvironmentVariable("DXVK_LOG_LEVEL", "debug");
+    Environment.SetEnvironmentVariable("CHROME_HEADLESS", "0");
+    Environment.SetEnvironmentVariable("CHROME_IPC_LOGGING", "1");
+
+    var output = TestContext.Out;
+    var pipeName = $"cefaloid-unit-tests-logging-{Environment.ProcessId}";
+    var pipeReady = new ManualResetEventSlim();
+    new Thread(() => {
+      using var pipeStream = new NamedPipeServerStream(pipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte);
+      using var streamReader = new StreamReader(pipeStream, Encoding.UTF8);
+      pipeReady.Set();
+      pipeStream.WaitForConnection();
+      for (;;) {
+        var line = streamReader.ReadLine();
+        if (line == null)
+          break;
+
+        output.WriteLine(line);
+        output.Flush();
+      }
+    }) {
+      IsBackground = true,
+      Name = "Cefaloid Unit Tests Logging Pipe Worker"
+    }.Start();
+
+    var pipePath = $@"\\.\pipe\{pipeName}";
+
+    pipeReady.Wait();
+    File.WriteAllText(pipePath, "TEST");
+
+    Environment.SetEnvironmentVariable("CHROME_LOG_FILE", pipePath);
 
     Cefaloid.Initialize();
 
@@ -49,6 +81,8 @@ public class Tests {
     while (!Cefaloid.IsReady)
       Thread.Sleep(1);
 
+
+
     Trace.WriteLine("Ready!");
 
     Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
@@ -58,11 +92,14 @@ public class Tests {
       RemoteDebuggingPort = 9222,
       LogSeverity = CefLogSeverity.Verbose,
       //LogSeverity = CefLogSeverity.Disable,
-      WindowlessRenderingEnabled = true,
+      WindowlessRenderingEnabled = false,
       MultiThreadedMessageLoop = true,
       CookieableSchemesExcludeDefaults = true,
       NoSandbox = true
     };
+
+    pipePath.CreateCefString(out settings.LogFile);
+
     //settings.InitializeBase();
     settings.Size.Should().NotBe(0);
 
@@ -153,6 +190,13 @@ public class Tests {
 
     var mainArgs = new CefMainArgs();
     mainArgs.ForWindows.InstanceHandle = default; //Marshal.GetHINSTANCE(typeof(Tests).Assembly.ManifestModule);
+
+    /*
+    var result = cefApp.Target.ExecuteProcess(ref mainArgs, null);
+
+    result.Should().BeLessThan(0);
+    */
+
     var success = cefApp.Target.Initialize(ref mainArgs, ref settings);
 
     success.Should().BeTrue();
@@ -313,6 +357,7 @@ public class Tests {
       var initUrl = "about:blank"
         .CreateCefString();
 
+      /*
       var created = CefBrowserHost.CreateBrowser(
         ref windowInfo,
         client,
@@ -322,6 +367,24 @@ public class Tests {
       );
 
       created.Should().BeTrue();
+      */
+
+      /*
+      var browser = CefBrowserHost.CreateBrowserSync(
+        ref windowInfo,
+        client,
+        ref initUrl,
+        ref browserSettings,
+        extraInfo
+      );
+
+      (browser == null).Should().BeFalse();
+      */
+      CefApp.RunMessageLoop();
+
+      /*
+
+      CefApp.Shutdown();*/
     }
   }
 

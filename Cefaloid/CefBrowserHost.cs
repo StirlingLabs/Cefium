@@ -48,10 +48,10 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// <c>CEF_EXPORT cef_browser_t* cef_browser_host_create_browser_sync(const cef_window_info_t* windowInfo, struct _cef_client_t* client, const cef_string_t* url, const struct _cef_browser_settings_t* settings, struct _cef_dictionary_value_t* extra_info, struct _cef_request_context_t* request_context);</c>
   /// </summary>
   [DllImport("cef", EntryPoint = "cef_browser_host_create_browser_sync", CallingConvention = CallingConvention.Cdecl)]
-  private static extern unsafe CefBrowser* _CreateBrowserSync(CefWindowInfo* windowInfo, CefClient* client, CefString* url, CefBrowserSettings* settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext);
+  private static extern unsafe CefBrowser* _CreateBrowserSync(CefWindowInfo* windowInfo, CefClient* client, CefString* url, CefBrowserSettings* settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext = null);
 
   /// <inheritdoc cref="_CreateBrowserSync"/>
-  public static unsafe CefBrowser* CreateBrowserSync(ref CefWindowInfo windowInfo, CefClient* client, ref CefString url, ref CefBrowserSettings settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext)
+  public static unsafe CefBrowser* CreateBrowserSync(ref CefWindowInfo windowInfo, CefClient* client, ref CefString url, ref CefBrowserSettings settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext = null)
     => _CreateBrowserSync(windowInfo.AsPointer(), client, url.AsPointer(), settings.AsPointer(), extraInfo, requestContext);
 
   /// <summary>
