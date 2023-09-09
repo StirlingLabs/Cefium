@@ -7,7 +7,8 @@
 public struct CefKeyboardHandler : ICefRefCountedBase<CefKeyboardHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefKeyboardHandler() {}
+  public CefKeyboardHandler() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -10,7 +10,8 @@
 public struct CefSchemeHandlerFactory : ICefRefCountedBase<CefSchemeHandlerFactory> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefSchemeHandlerFactory() {}
+  public CefSchemeHandlerFactory() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -9,7 +9,8 @@
 public struct CefStreamWriter : ICefRefCountedBase<CefStreamWriter> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefStreamWriter() {}
+  public CefStreamWriter() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -8,8 +8,10 @@ namespace Cefaloid;
 /// <seealso cref="CefPostDataElementExtensions"/>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPostDataElement : ICefRefCountedBase<CefPostDataElement> {
+
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPostDataElement() {}
+  public CefPostDataElement() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -20,7 +22,8 @@ public struct CefPostDataElement : ICefRefCountedBase<CefPostDataElement> {
   public static extern unsafe CefPostDataElement* _Create();
 
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefPostDataElement* Create() => _Create();
+  public static unsafe CefPostDataElement* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns true (1) if this object is read-only.

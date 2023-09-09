@@ -12,7 +12,8 @@ namespace Cefaloid;
 public struct CefMediaRoute : ICefRefCountedBase<CefMediaRoute> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaRoute() {}
+  public CefMediaRoute() {
+  }
 
   /// <summary>
   /// Base structure.

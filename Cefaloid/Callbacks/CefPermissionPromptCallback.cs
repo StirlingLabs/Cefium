@@ -7,7 +7,8 @@
 public struct CefPermissionPromptCallback : ICefRefCountedBase<CefPermissionPromptCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPermissionPromptCallback() {}
+  public CefPermissionPromptCallback() {
+  }
 
   /// <summary>
   /// Base structure.

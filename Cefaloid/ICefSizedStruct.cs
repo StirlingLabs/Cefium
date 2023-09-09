@@ -6,6 +6,7 @@ namespace Cefaloid;
 /// <seealso cref="CefSizedStructExtensions"/>
 [PublicAPI]
 public interface ICefSizedStruct<T> where T : unmanaged, ICefSizedStruct<T> {
+
   public static unsafe T* Create() {
     var size = (nuint) Unsafe.SizeOf<T>();
     var p = (nuint*) NativeMemory.AllocZeroed(size);

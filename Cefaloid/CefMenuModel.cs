@@ -11,7 +11,8 @@
 public struct CefMenuModel : ICefRefCountedBase<CefMenuModel> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMenuModel() {}
+  public CefMenuModel() {
+  }
 
   /// <summary>
   /// Base structure.

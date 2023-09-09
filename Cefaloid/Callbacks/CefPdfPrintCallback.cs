@@ -9,7 +9,8 @@
 public struct CefPdfPrintCallback : ICefRefCountedBase<CefPdfPrintCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPdfPrintCallback() {}
+  public CefPdfPrintCallback() {
+  }
 
   /// <summary>
   /// Base structure.

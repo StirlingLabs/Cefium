@@ -8,12 +8,17 @@ namespace Cefaloid;
 [PublicAPI]
 public interface ICefRefCountedBase<T> where T : unmanaged, ICefRefCountedBase<T> {
 
-  public virtual static unsafe T* Create() {
+  public virtual static unsafe T* CreateUndefined() {
     var p = (T*) NativeMemory.AllocZeroed((nuint) Unsafe.SizeOf<T>());
     p->InitializeBase();
+    T.Initialize(ref *p);
     return p;
   }
 
-  public virtual static unsafe CefRef<T> New() => new(T.Create());
+  public virtual static void Initialize(ref T item) {
+    // default
+  }
+
+  public virtual static unsafe CefRef<T> New() => new(T.CreateUndefined());
 
 }

@@ -9,7 +9,8 @@
 public struct CefV8ArrayBufferReleaseCallback : ICefRefCountedBase<CefV8ArrayBufferReleaseCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefV8ArrayBufferReleaseCallback() {}
+  public CefV8ArrayBufferReleaseCallback() {
+  }
 
   /// <summary>
   /// Base structure.

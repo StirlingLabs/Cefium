@@ -11,8 +11,10 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefImage : ICefRefCountedBase<CefImage> {
+
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefImage() {}
+  public CefImage() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -28,7 +30,8 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   public static extern unsafe CefImage* _Create();
 
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefImage* Create() => _Create();
+  public static unsafe CefImage* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns true (1) if this Image is NULL.

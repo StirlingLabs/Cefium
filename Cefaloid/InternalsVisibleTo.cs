@@ -1,0 +1,5 @@
+﻿[assembly: InternalsVisibleTo("Cefaloid.Tests")]
+[assembly: InternalsVisibleTo("Cefaloid.Tests.Windows")]
+[assembly: InternalsVisibleTo("Cefaloid.Tests.Linux")]
+[assembly: InternalsVisibleTo("Cefaloid.Tests.Mac")]
+[assembly: InternalsVisibleTo("Cefaloid.Subprocess")]

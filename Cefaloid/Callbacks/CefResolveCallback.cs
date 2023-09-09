@@ -8,7 +8,8 @@
 public struct CefResolveCallback : ICefRefCountedBase<CefResolveCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResolveCallback() {}
+  public CefResolveCallback() {
+  }
 
   /// <summary>
   /// Base structure.

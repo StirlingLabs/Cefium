@@ -10,7 +10,8 @@
 public struct CefMenuModelDelegate : ICefRefCountedBase<CefMenuModelDelegate> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMenuModelDelegate() {}
+  public CefMenuModelDelegate() {
+  }
 
   /// <summary>
   /// Base structure.

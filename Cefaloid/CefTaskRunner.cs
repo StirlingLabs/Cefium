@@ -16,7 +16,8 @@
 public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefTaskRunner() {}
+  public CefTaskRunner() {
+  }
 
   /// <summary>
   /// Base structure.

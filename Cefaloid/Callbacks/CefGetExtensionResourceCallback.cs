@@ -11,7 +11,8 @@ namespace Cefaloid;
 public struct CefGetExtensionResourceCallback : ICefRefCountedBase<CefGetExtensionResourceCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefGetExtensionResourceCallback() {}
+  public CefGetExtensionResourceCallback() {
+  }
 
   /// <summary>
   /// Base structure.

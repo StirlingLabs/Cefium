@@ -9,7 +9,8 @@
 public struct CefExtension : ICefRefCountedBase<CefExtension> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefExtension() {}
+  public CefExtension() {
+  }
 
   /// <summary>
   /// Base structure.

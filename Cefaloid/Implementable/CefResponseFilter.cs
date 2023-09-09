@@ -9,7 +9,8 @@
 public struct CefResponseFilter : ICefRefCountedBase<CefResponseFilter> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResponseFilter() {}
+  public CefResponseFilter() {
+  }
 
   /// <summary>
   /// Base structure.

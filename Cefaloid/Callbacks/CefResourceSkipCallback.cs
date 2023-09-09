@@ -8,7 +8,8 @@
 public struct CefResourceSkipCallback : ICefRefCountedBase<CefResourceSkipCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResourceSkipCallback() {}
+  public CefResourceSkipCallback() {
+  }
 
   /// <summary>
   /// Base structure.

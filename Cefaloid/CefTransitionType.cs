@@ -6,7 +6,7 @@ namespace Cefaloid;
 /// <c>cef_transition_type_t</c>
 /// </summary>
 [PublicAPI, Flags]
-public enum CefTransitionType : uint{
+public enum CefTransitionType : uint {
 
   /// <summary>
   /// Source is a link click or the JavaScript window.open function. This is
@@ -183,4 +183,5 @@ public enum CefTransitionType : uint{
   /// <c>TT_QUALIFIER_MASK</c>
   /// </summary>
   QualifierMask = 0xFFFFFF00,
+
 }

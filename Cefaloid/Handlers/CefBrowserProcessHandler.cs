@@ -1,6 +1,5 @@
 ﻿namespace Cefaloid;
 
-
 /// <summary>
 /// Structure used to implement browser process callbacks. The functions of this
 /// structure will be called on the browser process main thread unless otherwise
@@ -11,7 +10,8 @@
 public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefBrowserProcessHandler() {}
+  public CefBrowserProcessHandler() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -42,12 +42,14 @@ public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHan
   /// <c>void(CEF_CALLBACK* on_register_custom_preferences)(struct _cef_browser_process_handler_t* self, cef_preferences_type_t type, struct _cef_preference_registrar_t* registrar);</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserProcessHandler*, CefPreferencesType, CefPreferenceRegistrar*, void> _OnRegisterCustomPreferences;
+
   /// <summary>
   /// Called on the browser process UI thread immediately after the CEF context
   /// has been initialized.
   /// <c>void(CEF_CALLBACK* on_context_initialized)(struct _cef_browser_process_handler_t* self);</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserProcessHandler*, void> _OnContextInitialized;
+
   /// <summary>
   /// Called before a child process is launched. Will be called on the browser
   /// process UI thread when launching a render process and on the browser
@@ -57,6 +59,7 @@ public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHan
   /// <c>void(CEF_CALLBACK* on_before_child_process_launch)(struct _cef_browser_process_handler_t* self, struct _cef_command_line_t* command_line);</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserProcessHandler*, CefCommandLine*, void> _OnBeforeChildProcessLaunch;
+
   /// <summary>
   /// Called from any thread when work has been scheduled for the browser
   /// process main (UI) thread. This callback is used in combination with
@@ -72,6 +75,7 @@ public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHan
   /// <c>void(CEF_CALLBACK* on_schedule_message_pump_work)(struct _cef_browser_process_handler_t* self, int64 delay_ms);</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserProcessHandler*, long, void> _OnScheduleMessagePumpWork;
+
   /// <summary>
   /// Return the default client for use with a newly created browser window. If
   /// null is returned the browser will be unmanaged (no callbacks will be

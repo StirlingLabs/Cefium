@@ -9,7 +9,8 @@
 public struct CefFocusHandler : ICefRefCountedBase<CefFocusHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefFocusHandler() {}
+  public CefFocusHandler() {
+  }
 
   /// <summary>
   /// Base structure.

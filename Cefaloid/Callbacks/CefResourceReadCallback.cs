@@ -8,7 +8,8 @@
 public struct CefResourceReadCallback : ICefRefCountedBase<CefResourceReadCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResourceReadCallback() {}
+  public CefResourceReadCallback() {
+  }
 
   /// <summary>
   /// Base structure.

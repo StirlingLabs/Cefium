@@ -20,16 +20,20 @@ public unsafe struct CefStringUserFree {
   }
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public void Destroy() => _Str.Destroy();
+  public void Destroy()
+    => _Str.Destroy();
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public ReadOnlySpan<byte> AsByteSpan() => _Str.AsByteSpan();
+  public ReadOnlySpan<byte> AsByteSpan()
+    => _Str.AsByteSpan();
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public ReadOnlySpan<char> AsCharSpan() => _Str.AsCharSpan();
+  public ReadOnlySpan<char> AsCharSpan()
+    => _Str.AsCharSpan();
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public ReadOnlySpan<int> AsIntSpan() => _Str.AsIntSpan();
+  public ReadOnlySpan<int> AsIntSpan()
+    => _Str.AsIntSpan();
 
   /// <summary>
   /// These functions free the string structure allocated by the associated

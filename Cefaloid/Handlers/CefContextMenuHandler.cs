@@ -9,7 +9,8 @@
 public struct CefContextMenuHandler : ICefRefCountedBase<CefContextMenuHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefContextMenuHandler() {}
+  public CefContextMenuHandler() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -13,7 +13,8 @@
 public struct CefFrame : ICefRefCountedBase<CefFrame> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefFrame() {}
+  public CefFrame() {
+  }
 
   /// <summary>
   /// Base structure.

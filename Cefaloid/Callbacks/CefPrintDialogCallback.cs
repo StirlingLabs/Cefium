@@ -8,7 +8,8 @@
 public struct CefPrintDialogCallback : ICefRefCountedBase<CefPrintDialogCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPrintDialogCallback() {}
+  public CefPrintDialogCallback() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -7,7 +7,8 @@
 public struct CefRegistration : ICefRefCountedBase<CefRegistration> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRegistration() {}
+  public CefRegistration() {
+  }
 
   /// <summary>
   /// Base structure.

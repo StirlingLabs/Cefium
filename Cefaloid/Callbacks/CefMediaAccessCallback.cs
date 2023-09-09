@@ -7,7 +7,8 @@
 public struct CefMediaAccessCallback : ICefRefCountedBase<CefMediaAccessCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaAccessCallback() {}
+  public CefMediaAccessCallback() {
+  }
 
   /// <summary>
   /// Base structure.

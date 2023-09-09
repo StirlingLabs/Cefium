@@ -9,7 +9,8 @@
 public struct CefJsDialogHandler : ICefRefCountedBase<CefJsDialogHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefJsDialogHandler() {}
+  public CefJsDialogHandler() {
+  }
 
   /// <summary>
   /// Base structure.

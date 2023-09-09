@@ -8,7 +8,8 @@
 public struct CefRunContextMenuCallback : ICefRefCountedBase<CefRunContextMenuCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRunContextMenuCallback() {}
+  public CefRunContextMenuCallback() {
+  }
 
   /// <summary>
   /// Base structure.

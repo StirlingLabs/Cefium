@@ -9,7 +9,8 @@
 public struct CefAudioHandler : ICefRefCountedBase<CefAudioHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefAudioHandler() {}
+  public CefAudioHandler() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -7,7 +7,8 @@
 public struct CefFrameHandler : ICefRefCountedBase<CefFrameHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefFrameHandler() {}
+  public CefFrameHandler() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -9,7 +9,8 @@
 public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessageObserver> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDevToolsMessageObserver() {}
+  public CefDevToolsMessageObserver() {
+  }
 
   /// <summary>
   /// Base structure.

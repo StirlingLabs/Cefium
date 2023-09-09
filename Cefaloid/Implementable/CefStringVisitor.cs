@@ -10,7 +10,8 @@
 public struct CefStringVisitor : ICefRefCountedBase<CefStringVisitor> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefStringVisitor() {}
+  public CefStringVisitor() {
+  }
 
   /// <summary>
   /// Base structure.

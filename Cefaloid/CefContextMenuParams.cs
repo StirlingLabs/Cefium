@@ -9,7 +9,8 @@
 public struct CefContextMenuParams : ICefRefCountedBase<CefContextMenuParams> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefContextMenuParams() {}
+  public CefContextMenuParams() {
+  }
 
   /// <summary>
   /// Base structure.

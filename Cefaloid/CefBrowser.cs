@@ -12,7 +12,8 @@
 public struct CefBrowser : ICefRefCountedBase<CefBrowser> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefBrowser() {}
+  public CefBrowser() {
+  }
 
   /// <summary>
   /// Base structure.

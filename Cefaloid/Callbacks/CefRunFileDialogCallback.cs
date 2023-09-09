@@ -10,7 +10,8 @@
 public struct CefRunFileDialogCallback : ICefRefCountedBase<CefRunFileDialogCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRunFileDialogCallback() {}
+  public CefRunFileDialogCallback() {
+  }
 
   /// <summary>
   /// Base structure.

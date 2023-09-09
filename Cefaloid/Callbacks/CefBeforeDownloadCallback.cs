@@ -8,7 +8,8 @@
 public struct CefBeforeDownloadCallback : ICefRefCountedBase<CefBeforeDownloadCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefBeforeDownloadCallback() {}
+  public CefBeforeDownloadCallback() {
+  }
 
   /// <summary>
   /// Base structure.

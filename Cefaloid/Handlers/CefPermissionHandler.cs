@@ -7,7 +7,8 @@
 public struct CefPermissionHandler : ICefRefCountedBase<CefPermissionHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPermissionHandler() {}
+  public CefPermissionHandler() {
+  }
 
   /// <summary>
   /// Base structure.

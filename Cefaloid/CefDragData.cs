@@ -7,8 +7,10 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDragData : ICefRefCountedBase<CefDragData> {
+
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDragData() {}
+  public CefDragData() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -22,9 +24,9 @@ public struct CefDragData : ICefRefCountedBase<CefDragData> {
   [DllImport("cef", EntryPoint = "cef_drag_data_create", CallingConvention = CallingConvention.Cdecl)]
   public static extern unsafe CefDragData* _Create();
 
-
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefDragData* Create() => _Create();
+  public static unsafe CefDragData* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns a copy of the current object.

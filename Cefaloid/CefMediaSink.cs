@@ -10,7 +10,8 @@
 public struct CefMediaSink : ICefRefCountedBase<CefMediaSink> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaSink() {}
+  public CefMediaSink() {
+  }
 
   /// <summary>
   /// Base structure.

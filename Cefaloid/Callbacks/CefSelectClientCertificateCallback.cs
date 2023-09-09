@@ -8,7 +8,8 @@
 public struct CefSelectClientCertificateCallback : ICefRefCountedBase<CefSelectClientCertificateCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefSelectClientCertificateCallback() {}
+  public CefSelectClientCertificateCallback() {
+  }
 
   /// <summary>
   /// Base structure.

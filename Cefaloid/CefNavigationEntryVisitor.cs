@@ -9,7 +9,8 @@
 public struct CefNavigationEntryVisitor : ICefRefCountedBase<CefNavigationEntryVisitor> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefNavigationEntryVisitor() {}
+  public CefNavigationEntryVisitor() {
+  }
 
   /// <summary>
   /// Base structure.

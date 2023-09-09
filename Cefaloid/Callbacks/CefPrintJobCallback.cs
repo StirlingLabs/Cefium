@@ -8,7 +8,8 @@
 public struct CefPrintJobCallback : ICefRefCountedBase<CefPrintJobCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPrintJobCallback() {}
+  public CefPrintJobCallback() {
+  }
 
   /// <summary>
   /// Base structure.

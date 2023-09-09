@@ -13,7 +13,8 @@ namespace Cefaloid;
 public struct CefV8StackTrace : ICefRefCountedBase<CefV8StackTrace> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefV8StackTrace() {}
+  public CefV8StackTrace() {
+  }
 
   /// <summary>
   /// Base structure.

@@ -13,7 +13,8 @@ namespace Cefaloid;
 public struct CefResourceBundle : ICefRefCountedBase<CefResourceBundle> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResourceBundle() {}
+  public CefResourceBundle() {
+  }
 
   /// <summary>
   /// Base structure.

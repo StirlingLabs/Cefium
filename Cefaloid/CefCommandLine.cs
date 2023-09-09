@@ -14,9 +14,10 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCommandLine : ICefRefCountedBase<CefCommandLine> {
-  [Obsolete(DoNotConstructDirectly, true)]
-  public CefCommandLine() {}
 
+  [Obsolete(DoNotConstructDirectly, true)]
+  public CefCommandLine() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -31,7 +32,8 @@ public struct CefCommandLine : ICefRefCountedBase<CefCommandLine> {
   private static extern unsafe CefCommandLine* _Create();
 
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefCommandLine* Create() => _Create();
+  public static unsafe CefCommandLine* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns the singleton global cef_command_line_t object. The returned object

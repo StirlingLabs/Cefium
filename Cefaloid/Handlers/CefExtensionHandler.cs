@@ -12,7 +12,8 @@ namespace Cefaloid;
 public struct CefExtensionHandler : ICefRefCountedBase<CefExtensionHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefExtensionHandler() {}
+  public CefExtensionHandler() {
+  }
 
   /// <summary>
   /// Base structure.

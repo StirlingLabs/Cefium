@@ -9,7 +9,8 @@
 public struct CefApp : ICefRefCountedBase<CefApp> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefApp() {}
+  public CefApp() {
+  }
 
   /// <summary>
   /// Base structure.

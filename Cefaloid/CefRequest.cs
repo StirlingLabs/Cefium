@@ -10,7 +10,8 @@
 public struct CefRequest : ICefRefCountedBase<CefRequest> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRequest() {}
+  public CefRequest() {
+  }
 
   /// <summary>
   /// Base structure.

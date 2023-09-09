@@ -801,6 +801,12 @@
   <member name="T:Cefaloid.CefV8AccessControl">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefV8Accessor">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefV8AccessorExtensions">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefV8ArrayBufferReleaseCallback">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -825,6 +831,12 @@
   <member name="T:Cefaloid.CefV8HandlerExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefV8Interceptor">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefV8InterceptorExtensions">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefV8PropertyAttribute">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -840,7 +852,10 @@
   <member name="T:Cefaloid.CefV8StackTraceExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="T:Cefaloid.CefValue">
+  <member name="T:Cefaloid.CefV8Value">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefV8ValueExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefValueExtensions">

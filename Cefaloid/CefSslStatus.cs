@@ -8,7 +8,8 @@
 public struct CefSslStatus : ICefRefCountedBase<CefSslStatus> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefSslStatus() {}
+  public CefSslStatus() {
+  }
 
   /// <summary>
   /// Base structure.

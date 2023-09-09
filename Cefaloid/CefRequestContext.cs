@@ -21,7 +21,8 @@
 public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRequestContext() {}
+  public CefRequestContext() {
+  }
 
   /// <summary>
   /// Base structure.

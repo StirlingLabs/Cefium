@@ -9,7 +9,8 @@
 public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefCookieManager() {}
+  public CefCookieManager() {
+  }
 
   /// <summary>
   /// Base structure.

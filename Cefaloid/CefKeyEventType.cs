@@ -7,7 +7,6 @@
 [PublicAPI]
 public enum CefKeyEventType {
 
-
   /// <summary>
   /// Notification that a key transitioned from "up" to "down".
   /// <c>KEYEVENT_RAWKEYDOWN</c>

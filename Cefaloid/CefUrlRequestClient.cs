@@ -10,7 +10,8 @@
 public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefUrlRequestClient() {}
+  public CefUrlRequestClient() {
+  }
 
   /// <summary>
   /// Base structure.

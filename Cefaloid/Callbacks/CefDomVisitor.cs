@@ -11,7 +11,8 @@
 public struct CefDomVisitor : ICefRefCountedBase<CefDomVisitor> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDomVisitor() {}
+  public CefDomVisitor() {
+  }
 
   /// <summary>
   /// Base structure.

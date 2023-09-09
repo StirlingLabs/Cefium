@@ -9,7 +9,8 @@
 public struct CefWriteHandler : ICefRefCountedBase<CefWriteHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefWriteHandler() {}
+  public CefWriteHandler() {
+  }
 
   /// <summary>
   /// Base structure.

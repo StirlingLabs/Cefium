@@ -9,7 +9,8 @@
 public struct CefBinaryValue : ICefRefCountedBase<CefBinaryValue> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefBinaryValue() {}
+  public CefBinaryValue() {
+  }
 
   /// <summary>
   /// Base structure.

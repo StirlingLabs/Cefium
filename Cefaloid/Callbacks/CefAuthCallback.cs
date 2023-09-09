@@ -9,7 +9,8 @@
 public struct CefAuthCallback : ICefRefCountedBase<CefAuthCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefAuthCallback() {}
+  public CefAuthCallback() {
+  }
 
   /// <summary>
   /// Base structure.

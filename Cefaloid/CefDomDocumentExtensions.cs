@@ -44,5 +44,4 @@ public static class CefDomDocumentExtensions {
   public static unsafe CefStringUserFree* GetCompleteUrl(ref this CefDomDocument self, ref CefString partialUrl)
     => self._GetCompleteUrl(self.AsPointer(), partialUrl.AsPointer());
 
-
 }

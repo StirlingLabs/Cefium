@@ -10,7 +10,8 @@
 public struct CefRequestContextHandler : ICefRefCountedBase<CefRequestContextHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRequestContextHandler() {}
+  public CefRequestContextHandler() {
+  }
 
   /// <summary>
   /// Base structure.

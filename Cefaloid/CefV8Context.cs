@@ -12,7 +12,8 @@
 public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefV8Context() {}
+  public CefV8Context() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -78,7 +79,7 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// before calling this function.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* get_global)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefValue*> _GetGlobal;
+  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefV8Value*> _GetGlobal;
 
   /// <summary>
   /// Enter this context. A context must be explicitly entered before creating a
@@ -113,6 +114,6 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// to the exception, if any, and the function will return false (0).
   /// <c>int(CEF_CALLBACK* eval)(struct _cef_v8context_t* self, const cef_string_t* code, const cef_string_t* script_url, int start_line, struct _cef_v8value_t** retval, struct _cef_v8exception_t** exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefString*, CefString*, int, CefValue**, CefV8Exception**, int> _Eval;
+  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefString*, CefString*, int, CefV8Value**, CefV8Exception**, int> _Eval;
 
 }

@@ -14,7 +14,8 @@
 public struct CefTask : ICefRefCountedBase<CefTask> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefTask() {}
+  public CefTask() {
+  }
 
   ///
   /// Base structure.

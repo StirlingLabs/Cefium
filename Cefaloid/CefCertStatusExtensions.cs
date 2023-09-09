@@ -12,6 +12,7 @@ public static class CefCertStatusExtensions {
   internal static extern int _IsCertStatusError(CefCertStatus status);
 
   /// <inheritdoc cref="_IsCertStatusError"/>
-  public static bool IsError(this CefCertStatus status) => _IsCertStatusError(status) != 0;
+  public static bool IsError(this CefCertStatus status)
+    => _IsCertStatusError(status) != 0;
 
 }

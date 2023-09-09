@@ -11,7 +11,8 @@
 public struct CefMediaSource : ICefRefCountedBase<CefMediaSource> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaSource() {}
+  public CefMediaSource() {
+  }
 
   /// <summary>
   /// Base structure.

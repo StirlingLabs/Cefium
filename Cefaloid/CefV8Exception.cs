@@ -10,7 +10,8 @@
 public struct CefV8Exception : ICefRefCountedBase<CefV8Exception> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefV8Exception() {}
+  public CefV8Exception() {
+  }
 
   /// <summary>
   /// Base structure.

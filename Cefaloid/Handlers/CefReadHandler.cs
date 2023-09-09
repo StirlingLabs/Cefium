@@ -9,7 +9,8 @@
 public struct CefReadHandler : ICefRefCountedBase<CefReadHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefReadHandler() {}
+  public CefReadHandler() {
+  }
 
   /// <summary>
   /// Base structure.

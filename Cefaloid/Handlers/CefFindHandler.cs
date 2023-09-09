@@ -9,7 +9,8 @@
 public struct CefFindHandler : ICefRefCountedBase<CefFindHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefFindHandler() {}
+  public CefFindHandler() {
+  }
 
   /// <summary>
   /// Base structure.

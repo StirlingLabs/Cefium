@@ -10,7 +10,8 @@ namespace Cefaloid;
 public struct CefMediaObserver : ICefRefCountedBase<CefMediaObserver> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaObserver() {}
+  public CefMediaObserver() {
+  }
 
   /// <summary>
   /// Base structure.

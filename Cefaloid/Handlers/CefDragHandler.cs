@@ -9,7 +9,8 @@
 public struct CefDragHandler : ICefRefCountedBase<CefDragHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDragHandler() {}
+  public CefDragHandler() {
+  }
 
   /// <summary>
   /// Base structure.

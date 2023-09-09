@@ -10,7 +10,8 @@ namespace Cefaloid;
 public struct CefStreamReader : ICefRefCountedBase<CefStreamReader> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefStreamReader() {}
+  public CefStreamReader() {
+  }
 
   /// <summary>
   /// Base structure.

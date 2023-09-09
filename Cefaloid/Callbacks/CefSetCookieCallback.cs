@@ -9,7 +9,8 @@
 public struct CefSetCookieCallback : ICefRefCountedBase<CefSetCookieCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefSetCookieCallback() {}
+  public CefSetCookieCallback() {
+  }
 
   /// <summary>
   /// Base structure.

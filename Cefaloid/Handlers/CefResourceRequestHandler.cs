@@ -10,7 +10,8 @@
 public struct CefResourceRequestHandler : ICefRefCountedBase<CefResourceRequestHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResourceRequestHandler() {}
+  public CefResourceRequestHandler() {
+  }
 
   /// <summary>
   /// Base structure.

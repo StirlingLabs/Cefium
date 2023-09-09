@@ -8,7 +8,8 @@
 public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPreferenceManager() {}
+  public CefPreferenceManager() {
+  }
 
   /// <summary>
   /// Base structure.

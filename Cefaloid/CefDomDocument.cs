@@ -10,7 +10,8 @@ namespace Cefaloid;
 public struct CefDomDocument : ICefRefCountedBase<CefDomDocument> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDomDocument() {}
+  public CefDomDocument() {
+  }
 
   /// <summary>
   /// Base structure.

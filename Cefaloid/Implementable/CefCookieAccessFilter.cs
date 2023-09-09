@@ -10,7 +10,8 @@
 public struct CefCookieAccessFilter : ICefRefCountedBase<CefCookieAccessFilter> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefCookieAccessFilter() {}
+  public CefCookieAccessFilter() {
+  }
 
   /// <summary>
   /// Base structure.

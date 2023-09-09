@@ -9,7 +9,8 @@
 public struct CefRenderHandler : ICefRefCountedBase<CefRenderHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefRenderHandler() {}
+  public CefRenderHandler() {
+  }
 
   /// <summary>
   /// Base structure.

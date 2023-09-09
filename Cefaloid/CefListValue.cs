@@ -6,8 +6,10 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefListValue : ICefRefCountedBase<CefListValue> {
+
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefListValue() {}
+  public CefListValue() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -22,7 +24,8 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   public static extern unsafe CefListValue* _Create();
 
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefListValue* Create() => _Create();
+  public static unsafe CefListValue* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns true (1) if this object is valid. This object may become invalid

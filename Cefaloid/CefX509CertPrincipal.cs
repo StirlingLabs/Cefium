@@ -8,7 +8,8 @@
 public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefX509CertPrincipal() {}
+  public CefX509CertPrincipal() {
+  }
 
   /// <summary>
   /// Base structure.

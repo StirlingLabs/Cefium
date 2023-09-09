@@ -10,7 +10,9 @@
 public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefPrintHandler() {}
+  public CefPrintHandler() {
+  }
+
   /// <summary>
   /// Base structure.
   /// </summary>
@@ -25,6 +27,7 @@ public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
   /// <c>void(CEF_CALLBACK* on_print_start)(struct _cef_print_handler_t* self, struct _cef_browser_t* browser)</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPrintHandler*, CefBrowser*, void> _OnPrintStart;
+
   /// <summary>
   /// Synchronize |settings| with client state. If |get_defaults| is true (1)
   /// then populate |settings| with the default print settings. Do not keep a
@@ -32,6 +35,7 @@ public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
   /// <c>void(CEF_CALLBACK* on_print_settings)(struct _cef_print_handler_t* self, struct _cef_browser_t* browser, struct _cef_print_settings_t* settings, int get_defaults)</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPrintHandler*, CefBrowser*, CefPrintSettings*, int, void> _OnPrintSettings;
+
   /// <summary>
   /// Show the print dialog. Execute |callback| once the dialog is dismissed.
   /// Return true (1) if the dialog will be displayed or false (0) to cancel the
@@ -39,6 +43,7 @@ public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
   /// <c>int(CEF_CALLBACK* on_print_dialog)(struct _cef_print_handler_t* self, struct _cef_browser_t* browser, int has_selection, struct _cef_print_dialog_callback_t* callback)</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPrintHandler*, CefBrowser*, int, CefPrintDialogCallback*, int> _OnPrintDialog;
+
   /// <summary>
   /// Send the print job to the printer. Execute |callback| once the job is
   /// completed. Return true (1) if the job will proceed or false (0) to cancel
@@ -46,11 +51,13 @@ public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
   /// <c>int(CEF_CALLBACK* on_print_job)(struct _cef_print_handler_t* self, struct _cef_browser_t* browser, const cef_string_t* document_name, const cef_string_t* pdf_file_path, struct _cef_print_job_callback_t* callback)</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPrintHandler*, CefBrowser*, CefString*, CefString*, CefPrintJobCallback*, int> _OnPrintJob;
+
   /// <summary>
   /// Reset client state related to printing.
   /// <c>void(CEF_CALLBACK* on_print_reset)(struct _cef_print_handler_t* self, struct _cef_browser_t* browser)</c>
   /// </summary>
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPrintHandler*, CefBrowser*, void> _OnPrintReset;
+
   /// <summary>
   /// Return the PDF paper size in device units. Used in combination with
   /// cef_browser_host_t::print_to_pdf().

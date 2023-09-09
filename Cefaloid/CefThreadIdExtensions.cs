@@ -13,6 +13,7 @@ public static class CefThreadIdExtensions {
   [DllImport("cef", EntryPoint = "cef_currently_on", CallingConvention = CallingConvention.Cdecl)]
   internal static extern int _CurrentlyOn(CefThreadId threadId);
 
-  public static bool CurrentlyOn(this CefThreadId threadId) => _CurrentlyOn(threadId) != 0;
+  public static bool CurrentlyOn(this CefThreadId threadId)
+    => _CurrentlyOn(threadId) != 0;
 
 }

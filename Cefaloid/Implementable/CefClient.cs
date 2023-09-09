@@ -9,7 +9,8 @@
 public struct CefClient : ICefRefCountedBase<CefClient> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefClient() {}
+  public CefClient() {
+  }
 
   /// <summary>
   /// Base structure.

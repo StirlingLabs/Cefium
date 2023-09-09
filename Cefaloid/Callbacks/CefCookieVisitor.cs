@@ -9,7 +9,8 @@
 public struct CefCookieVisitor : ICefRefCountedBase<CefCookieVisitor> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefCookieVisitor() {}
+  public CefCookieVisitor() {
+  }
 
   /// <summary>
   /// Base structure.

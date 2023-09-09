@@ -9,7 +9,8 @@
 public struct CefDownloadImageCallback : ICefRefCountedBase<CefDownloadImageCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDownloadImageCallback() {}
+  public CefDownloadImageCallback() {
+  }
 
   /// <summary>
   /// Base structure.

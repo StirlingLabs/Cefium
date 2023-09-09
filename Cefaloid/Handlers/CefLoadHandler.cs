@@ -10,7 +10,8 @@
 public struct CefLoadHandler : ICefRefCountedBase<CefLoadHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefLoadHandler() {}
+  public CefLoadHandler() {
+  }
 
   /// <summary>
   /// Base structure.

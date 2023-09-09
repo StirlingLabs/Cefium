@@ -7,8 +7,10 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResponse : ICefRefCountedBase<CefResponse> {
+
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResponse() {}
+  public CefResponse() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -23,7 +25,8 @@ public struct CefResponse : ICefRefCountedBase<CefResponse> {
   public static extern unsafe CefResponse* _Create();
 
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefResponse* Create() => _Create();
+  public static unsafe CefResponse* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns true (1) if this object is read-only.

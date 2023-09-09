@@ -11,7 +11,8 @@
 public struct CefV8Handler : ICefRefCountedBase<CefV8Handler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefV8Handler() {}
+  public CefV8Handler() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -26,8 +27,6 @@ public struct CefV8Handler : ICefRefCountedBase<CefV8Handler> {
   /// exception that will be thrown. Return true (1) if execution was handled.
   /// <c>int(CEF_CALLBACK* execute)(struct _cef_v8handler_t* self, const cef_string_t* name, struct _cef_v8value_t* object, size_t argumentsCount, struct _cef_v8value_t* const* arguments, struct _cef_v8value_t** retval, cef_string_t* exception);</c>
   /// </summary>
-  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Handler*, CefString*, CefValue*, nuint, CefValue**, CefValue**, CefString*, int> _Execute;
-
-
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Handler*, CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, int> _Execute;
 
 }

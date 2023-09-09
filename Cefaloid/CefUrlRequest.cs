@@ -12,7 +12,8 @@
 public struct CefUrlRequest : ICefRefCountedBase<CefUrlRequest> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefUrlRequest() {}
+  public CefUrlRequest() {
+  }
 
   /// <summary>
   /// Base structure.

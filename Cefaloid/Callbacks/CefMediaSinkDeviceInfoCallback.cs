@@ -9,7 +9,8 @@
 public struct CefMediaSinkDeviceInfoCallback : ICefRefCountedBase<CefMediaSinkDeviceInfoCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefMediaSinkDeviceInfoCallback() {}
+  public CefMediaSinkDeviceInfoCallback() {
+  }
 
   /// <summary>
   /// Base structure.

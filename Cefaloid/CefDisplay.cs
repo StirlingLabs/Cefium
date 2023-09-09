@@ -13,7 +13,8 @@ namespace Cefaloid;
 public struct CefDisplay : ICefRefCountedBase<CefDisplay> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDisplay() {}
+  public CefDisplay() {
+  }
 
   /// <summary>
   /// Base structure.

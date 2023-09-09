@@ -8,7 +8,8 @@
 public struct CefNavigationEntry : ICefRefCountedBase<CefNavigationEntry> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefNavigationEntry() {}
+  public CefNavigationEntry() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -90,4 +91,5 @@ public struct CefNavigationEntry : ICefRefCountedBase<CefNavigationEntry> {
   /// <c>struct _cef_sslstatus_t*(CEF_CALLBACK* get_sslstatus)(struct _cef_navigation_entry_t* self)</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefNavigationEntry*, CefSslStatus*> _GetSslStatus;
+
 }

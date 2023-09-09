@@ -9,7 +9,8 @@
 public struct CefDictionaryValue : ICefRefCountedBase<CefDictionaryValue> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDictionaryValue() {}
+  public CefDictionaryValue() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -23,9 +24,9 @@ public struct CefDictionaryValue : ICefRefCountedBase<CefDictionaryValue> {
   [DllImport("cef", EntryPoint = "cef_dictionary_value_create", CallingConvention = CallingConvention.Cdecl)]
   private static extern unsafe CefDictionaryValue* _Create();
 
-
   /// <inheritdoc cref="_Create"/>
-  public static unsafe CefDictionaryValue* Create() => _Create();
+  public static unsafe CefDictionaryValue* CreateUndefined()
+    => _Create();
 
   /// <summary>
   /// Returns true (1) if this object is valid. This object may become invalid

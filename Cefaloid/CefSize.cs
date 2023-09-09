@@ -112,4 +112,5 @@ public struct CefSize
 
   public static implicit operator CefSize(in ValueTuple<int, int> value)
     => Unsafe.As<ValueTuple<int, int>, CefSize>(ref Unsafe.AsRef(value));
+
 }

@@ -8,7 +8,8 @@
 public struct CefCompletionCallback : ICefRefCountedBase<CefCompletionCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefCompletionCallback() {}
+  public CefCompletionCallback() {
+  }
 
   /// <summary>
   /// Base structure.

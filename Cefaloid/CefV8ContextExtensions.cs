@@ -17,7 +17,8 @@ public static class CefV8ContextExtensions {
   public static unsafe CefFrame* GetFrame(this ref CefV8Context self) => self._GetFrame(self.AsPointer());
 
   /// <inheritdoc cref="CefV8Context._GetGlobal" />
-  public static unsafe CefValue* GetGlobal(this ref CefV8Context self) => self._GetGlobal(self.AsPointer());
+  public static unsafe CefV8Value* GetGlobal(this ref CefV8Context self)
+    => self._GetGlobal(self.AsPointer());
 
   /// <inheritdoc cref="CefV8Context._Enter" />
   public static unsafe bool Enter(this ref CefV8Context self) => self._Enter(self.AsPointer()) != 0;
@@ -29,7 +30,7 @@ public static class CefV8ContextExtensions {
   public static unsafe bool IsSame(this ref CefV8Context self, ref CefV8Context that) => self._IsSame(self.AsPointer(), that.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefV8Context._Eval" />
-  public static unsafe bool Eval(this ref CefV8Context self, ref CefString code, ref CefString scriptUrl, int startLine, ref CefValue* retval, ref CefV8Exception* exception)
+  public static unsafe bool Eval(this ref CefV8Context self, ref CefString code, ref CefString scriptUrl, int startLine, ref CefV8Value* retval, ref CefV8Exception* exception)
     => self._Eval(self.AsPointer(), code.AsPointer(), scriptUrl.AsPointer(), startLine, AsPointer(ref retval), AsPointer(ref exception)) != 0;
 
 }

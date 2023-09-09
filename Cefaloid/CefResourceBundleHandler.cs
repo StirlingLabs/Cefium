@@ -10,7 +10,8 @@
 public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefResourceBundleHandler() {}
+  public CefResourceBundleHandler() {
+  }
 
   /// <summary>
   /// Base structure.
@@ -25,6 +26,7 @@ public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHan
   /// <c>int(CEF_CALLBACK* get_localized_string)(struct _cef_resource_bundle_handler_t* self, int string_id, cef_string_t* string);</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, CefString*, int> _GetLocalizedString;
+
   /// <summary>
   /// Called to retrieve data for the specified scale independent |resource_id|.
   /// To provide the resource data set |data| and |data_size| to the data
@@ -35,6 +37,7 @@ public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHan
   /// <c>int(CEF_CALLBACK* get_data_resource)(struct _cef_resource_bundle_handler_t* self, int resource_id, void** data, size_t* data_size);</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, void**, nuint*, int> _GetDataResource;
+
   /// <summary>
   /// Called to retrieve data for the specified |resource_id| nearest the scale
   /// factor |scale_factor|. To provide the resource data set |data| and

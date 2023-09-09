@@ -9,7 +9,8 @@
 public struct CefDownloadHandler : ICefRefCountedBase<CefDownloadHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefDownloadHandler() {}
+  public CefDownloadHandler() {
+  }
 
   /// <summary>
   /// Base structure.

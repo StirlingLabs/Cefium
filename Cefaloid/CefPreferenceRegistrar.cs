@@ -7,7 +7,6 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPreferenceRegistrar {
 
-
   /// <summary>
   /// Base structure.
   /// </summary>
@@ -26,4 +25,5 @@ public struct CefPreferenceRegistrar {
   /// <c>int(CEF_CALLBACK* add_preference)(struct _cef_preference_registrar_t* self, const cef_string_t* name, struct _cef_value_t* default_value);</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceRegistrar*, CefString*, CefValue*, int> _AddPreference;
+
 }

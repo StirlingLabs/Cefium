@@ -10,7 +10,8 @@
 public struct CefAccessibilityHandler : ICefRefCountedBase<CefAccessibilityHandler> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefAccessibilityHandler() {}
+  public CefAccessibilityHandler() {
+  }
 
   /// <summary>
   /// Base structure.

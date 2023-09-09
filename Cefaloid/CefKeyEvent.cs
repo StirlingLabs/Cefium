@@ -6,6 +6,7 @@
 /// </summary>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefKeyEvent {
+
   /// <summary>
   /// The type of keyboard event.
   /// </summary>
@@ -53,4 +54,5 @@ public struct CefKeyEvent {
   /// useful for determining if standard key events should be intercepted.
   /// </summary>
   public int FocusOnEditableField;
+
 }

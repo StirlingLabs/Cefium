@@ -9,7 +9,8 @@
 public struct CefJsDialogCallback : ICefRefCountedBase<CefJsDialogCallback> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefJsDialogCallback() {}
+  public CefJsDialogCallback() {
+  }
 
   /// <summary>
   /// Base structure.

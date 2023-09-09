@@ -9,7 +9,8 @@
 public struct CefProcessMessage : ICefRefCountedBase<CefProcessMessage> {
 
   [Obsolete(DoNotConstructDirectly, true)]
-  public CefProcessMessage() {}
+  public CefProcessMessage() {
+  }
 
   /// <summary>
   /// Base structure.
