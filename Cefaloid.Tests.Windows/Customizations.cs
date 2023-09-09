@@ -108,7 +108,8 @@ public static class Customizations {
     "disable-default-apps",
     "disable-infobars",
     //"disable-logging",
-    "enable-logging",
+    //"enable-logging",
+    "blink-platform-log-channels",
     "ignore-gpu-blacklist",
     "enable-viewport",
     "bwsi",
@@ -124,6 +125,9 @@ public static class Customizations {
     //("use-angle", "gl"), // see also, Vulkan in EnableFeatures
     ("use-angle", "d3d11"),
     ("default-background-color", "00000000"),
+    ("enable-logging", "stderr"),
+    //("log-file",""),
+    ("log-level","0"),
     ("v", "1")
   };
 

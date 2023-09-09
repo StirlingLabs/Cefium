@@ -6,7 +6,66 @@ namespace Cefaloid;
 [PublicAPI]
 public static class CefRefCountedBaseExtensions {
 
-  public static readonly ConcurrentDictionary<nint, nuint> RefCounts = new();
+  internal static readonly ConcurrentDictionary<nint, nuint> RefCounts = new();
+
+  internal static readonly ConcurrentDictionary<nint, LinkedList<Action<nint>>> Disposers = new();
+
+  public static unsafe void RegisterDisposer(in this CefRefCountedBase ptr, Action<nint> disposer)
+    => RegisterDisposer((nint) Unsafe.AsPointer(ref Unsafe.AsRef(ptr)), disposer);
+
+  public static unsafe void RegisterDisposer<T>(in this CefRefCountedBase ptr, RefAction<T> disposer)
+    where T : unmanaged, ICefRefCountedBase<T>
+    => RegisterDisposer((nint) Unsafe.AsPointer(ref Unsafe.AsRef(ptr)),
+      ptr => disposer(ref Unsafe.AsRef<T>((void*) ptr)));
+
+  public static unsafe bool UnregisterDisposer(in this CefRefCountedBase ptr, Action<nint> disposer)
+    => UnregisterDisposer((nint) Unsafe.AsPointer(ref Unsafe.AsRef(ptr)), disposer);
+
+  public static void RegisterDisposer(nint ptr, Action<nint> disposer)
+    => Disposers.AddOrUpdate(ptr,
+      static (_, disposer) => new() {disposer},
+      static (_, disposers, disposer) => {
+        lock (disposers) {
+          disposers.AddLast(disposer);
+          return disposers;
+        }
+      },
+      disposer
+    );
+
+  public static bool UnregisterDisposer(nint ptr, Action<nint> disposer) {
+    if (!Disposers.TryGetValue(ptr, out var disposers))
+      return false;
+
+    lock (disposers) {
+      var found = disposers.Find(disposer);
+      if (found is not null)
+        disposers.Remove(found);
+      else
+        return false;
+
+      if (disposers.Count == 0)
+        Disposers.TryRemove(new(ptr, disposers));
+    }
+
+    return true;
+  }
+
+  internal static bool ExecuteDisposers(nint ptr) {
+    if (!Disposers.TryRemove(ptr, out var disposers))
+      return false;
+
+    lock (disposers) {
+      foreach (var disposer in disposers) {
+        try { disposer.Invoke(ptr); }
+        catch {
+          // TODO: error handling
+        }
+      }
+    }
+
+    return true;
+  }
 
   private static unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, void>
     _pfnAddRef = &AddRef;
@@ -67,11 +126,18 @@ public static class CefRefCountedBaseExtensions {
       (_, c) => c - 1
     );
 
-    // ReSharper disable once InvertIf
-    if (count == 0) {
-      RefCounts.TryRemove(ptr, out _);
-      NativeMemory.Free((void*) ptr);
+    if (count > 0)
+      return (int) Math.Min(int.MaxValue, count);
+
+    while (!RefCounts.TryRemove(new(ptr, 0))) {
+      if (!RefCounts.TryGetValue(ptr, out var newCount))
+        return 0;
+
+      return (int) Math.Min(int.MaxValue, newCount);
     }
+
+    ExecuteDisposers(ptr);
+    NativeMemory.Free((void*) ptr);
 
     return (int) Math.Min(int.MaxValue, count);
   }

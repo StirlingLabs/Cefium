@@ -1,4 +1,5 @@
-﻿using System.Runtime.Intrinsics;
+﻿using System.ComponentModel;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 using InlineIL;
@@ -137,5 +138,23 @@ public static class Helpers {
     IL.Emit.Ret();
     throw IL.Unreachable();
   }
+
+  [Browsable(false)]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  internal static void Add<T>(this Queue<T> queue, T item)
+    => queue.Enqueue(item);
+
+  [Browsable(false)]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  internal static void Add<T>(this Stack<T> stack, T item)
+    => stack.Push(item);
+
+  [Browsable(false)]
+  [EditorBrowsable(EditorBrowsableState.Never)]
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  internal static void Add<T>(this LinkedList<T> stack, T item)
+    => stack.AddLast(item);
 
 }

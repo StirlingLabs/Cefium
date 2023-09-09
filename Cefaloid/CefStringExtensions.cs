@@ -25,6 +25,12 @@ public static class CefStringExtensions {
     fixed (char* pSrc = src)
       return _SetUtf16(pSrc, (nuint) src.Length, output.AsPointer(), copy ? 1 : 0) != 0;
   }
+  /// <inheritdoc cref="_SetUtf16"/>
+  public static unsafe bool SetCefString(this string src, CefString* output, bool copy = true) {
+    // assuming CEF_STRING_TYPE_UTF16
+    fixed (char* pSrc = src)
+      return _SetUtf16(pSrc, (nuint) src.Length, output, copy ? 1 : 0) != 0;
+  }
 
   public static ref CefString CreateCefString(this string str, [UnscopedRef] out CefString cefStr) {
     // assuming CEF_STRING_TYPE_UTF16
@@ -33,6 +39,14 @@ public static class CefStringExtensions {
       throw FailedToSetCefString();
 
     return ref cefStr;
+  }
+  public static unsafe ref CefString CreateCefString(this string str, CefString* cefStr) {
+    // assuming CEF_STRING_TYPE_UTF16
+    *cefStr = new();
+    if (!str.SetCefString(cefStr))
+      throw FailedToSetCefString();
+
+    return ref Unsafe.AsRef<CefString>(cefStr);
   }
 
   public static CefString CreateCefString(this string str) {
