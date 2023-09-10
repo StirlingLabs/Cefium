@@ -270,16 +270,21 @@ public class Tests {
           try {
             var g = v8Ctx->GetGlobal();
             var exampleKey = "example".CreateCefString();
-            var exampleValue = "Hello World!".CreateCefString();
+            var exampleValue = "Success!".CreateCefString();
             //var exampleKeyV8 = CefV8Value.CreateString(ref exampleKey);
             var exampleValueV8 = CefV8Value.CreateString(ref exampleValue);
             g->SetValueByKey(ref exampleKey, exampleValueV8, CefV8PropertyAttribute.ReadOnly | CefV8PropertyAttribute.DontDelete);
-            var cefHandler = New<CefTestV8Handler>();
-            cefHandler.Target.SetAction(() => {
+            var cefHandler = New<CefDelegateV8Handler>();
+            cefHandler.Target.SetHandler(static (name, o, count, arguments, retval, exception) => {
 
+              var @true = CefV8Value.CreateBool(true);
+              *retval = @true;
+
+              return true;
             });
-            CefV8Value.CreateFunction()
-            g->SetValueByKey()
+            var invokeCSharpStr = "invokeCSharp".CreateCefString();
+            var invokeCSharpFunc = CefV8Value.CreateFunction(ref invokeCSharpStr, ref cefHandler.Target.V8Handler);
+            g->SetValueByKey(ref invokeCSharpStr, invokeCSharpFunc, CefV8PropertyAttribute.ReadOnly | CefV8PropertyAttribute.DontDelete);
           }
           finally {
             v8Ctx->Exit();
@@ -571,7 +576,7 @@ public class Tests {
 
       taskSuccess.Value.Should().BeTrue();*/
 
-      var jsAlert = "alert(example)".CreateCefString();
+      var jsAlert = "alert(invokeCSharp() ? example : \"Fail!\")".CreateCefString();
       frame->ExecuteJavaScript(ref jsAlert, ref initUrl, 0);
 
       if (!cts.TryReset())

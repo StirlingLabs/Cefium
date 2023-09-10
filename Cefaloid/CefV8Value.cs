@@ -172,8 +172,8 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   internal static extern unsafe CefV8Value* _CreateFunction(CefString* name, CefV8Handler* handler);
 
   /// <inheritdoc cref="_CreateFunction"/>
-  public static unsafe CefV8Value* CreateFunction(CefString* name, CefV8Handler* handler)
-    => _CreateFunction(name, handler);
+  public static unsafe CefV8Value* CreateFunction(ref CefString name, ref CefV8Handler handler)
+    => _CreateFunction(name.AsPointer(), handler.AsPointer());
 
   /// <summary>
   /// Create a new cef_v8value_t object of type Promise. This function should only
