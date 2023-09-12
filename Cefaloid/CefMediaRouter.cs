@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaRouter : ICefRefCountedBase<CefMediaRouter> {
 
+  /// <inheritdoc cref="CefMediaRouter"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaRouter() {
   }
@@ -39,7 +40,7 @@ public struct CefMediaRouter : ICefRefCountedBase<CefMediaRouter> {
   /// <summary>
   /// Returns a MediaSource object for the specified media source URN. Supported
   /// URN schemes include "cast:" and "dial:", and will be already known by the
-  /// client application (e.g. "cast:<appId>?clientId=<clientId>").
+  /// client application (e.g. "cast:&lt;appId>?clientId=&amp;lt;clientId>").
   /// <c>struct _cef_media_source_t*(CEF_CALLBACK* get_source)(struct _cef_media_router_t* self, const cef_string_t* urn);</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefString*, CefMediaSource*> _GetSource;

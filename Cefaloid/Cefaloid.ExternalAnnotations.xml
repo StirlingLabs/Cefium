@@ -81,6 +81,12 @@
   <member name="T:Cefaloid.CefChannelLayout">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefChromePageActionIconType">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefChromeToolbarButtonType">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefClient">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -118,6 +124,12 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefCompositionUnderlineStyle">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefContentSettingTypes">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefContentSettingValues">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefContextMenuEditStateFlags">
@@ -160,9 +172,6 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefCursorType">
-    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
-  </member>
-  <member name="T:Cefaloid.CefDelegateType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefDelegateV8Handler">
@@ -789,7 +798,7 @@
   <member name="T:Cefaloid.CefTouchEventType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="T:Cefaloid.CefTouchHandleState">
+  <member name="T:Cefaloid.CefTouchHandleStateFlags">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefTransitionType">

@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDownloadHandler : ICefRefCountedBase<CefDownloadHandler> {
 
+  /// <inheritdoc cref="CefDownloadHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDownloadHandler() {
   }

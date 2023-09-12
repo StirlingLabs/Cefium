@@ -11,6 +11,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefUrlRequest : ICefRefCountedBase<CefUrlRequest> {
 
+  /// <inheritdoc cref="CefUrlRequest"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefUrlRequest() {
   }

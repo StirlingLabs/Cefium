@@ -11,6 +11,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefBrowser : ICefRefCountedBase<CefBrowser> {
 
+  /// <inheritdoc cref="CefBrowser"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefBrowser() {
   }
@@ -34,10 +35,10 @@ public struct CefBrowser : ICefRefCountedBase<CefBrowser> {
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowser*, CefBrowserHost*> _GetHost;
 
-  /// </summary>
+  /// <summary>
   /// Returns true (1) if the browser can navigate backwards.
   /// <c>int(CEF_CALLBACK* can_go_back)(struct _cef_browser_t* self);</c>
-  /// <summary>
+  /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowser*, int> _CanGoBack;
 
   /// <summary>

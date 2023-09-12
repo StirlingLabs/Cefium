@@ -75,6 +75,9 @@ public struct CefCookie {
     set => _HasExpires = value ? 1 : 0;
   }
 
+  /// <summary>
+  /// The cookie expiration date. This is only valid if |has_expires| is true.
+  /// </summary>
   public CefBaseTime Expires;
 
   /// <summary>

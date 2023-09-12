@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefBinaryValue : ICefRefCountedBase<CefBinaryValue> {
 
+  /// <inheritdoc cref="CefBinaryValue"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefBinaryValue() {
   }

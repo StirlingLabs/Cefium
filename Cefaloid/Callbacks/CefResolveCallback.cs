@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResolveCallback : ICefRefCountedBase<CefResolveCallback> {
 
+  /// <see cref="CefResolveCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResolveCallback() {
   }

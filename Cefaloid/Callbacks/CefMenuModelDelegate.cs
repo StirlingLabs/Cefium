@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMenuModelDelegate : ICefRefCountedBase<CefMenuModelDelegate> {
 
+  /// <see cref="CefMenuModelDelegate"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMenuModelDelegate() {
   }

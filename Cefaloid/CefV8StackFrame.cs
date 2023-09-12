@@ -12,6 +12,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8StackFrame : ICefRefCountedBase<CefV8StackFrame> {
 
+  /// <inheritdoc cref="CefV8StackFrame"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8StackFrame() {
   }

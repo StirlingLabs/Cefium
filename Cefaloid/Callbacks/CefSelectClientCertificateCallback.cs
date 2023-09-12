@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefSelectClientCertificateCallback : ICefRefCountedBase<CefSelectClientCertificateCallback> {
 
+  /// <see cref="CefSelectClientCertificateCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefSelectClientCertificateCallback() {
   }

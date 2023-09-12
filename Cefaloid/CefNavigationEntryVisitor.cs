@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefNavigationEntryVisitor : ICefRefCountedBase<CefNavigationEntryVisitor> {
 
+  /// <inheritdoc cref="CefNavigationEntryVisitor"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefNavigationEntryVisitor() {
   }

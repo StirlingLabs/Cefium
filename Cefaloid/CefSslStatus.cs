@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefSslStatus : ICefRefCountedBase<CefSslStatus> {
 
+  /// <inheritdoc cref="CefSslStatus"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefSslStatus() {
   }

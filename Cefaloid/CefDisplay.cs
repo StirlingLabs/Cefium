@@ -12,6 +12,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDisplay : ICefRefCountedBase<CefDisplay> {
 
+  /// <inheritdoc cref="CefDisplay"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDisplay() {
   }

@@ -24,7 +24,6 @@ if (OperatingSystem.IsWindows()) {
   }
 
   EnableDpiAwareness();
-  Cef.EnableHighDpiSupportForWindows();
 }
 
 var cefMainArgs = new CefMainArgs();

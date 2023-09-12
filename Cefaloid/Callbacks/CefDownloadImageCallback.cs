@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDownloadImageCallback : ICefRefCountedBase<CefDownloadImageCallback> {
 
+  /// <see cref="CefDownloadImageCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDownloadImageCallback() {
   }

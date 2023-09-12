@@ -10,6 +10,9 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefBrowserSettings : ICefSizedStruct<CefBrowserSettings> {
 
+  /// <summary>
+  /// Creates a new <see cref="CefBrowserSettings"/> instance.
+  /// </summary>
   public CefBrowserSettings()
     => this.InitializeBase();
 
@@ -29,24 +32,54 @@ public struct CefBrowserSettings : ICefSizedStruct<CefBrowserSettings> {
 
   // BEGIN values that map to WebPreferences settings.
 
+  /// <summary>
+  /// Standard font family.
+  /// </summary>
   public CefString StandardFontFamily;
 
+  /// <summary>
+  /// Fixed font family.
+  /// </summary>
   public CefString FixedFontFamily;
 
+  /// <summary>
+  /// Serif font family.
+  /// </summary>
   public CefString SerifFontFamily;
 
+  /// <summary>
+  /// Sans-serif font family.
+  /// </summary>
   public CefString SansSerifFontFamily;
 
+  /// <summary>
+  /// Cursive font family.
+  /// </summary>
   public CefString CursiveFontFamily;
 
+  /// <summary>
+  /// Fantasy font family.
+  /// </summary>
   public CefString FantasyFontFamily;
 
+  /// <summary>
+  /// Default font size.
+  /// </summary>
   public int DefaultFontSize;
 
+  /// <summary>
+  /// Default fixed font size.
+  /// </summary>
   public int DefaultFixedFontSize;
 
+  /// <summary>
+  /// Minimum font size.
+  /// </summary>
   public int MinimumFontSize;
 
+  /// <summary>
+  /// Minimum logical font size.
+  /// </summary>
   public int MinimumLogicalFontSize;
 
   /// <summary>

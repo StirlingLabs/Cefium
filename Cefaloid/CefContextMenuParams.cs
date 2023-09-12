@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefContextMenuParams : ICefRefCountedBase<CefContextMenuParams> {
 
+  /// <inheritdoc cref="CefContextMenuParams"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefContextMenuParams() {
   }

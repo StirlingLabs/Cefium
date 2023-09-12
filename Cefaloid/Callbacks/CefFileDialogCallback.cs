@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefFileDialogCallback : ICefRefCountedBase<CefFileDialogCallback> {
 
+  /// <see cref="CefFileDialogCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefFileDialogCallback() {
   }

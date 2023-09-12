@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCompletionCallback : ICefRefCountedBase<CefCompletionCallback> {
 
+  /// <see cref="CefCompletionCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefCompletionCallback() {
   }

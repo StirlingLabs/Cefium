@@ -6,17 +6,23 @@ using InlineIL;
 
 namespace Cefaloid;
 
+/// <summary>
+/// Helper methods used throughout Cefaloid.
+/// </summary>
 [PublicAPI]
 public static class Helpers {
 
+  // TODO: .NET 8 intrinsic for interpolate
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   internal static float Interpolate(float from, float to, float t)
     => MathF.FusedMultiplyAdd(to - from, t, from);
 
+  // TODO: .NET 8 intrinsic for interpolate
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   internal static double Interpolate(double from, double to, double t)
     => Math.FusedMultiplyAdd(to - from, t, from);
 
+  // TODO: .NET 8 intrinsic for interpolate
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   internal static Vector128<float> Interpolate(in this Vector128<float> from, in Vector128<float> to, float t) {
     var delta = Vector128.Subtract(to, from);
@@ -32,6 +38,7 @@ public static class Helpers {
     return Vector128.Add(Vector128.Multiply(delta, t), from);
   }
 
+  // TODO: .NET 8 intrinsic for interpolate
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   internal static Vector256<float> Interpolate(in this Vector256<float> from, in Vector256<float> to, float t) {
     var delta = Vector256.Subtract(to, from);

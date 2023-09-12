@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaObserver : ICefRefCountedBase<CefMediaObserver> {
 
+  /// <inheritdoc cref="CefMediaObserver"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaObserver() {
   }

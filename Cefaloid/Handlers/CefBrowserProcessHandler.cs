@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHandler> {
 
+  /// <inheritdoc cref="CefBrowserProcessHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefBrowserProcessHandler() {
   }
@@ -68,7 +69,7 @@ public struct CefBrowserProcessHandler : ICefRefCountedBase<CefBrowserProcessHan
   /// application message loop (see additional comments and warnings on
   /// CefDoMessageLoopWork). This callback should schedule a
   /// cef_do_message_loop_work() call to happen on the main (UI) thread.
-  /// |delay_ms| is the requested delay in milliseconds. If |delay_ms| is <= 0
+  /// |delay_ms| is the requested delay in milliseconds. If |delay_ms| is &amp;lt;= 0
   /// then the call should happen reasonably soon. If |delay_ms| is > 0 then the
   /// call should be scheduled to happen after the specified delay and any
   /// currently pending scheduled call should be cancelled.

@@ -157,6 +157,7 @@ public struct CefSettings : ICefSizedStruct<CefSettings> {
   /// </summary>
   public CefString RootCachePath;
 
+  /*
   /// <summary>
   /// The location where user data such as the Widevine CDM module and spell
   /// checking dictionary files will be stored on disk. If this value is empty
@@ -168,6 +169,7 @@ public struct CefSettings : ICefSizedStruct<CefSettings> {
   /// this value will be ignored in favor of the |root_cache_path| value.
   /// </summary>
   public CefString UserDataPath;
+  */
 
   /// <summary>
   /// To persist session cookies (cookies without an expiry date or validity
@@ -342,6 +344,9 @@ public struct CefSettings : ICefSizedStruct<CefSettings> {
   /// </summary>
   public CefString CookieableSchemesList;
 
+  /// <summary>
+  /// (Undocumented)
+  /// </summary>
   private int _CookieableSchemesExcludeDefaults;
 
   /// <inheritdoc cref="_CookieableSchemesExcludeDefaults"/>

@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCookieAccessFilter : ICefRefCountedBase<CefCookieAccessFilter> {
 
+  /// <inheritdoc cref="CefCookieAccessFilter"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefCookieAccessFilter() {
   }

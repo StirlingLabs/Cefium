@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefAccessibilityHandler : ICefRefCountedBase<CefAccessibilityHandler> {
 
+  /// <inheritdoc cref="CefAccessibilityHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefAccessibilityHandler() {
   }

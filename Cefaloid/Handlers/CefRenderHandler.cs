@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRenderHandler : ICefRefCountedBase<CefRenderHandler> {
 
+  /// <inheritdoc cref="CefRenderHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRenderHandler() {
   }
@@ -112,7 +113,7 @@ public struct CefRenderHandler : ICefRefCountedBase<CefRenderHandler> {
   /// rendering the touch handles.
   /// <c>void(CEF_CALLBACK* on_touch_handle_state_changed)(struct _cef_render_handler_t* self, struct _cef_browser_t* browser, const cef_touch_handle_state_t* state)</c>
   /// </summary>
-  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRenderHandler*, CefBrowser*, CefTouchHandleState*, void> _OnTouchHandleStateChanged;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRenderHandler*, CefBrowser*, CefTouchHandleStateFlags*, void> _OnTouchHandleStateChanged;
 
   /// <summary>
   /// Called when the user starts dragging content in the web view. Contextual
@@ -131,7 +132,7 @@ public struct CefRenderHandler : ICefRefCountedBase<CefRenderHandler> {
   public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRenderHandler*, CefBrowser*, CefDragData*, CefDragOperationsMask, int, int, int> _StartDragging;
 
   /// <summary>
-  /// Called when the web view wants to update the mouse cursor during a drag &
+  /// Called when the web view wants to update the mouse cursor during a drag &amp;
   /// drop operation. |operation| describes the allowed operation (none, move, /// copy, link).
   /// <c>void(CEF_CALLBACK* update_drag_cursor)(struct _cef_render_handler_t* self, struct _cef_browser_t* browser, cef_drag_operations_mask_t operation)</c>
   /// </summary>

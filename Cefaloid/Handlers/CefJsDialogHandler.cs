@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefJsDialogHandler : ICefRefCountedBase<CefJsDialogHandler> {
 
+  /// <inheritdoc cref="CefJsDialogHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefJsDialogHandler() {
   }

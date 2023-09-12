@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRenderProcessHandler : ICefRefCountedBase<CefRenderProcessHandler> {
 
+  /// <inheritdoc cref="CefRenderProcessHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRenderProcessHandler() {
   }

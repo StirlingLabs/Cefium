@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPermissionHandler : ICefRefCountedBase<CefPermissionHandler> {
 
+  /// <inheritdoc cref="CefPermissionHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPermissionHandler() {
   }

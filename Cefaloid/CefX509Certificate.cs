@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefX509Certificate : ICefRefCountedBase<CefX509Certificate> {
 
+  /// <inheritdoc cref="CefX509Certificate"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefX509Certificate() {
   }

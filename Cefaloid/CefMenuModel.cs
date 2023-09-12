@@ -10,6 +10,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMenuModel : ICefRefCountedBase<CefMenuModel> {
 
+  /// <inheritdoc cref="CefMenuModel"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMenuModel() {
   }

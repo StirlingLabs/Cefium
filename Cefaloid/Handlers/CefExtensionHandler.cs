@@ -11,6 +11,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefExtensionHandler : ICefRefCountedBase<CefExtensionHandler> {
 
+  /// <inheritdoc cref="CefExtensionHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefExtensionHandler() {
   }

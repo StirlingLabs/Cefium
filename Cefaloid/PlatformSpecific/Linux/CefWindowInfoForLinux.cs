@@ -2,6 +2,8 @@
 
 namespace Cefaloid;
 
+/// <inheritdoc cref="CefWindowInfo"/>
+/// <seealso cref="CefWindowInfo"/>
 [SupportedOSPlatform("linux")]
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefWindowInfoForLinux {

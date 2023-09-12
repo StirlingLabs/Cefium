@@ -15,6 +15,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
 
+  /// <inheritdoc cref="CefTaskRunner"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefTaskRunner() {
   }
@@ -64,7 +65,7 @@ public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
   /// task runners. An NULL reference will be returned if this function is called
   /// on an invalid thread.
   ///
-  /// <c>CEF_EXPORT cef_task_runner_t* cef_task_runner_get_for_current_thread(void);
+  /// <c>CEF_EXPORT cef_task_runner_t* cef_task_runner_get_for_current_thread(void);</c>
   /// </summary>
   [DllImport("cef", EntryPoint = "cef_task_runner_get_for_current_thread", CallingConvention = CallingConvention.Cdecl)]
   public static extern unsafe CefTaskRunner* GetForCurrentThread();
@@ -72,7 +73,7 @@ public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
   /// <summary>
   /// Returns the task runner for the specified CEF thread.
   ///
-  /// <c>CEF_EXPORT cef_task_runner_t* cef_task_runner_get_for_thread(cef_thread_id_t threadId);
+  /// <c>CEF_EXPORT cef_task_runner_t* cef_task_runner_get_for_thread(cef_thread_id_t threadId);</c>
   /// </summary>
   [DllImport("cef", EntryPoint = "cef_task_runner_get_for_thread", CallingConvention = CallingConvention.Cdecl)]
   public static extern unsafe CefTaskRunner* GetForThread(CefThreadId threadId);

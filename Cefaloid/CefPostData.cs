@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPostData : ICefRefCountedBase<CefPostData> {
 
+  /// <inheritdoc cref="CefPostData"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPostData() {
   }

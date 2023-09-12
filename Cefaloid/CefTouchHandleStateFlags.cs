@@ -2,10 +2,10 @@
 
 /// <summary>
 /// Values indicating what state of the touch handle is set.
-/// <c>cef_touch_handle_state_t</c>
+/// <c>cef_touch_handle_state_flags_t</c>
 /// </summary>
 [PublicAPI]
-public enum CefTouchHandleState {
+public enum CefTouchHandleStateFlags {
 
   /// <summary>
   /// <c>CEF_THS_FLAG_NONE</c>

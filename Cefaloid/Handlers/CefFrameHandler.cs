@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefFrameHandler : ICefRefCountedBase<CefFrameHandler> {
 
+  /// <inheritdoc cref="CefFrameHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefFrameHandler() {
   }

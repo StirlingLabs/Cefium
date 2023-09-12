@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefLifeSpanHandler : ICefRefCountedBase<CefLifeSpanHandler> {
 
+  /// <inheritdoc cref="CefLifeSpanHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefLifeSpanHandler() {
   }

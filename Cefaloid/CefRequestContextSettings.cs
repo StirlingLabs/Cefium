@@ -44,7 +44,7 @@ public struct CefRequestContextSettings : ICefSizedStruct<CefRequestContextSetti
   /// this value to true (1). Can be set globally using the
   /// CefSettings.persist_user_preferences value. This value will be ignored if
   /// |cache_path| is empty or if it matches the CefSettings.cache_path value.
-  ///
+  /// </summary>
   public int PersistUserPreferences;
 
   /// <summary>

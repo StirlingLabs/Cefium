@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8ArrayBufferReleaseCallback : ICefRefCountedBase<CefV8ArrayBufferReleaseCallback> {
 
+  /// <see cref="CefV8ArrayBufferReleaseCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8ArrayBufferReleaseCallback() {
   }

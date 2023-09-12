@@ -8,6 +8,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaRouteCreateCallback : ICefRefCountedBase<CefMediaRouteCreateCallback> {
 
+  /// <inheritdoc cref="CefMediaRouteCreateCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaRouteCreateCallback() {
   }

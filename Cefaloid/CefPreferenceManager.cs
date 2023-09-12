@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
 
+  /// <inheritdoc cref="CefPreferenceManager"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPreferenceManager() {
   }

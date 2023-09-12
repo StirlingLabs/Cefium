@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefSchemeHandlerFactory : ICefRefCountedBase<CefSchemeHandlerFactory> {
 
+  /// <inheritdoc cref="CefSchemeHandlerFactory"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefSchemeHandlerFactory() {
   }

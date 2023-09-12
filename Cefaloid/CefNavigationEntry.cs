@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefNavigationEntry : ICefRefCountedBase<CefNavigationEntry> {
 
+  /// <inheritdoc cref="CefNavigationEntry"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefNavigationEntry() {
   }

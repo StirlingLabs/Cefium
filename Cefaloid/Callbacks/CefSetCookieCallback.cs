@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefSetCookieCallback : ICefRefCountedBase<CefSetCookieCallback> {
 
+  /// <see cref="CefSetCookieCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefSetCookieCallback() {
   }

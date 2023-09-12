@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefAudioHandler : ICefRefCountedBase<CefAudioHandler> {
 
+  /// <inheritdoc cref="CefAudioHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefAudioHandler() {
   }

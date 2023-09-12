@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResourceSkipCallback : ICefRefCountedBase<CefResourceSkipCallback> {
 
+  /// <see cref="CefResourceSkipCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResourceSkipCallback() {
   }

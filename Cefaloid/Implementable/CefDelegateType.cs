@@ -1,7 +1,6 @@
 ﻿namespace Cefaloid;
 
-[PublicAPI]
-public enum CefDelegateType : int {
+internal enum CefDelegateType : int {
 
   Uninitialized,
 

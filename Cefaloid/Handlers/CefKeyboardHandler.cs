@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefKeyboardHandler : ICefRefCountedBase<CefKeyboardHandler> {
 
+  /// <inheritdoc cref="CefKeyboardHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefKeyboardHandler() {
   }

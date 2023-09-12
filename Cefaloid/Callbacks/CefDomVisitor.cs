@@ -10,6 +10,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDomVisitor : ICefRefCountedBase<CefDomVisitor> {
 
+  /// <see cref="CefDomVisitor"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDomVisitor() {
   }

@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDictionaryValue : ICefRefCountedBase<CefDictionaryValue> {
 
+  /// <inheritdoc cref="CefDictionaryValue"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDictionaryValue() {
   }

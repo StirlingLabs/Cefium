@@ -11,6 +11,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
 
+  /// <inheritdoc cref="CefV8Context"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8Context() {
   }

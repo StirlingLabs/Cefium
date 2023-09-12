@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
 
+  /// <inheritdoc cref="CefX509CertPrincipal"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefX509CertPrincipal() {
   }
@@ -58,11 +59,13 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetCountryName;
 
+  /*
   /// <summary>
   /// Retrieve the list of street addresses.
   /// <c>void(CEF_CALLBACK* get_street_addresses)(struct _cef_x509cert_principal_t* self, cef_string_list_t addresses)</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetStreetAddresses;
+  */
 
   /// <summary>
   /// Retrieve the list of organization names.
@@ -76,10 +79,12 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetOrganizationUnitNames;
 
+  /*
   /// <summary>
   /// Retrieve the list of domain components.
   /// <c>void(CEF_CALLBACK* get_domain_components)(struct _cef_x509cert_principal_t* self, cef_string_list_t components)</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetDomainComponents;
+  */
 
 }

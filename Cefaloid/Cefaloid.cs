@@ -8,6 +8,10 @@ using static System.Environment;
 
 namespace Cefaloid;
 
+/// <summary>
+/// The main entry point for Cefaloid.
+/// Handles downloading, installing and loading the CEF library.
+/// </summary>
 [PublicAPI]
 [SuppressMessage("Usage", "CA2255",
   Justification = "ModuleInitializer is required to preemptively load the native library.")]
@@ -26,73 +30,95 @@ public static class Cefaloid {
         ? "linuxarm64"
         : "linux64";
 
-  internal static readonly string MinimalCefCdnUrl = $"https://cef-builds.spotifycdn.com/cef_binary_110.0.28%2Bg16a2153%2Bchromium-110.0.5481.104_{LibraryOsId}_minimal.tar.bz2";
+  private const string CefVersion = "116.0.21";
 
-  internal static readonly string ArchiveSubdirectory1 = $@"cef_binary_110.0.28+g16a2153+chromium-110.0.5481.104_{LibraryOsId}_minimal/Release/";
+  private const string CefVersionMetadata = "g9c7dc32";
 
-  internal static readonly string ArchiveSubdirectory2 = $@"cef_binary_110.0.28+g16a2153+chromium-110.0.5481.104_{LibraryOsId}_minimal/Resources/";
+  private const string ChromiumVersion = "116.0.5845.181";
 
-  private const string CefVersion = "110.0.28";
+  internal static readonly string MinimalCefCdnUrl
+    = $"https://cef-builds.spotifycdn.com/cef_binary_{CefVersion}%2B{CefVersionMetadata}%2Bchromium-{ChromiumVersion}_{LibraryOsId}_minimal.tar.bz2";
 
-  private const long WindowsX64ExpectedContentLength = 169_269_806;
+  internal static readonly string ArchiveSubdirectory1
+    = $@"cef_binary_{CefVersion}+{CefVersionMetadata}+chromium-{ChromiumVersion}_{LibraryOsId}_minimal/Release/";
+
+  internal static readonly string ArchiveSubdirectory2
+    = $@"cef_binary_{CefVersion}+{CefVersionMetadata}+chromium-{ChromiumVersion}_{LibraryOsId}_minimal/Resources/";
+
+  private const long WindowsX64ExpectedContentLength = 172_199_405;
 
   private static readonly byte[] WindowsX64ExpectedSha256 = {
-    0x1F, 0x46, 0x4E, 0x81, 0x24, 0xFD, 0x70, 0x03, 0xB4, 0x9C, 0xDD, 0x12, 0x11, 0x2C, 0x2E, 0x75,
-    0xB5, 0x57, 0xAD, 0xAA, 0x3D, 0x89, 0x8B, 0x8C, 0xA9, 0xC6, 0x25, 0x5A, 0xA6, 0xA9, 0x5B, 0x8C
+    0xFF, 0x91, 0xDB, 0x57, 0x20, 0xA4, 0xDD, 0x26, 0xD5, 0x65, 0x8D, 0x25, 0xAF, 0x95, 0x46, 0xF5,
+    0x88, 0x90, 0xA7, 0x3A, 0x47, 0xC6, 0x55, 0xBE, 0x91, 0xE8, 0xDB, 0x34, 0xFC, 0x43, 0x22, 0x85
   };
 
-  private const long MacOsX64ExpectedContentLength = 96_933_885;
-
-  private static readonly byte[] MacOsX64ExpectedSha256 = {
-    0x4B, 0x24, 0x11, 0x3B, 0xA1, 0x74, 0x9C, 0x02, 0x64, 0x04, 0x72, 0xB2, 0xB2, 0x5E, 0x7E, 0xC0,
-    0xBD, 0xE6, 0x07, 0x11, 0x7C, 0xB3, 0x1A, 0xD7, 0xFB, 0x82, 0x32, 0xAB, 0x85, 0x0C, 0xE3, 0x04
-  };
-
-  private const long LinuxX64ExpectedContentLength = 303_511_761;
-
-  private static readonly byte[] LinuxX64ExpectedSha256 = {
-    0x87, 0xF2, 0xBE, 0xD7, 0x2B, 0xE1, 0x4C, 0x5C, 0x15, 0x37, 0xE7, 0xA6, 0x09, 0x4E, 0xA0, 0xDA,
-    0xC6, 0x63, 0x53, 0x2A, 0xC9, 0xD3, 0xF8, 0xDF, 0x28, 0x26, 0xE6, 0xEA, 0xBD, 0x95, 0xC2, 0x4D
-  };
-
-  private const long WindowsArm64ContentLength = 154_200_655;
+  private const long WindowsArm64ContentLength = 161_059_867;
 
   private static readonly byte[] WindowsArm64ExpectedSha256 = {
-    0x56, 0x15, 0xCE, 0x86, 0xEA, 0x3D, 0xF9, 0x03, 0x5F, 0x98, 0x7B, 0xE4, 0x2C, 0xF7, 0x8B, 0x0F,
-    0x9E, 0x21, 0xEE, 0xE8, 0x7D, 0x37, 0x73, 0xA1, 0xFF, 0xE8, 0xE4, 0xCC, 0x2E, 0x36, 0x95, 0xCA
+    0x1A, 0xAF, 0xD9, 0x55, 0xFD, 0x93, 0x44, 0x7F, 0x39, 0x3E, 0xE8, 0xBA, 0x43, 0x39, 0x80, 0xBE,
+    0x2B, 0x91, 0xA8, 0xB2, 0x24, 0x01, 0xB1, 0xE0, 0x79, 0x3C, 0x7D, 0x8D, 0xBE, 0x1B, 0x90, 0x8E
   };
 
-  private const long MacOsArm64ContentLength = 92_731_070;
+  private const long MacOsX64ExpectedContentLength = 99_469_511;
+
+  private static readonly byte[] MacOsX64ExpectedSha256 = {
+    0x55, 0x50, 0x8F, 0x90, 0x1C, 0xDC, 0x7D, 0x48, 0xB5, 0x90, 0x4F, 0xF7, 0xD2, 0xB2, 0x56, 0x99,
+    0xCA, 0x0F, 0xB8, 0x4E, 0x93, 0x56, 0x9F, 0x00, 0x98, 0xFF, 0x58, 0xFE, 0x91, 0xAA, 0x65, 0xCF
+  };
+
+  private const long MacOsArm64ContentLength = 95_334_715;
 
   private static readonly byte[] MacOsArm64ExpectedSha256 = {
-    0x2D, 0xA4, 0x53, 0xC1, 0x88, 0xB5, 0xF8, 0x91, 0x17, 0x74, 0x52, 0x08, 0x26, 0xAD, 0xE7, 0x60,
-    0x79, 0x9C, 0x9B, 0x9A, 0xE0, 0xD5, 0x87, 0x88, 0x7D, 0xB1, 0x94, 0x12, 0xC5, 0x63, 0x99, 0x49
+    0x45, 0x47, 0xFC, 0x0A, 0xE2, 0x7D, 0x55, 0x3D, 0xC8, 0x65, 0x0C, 0xD0, 0x9A, 0xFC, 0x9D, 0x26,
+    0xC0, 0x30, 0x0A, 0x8C, 0x1B, 0xA3, 0x03, 0x49, 0x4C, 0xA9, 0x91, 0xB8, 0x91, 0x60, 0xAB, 0xBE
   };
 
-  private const long LinuxArm64ContentLength = 391_328_068;
+  private const long LinuxX64ExpectedContentLength = 319_623_253;
+
+  private static readonly byte[] LinuxX64ExpectedSha256 = {
+    0x72, 0x3D, 0xD4, 0x20, 0xAF, 0xAC, 0x14, 0xCB, 0xDF, 0x85, 0x21, 0x37, 0x06, 0x10, 0x6B, 0xCE,
+    0x69, 0x7D, 0xC8, 0xB1, 0x60, 0xE5, 0xE4, 0x87, 0x70, 0xC3, 0xA4, 0x10, 0xD6, 0x69, 0x10, 0xA1
+  };
+
+  private const long LinuxArm64ContentLength = 420_733_541;
 
   private static readonly byte[] LinuxArm64ExpectedSha256 = {
-    0xC1, 0x16, 0xA0, 0x3E, 0x3C, 0xEF, 0xC3, 0x4D, 0xF7, 0x10, 0x31, 0xD7, 0xDE, 0xD5, 0x68, 0x08,
-    0x00, 0xB3, 0x89, 0xE6, 0xD5, 0x91, 0x32, 0xE0, 0x70, 0x1D, 0x02, 0xAE, 0x56, 0xC2, 0x4C, 0xA9
+    0xCD, 0xD4, 0x34, 0x27, 0x13, 0x44, 0x71, 0xDD, 0x97, 0xED, 0x2F, 0xBF, 0x17, 0x51, 0x19, 0x9E,
+    0x5F, 0x8A, 0xDF, 0x9F, 0xAA, 0x3E, 0x09, 0x66, 0x10, 0x28, 0x6C, 0xB8, 0x84, 0x7D, 0x71, 0xB4
   };
 
   private const int MaxDownloadAttempts = 3;
 
   private static int _initialized;
 
+  /// <summary>
+  /// Whether or not Cefaloid has been initialized.
+  /// </summary>
   public static bool IsInitialized => _initialized == 1;
 
   private static int _downloading;
 
+  /// <summary>
+  /// Whether or not Cefaloid is currently downloading the CEF library.
+  /// </summary>
   public static bool IsDownloading => _downloading == 1 && _ready == 0;
 
   private static int _ready;
 
+  /// <summary>
+  /// Whether or not Cefaloid is ready to be used.
+  /// </summary>
   public static bool IsReady => _ready == 1;
 
+  /// <summary>
+  /// The path to Cefaloid's versioned CEF installations.
+  /// </summary>
   public static readonly string LocalAppDataPathBase = GetEnvironmentVariable("CEFALOID_LOCALAPPDATA")
     ?? Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData, SpecialFolderOption.Create), "Cefaloid");
 
+  /// <summary>
+  /// The path containing the CEF library, a versioned CEF installation managed by Cefaloid.
+  /// </summary>
   public static readonly string LocalAppDataPath = Path.Combine(LocalAppDataPathBase, CefVersion);
 
   [SuppressMessage("ReSharper", "StringLiteralTypo")]
@@ -102,8 +128,11 @@ public static class Cefaloid {
       ? "Chromium Embedded Framework.framework/Chromium Embedded Framework"
       : "libcef.so";
 
+  /// <summary>
+  /// The path to the CEF Framework on Mac OS.
+  /// </summary>
   [SupportedOSPlatform("macos")]
-  public static readonly string FrameworkPath = Path.Combine(LocalAppDataPath, "Chromium Embedded Framework.framework");
+  public static readonly string MacFrameworkPath = Path.Combine(LocalAppDataPath, "Chromium Embedded Framework.framework");
 
   private static readonly string LibraryFilePath = Path.Combine(LocalAppDataPath, LibraryFileName);
 
@@ -115,6 +144,10 @@ public static class Cefaloid {
 
   private static readonly Encoding Utf8NoBom = new UTF8Encoding(false, false);
 
+  /// <summary>
+  /// Initializes Cefaloid.
+  /// This is called as a module initializer on .NET 6 and up.
+  /// </summary>
   [ModuleInitializer]
   public static void Initialize() {
     if (Interlocked.CompareExchange(ref _initialized, 1, 0) != 0)
@@ -331,6 +364,15 @@ public static class Cefaloid {
     writeStream.Flush();
   }
 
+  /// <summary>
+  /// The download progress of the CEF library.
+  /// </summary>
+  /// <remarks>
+  /// Extraction begins after downloading completes.
+  /// Represented by a fractional value between 0.0 (0%) and 1.0 (100%).
+  /// </remarks>
+  /// <seealso cref="ExtractProgress"/>
+  /// <seealso cref="InstallProgress"/>
   public static float DownloadProgress {
     get {
       if (_tarOnDiskStreamWeakRef is null)
@@ -353,6 +395,15 @@ public static class Cefaloid {
     }
   }
 
+  /// <summary>
+  /// The extraction progress of the CEF library.
+  /// </summary>
+  /// <remarks>
+  /// Extraction begins after downloading completes.
+  /// Represented by a fractional value between 0.0 (0%) and 1.0 (100%).
+  /// </remarks>
+  /// <seealso cref="DownloadProgress"/>
+  /// <seealso cref="InstallProgress"/>
   public static float ExtractProgress {
     get {
       if (_tarBeingReadStreamWeakRef is null)
@@ -372,6 +423,14 @@ public static class Cefaloid {
     }
   }
 
+  /// <summary>
+  /// The combined download and extraction progress of the CEF library.
+  /// </summary>
+  /// <remarks>
+  /// Represented by a fractional value between 0.0 (0%) and 1.0 (100%).
+  /// </remarks>
+  /// <seealso cref="DownloadProgress"/>
+  /// <seealso cref="ExtractProgress"/>
   public static float InstallProgress
     => !IsReady
       ? MathF.Min(99.99f, (DownloadProgress + ExtractProgress) / 2)

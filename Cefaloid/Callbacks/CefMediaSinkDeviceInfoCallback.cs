@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaSinkDeviceInfoCallback : ICefRefCountedBase<CefMediaSinkDeviceInfoCallback> {
 
+  /// <see cref="CefMediaSinkDeviceInfoCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaSinkDeviceInfoCallback() {
   }

@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaSink : ICefRefCountedBase<CefMediaSink> {
 
+  /// <inheritdoc cref="CefMediaSink"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaSink() {
   }

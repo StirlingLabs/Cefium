@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefFocusHandler : ICefRefCountedBase<CefFocusHandler> {
 
+  /// <inheritdoc cref="CefFocusHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefFocusHandler() {
   }

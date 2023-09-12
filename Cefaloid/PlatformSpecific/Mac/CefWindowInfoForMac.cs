@@ -2,10 +2,15 @@
 
 namespace Cefaloid;
 
+/// <inheritdoc cref="CefWindowInfo"/>
+/// <seealso cref="CefWindowInfo"/>
 [SupportedOSPlatform("macos")]
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefWindowInfoForMac {
 
+  /// <summary>
+  /// The window name.
+  /// </summary>
   public CefString WindowName;
 
   /// <summary>

@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDownloadItemCallback : ICefRefCountedBase<CefDownloadItemCallback> {
 
+  /// <see cref="CefDownloadItemCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDownloadItemCallback() {
   }

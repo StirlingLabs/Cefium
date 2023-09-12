@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRunQuickMenuCallback : ICefRefCountedBase<CefRunQuickMenuCallback> {
 
+  /// <see cref="CefRunQuickMenuCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRunQuickMenuCallback() {
   }

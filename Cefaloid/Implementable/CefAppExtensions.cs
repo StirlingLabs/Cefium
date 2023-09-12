@@ -4,11 +4,11 @@ namespace Cefaloid;
 [PublicAPI]
 public static class CefAppExtensions {
 
-  /// <inheritdoc cref="CefApp.ExecuteProcess"/>
-  public static unsafe int ExecuteProcess(ref this CefApp self, ref CefMainArgs args)
-    => CefApp.ExecuteProcess(ref args, ref self, null);
+  /// <inheritdoc cref="CefApp.ExecuteProcess(ref CefMainArgs,ref CefApp)"/>
+  public static int ExecuteProcess(ref this CefApp self, ref CefMainArgs args)
+    => CefApp.ExecuteProcess(ref args, ref self);
 
-  /// <inheritdoc cref="CefApp.ExecuteProcess"/>
+  /// <inheritdoc cref="CefApp._ExecuteProcess"/>
   public static unsafe int ExecuteProcess(ref this CefApp self, ref CefMainArgs args, void* windowsSandboxInfo)
     => CefApp.ExecuteProcess(ref args, ref self, windowsSandboxInfo);
 

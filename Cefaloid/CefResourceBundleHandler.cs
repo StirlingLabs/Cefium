@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHandler> {
 
+  /// <inheritdoc cref="CefResourceBundleHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResourceBundleHandler() {
   }

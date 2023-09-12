@@ -1,7 +1,14 @@
 ﻿namespace Cefaloid;
 
+/// <summary>
+/// Structure that wraps other data value types. Complex types (binary,
+/// dictionary and list) will be referenced but not owned by this object. Can be
+/// used on any process and thread.
+/// <c>cef_value_t</c>
+/// </summary>
 public struct CefValue : ICefRefCountedBase<CefV8Value> {
 
+  /// <inheritdoc cref="CefValue"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefValue() {
   }

@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefProcessMessage : ICefRefCountedBase<CefProcessMessage> {
 
+  /// <inheritdoc cref="CefProcessMessage"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefProcessMessage() {
   }
@@ -50,6 +51,13 @@ public struct CefProcessMessage : ICefRefCountedBase<CefProcessMessage> {
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_name)(struct _cef_process_message_t* self);</c>
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefStringUserFree*> _GetName;
+
+  /// <summary>
+  /// Returns the list of arguments. Returns nullptr when message contains a
+  /// shared memory region.
+  /// <c>struct _cef_list_value_t*(CEF_CALLBACK* get_argument_list)(struct _cef_process_message_t* self);</c>
+  /// </summary>
+  internal unsafe delegate * unmanaged[Cdecl]<CefProcessMessage*, CefListValue*> _GetArgumentList;
 
   /// <summary>
   /// Returns the shared memory region. Returns nullptr when message contains an

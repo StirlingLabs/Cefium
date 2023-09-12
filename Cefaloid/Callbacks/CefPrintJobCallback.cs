@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPrintJobCallback : ICefRefCountedBase<CefPrintJobCallback> {
 
+  /// <see cref="CefPrintJobCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPrintJobCallback() {
   }

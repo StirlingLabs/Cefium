@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefStreamWriter : ICefRefCountedBase<CefStreamWriter> {
 
+  /// <inheritdoc cref="CefStreamWriter"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefStreamWriter() {
   }

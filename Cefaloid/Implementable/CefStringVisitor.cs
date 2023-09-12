@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefStringVisitor : ICefRefCountedBase<CefStringVisitor> {
 
+  /// <inheritdoc cref="CefStringVisitor"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefStringVisitor() {
   }

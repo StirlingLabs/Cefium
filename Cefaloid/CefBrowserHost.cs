@@ -11,6 +11,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
 
+  /// <inheritdoc cref="CefBrowserHost"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefBrowserHost() {
   }

@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaAccessCallback : ICefRefCountedBase<CefMediaAccessCallback> {
 
+  /// <see cref="CefMediaAccessCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaAccessCallback() {
   }

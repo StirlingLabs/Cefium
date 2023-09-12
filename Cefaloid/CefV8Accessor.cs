@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8Accessor : ICefRefCountedBase<CefV8Accessor> {
 
+  /// <inheritdoc cref="CefV8Accessor"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8Accessor() {
   }

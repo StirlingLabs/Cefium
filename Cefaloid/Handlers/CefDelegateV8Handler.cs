@@ -1,24 +1,30 @@
 ﻿namespace Cefaloid;
 
+/// <summary>
+/// A delegate-based implementation of <see cref="CefV8Handler"/>.
+/// </summary>
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential)]
 public struct CefDelegateV8Handler : ICefRefCountedBase<CefDelegateV8Handler> {
 
+  /// <summary>
+  /// The CefV8Handler header.
+  /// </summary>
   public CefV8Handler V8Handler;
 
-  public CefDelegateType Type;
+  internal CefDelegateType Type;
 
-  public unsafe void* pFunc;
+  internal unsafe void* pFunc;
 
-  public unsafe delegate*<CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool> StaticFunc
+  internal unsafe delegate*<CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool> StaticFunc
     => (delegate*<CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool>) pFunc;
 
-  public unsafe delegate*<object?, CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool> FuncWithContext
+  internal unsafe delegate*<object?, CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool> FuncWithContext
     => (delegate*<object?, CefString*, CefV8Value*, nuint, CefV8Value**, CefV8Value**, CefString*, bool>) pFunc;
 
-  public GCHandle Context;
+  internal GCHandle Context;
 
-  public static unsafe void Initialize(ref CefDelegateV8Handler task) {
+  static unsafe void ICefRefCountedBase<CefDelegateV8Handler>.Initialize(ref CefDelegateV8Handler task) {
     task.V8Handler._Execute = &Execute;
     task.V8Handler.Base.RegisterDisposer(static (ref CefDelegateV8Handler self) => {
       if (self.Type != CefDelegateType.Uninitialized && self.Context.IsAllocated)
@@ -27,7 +33,7 @@ public struct CefDelegateV8Handler : ICefRefCountedBase<CefDelegateV8Handler> {
   }
 
   [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvStdcall), typeof(CallConvSuppressGCTransition)})]
-  public static unsafe int Execute(CefV8Handler* self, CefString* name, CefV8Value* @object, nuint argumentsCount, CefV8Value** arguments, CefV8Value** retval, CefString* exception) {
+  internal static unsafe int Execute(CefV8Handler* self, CefString* name, CefV8Value* @object, nuint argumentsCount, CefV8Value** arguments, CefV8Value** retval, CefString* exception) {
     var task = (CefDelegateV8Handler*) self;
     switch (task->Type) {
       case CefDelegateType.Static:
@@ -47,6 +53,9 @@ public struct CefDelegateV8Handler : ICefRefCountedBase<CefDelegateV8Handler> {
     }
   }
 
+  /// <summary>
+  /// The CefV8Handler function delegate.
+  /// </summary>
   public unsafe delegate bool Handler(
     CefString* name,
     CefV8Value* @object,
@@ -56,6 +65,9 @@ public struct CefDelegateV8Handler : ICefRefCountedBase<CefDelegateV8Handler> {
     CefString* exception
   );
 
+  /// <summary>
+  /// Sets the handler to be executed.
+  /// </summary>
   public unsafe void SetHandler(Handler handler) {
     var m = handler.Method;
     pFunc = (void*) m.MethodHandle.GetFunctionPointer();

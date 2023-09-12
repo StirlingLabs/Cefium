@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRegistration : ICefRefCountedBase<CefRegistration> {
 
+  /// <inheritdoc cref="CefRegistration"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRegistration() {
   }

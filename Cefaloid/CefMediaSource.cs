@@ -10,6 +10,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaSource : ICefRefCountedBase<CefMediaSource> {
 
+  /// <inheritdoc cref="CefMediaSource"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaSource() {
   }

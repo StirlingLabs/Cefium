@@ -60,25 +60,33 @@ public static class Customizations {
   };
 
   public static readonly string[] EnabledFeatures = {
+    "UnexpireFlagsM114",
+    "JavaScriptExperimentalSharedMemory",
     "ChromeLabs", "FontAccess", "VariableCOLRV1", // very handy
     "PrintWithReducedRasterization", // fast pdf production?
     "V8VmFuture", // javascript features
     "RawDraw", "GpuRasterization", // useful
     "ExperimentalWebPlatformFeatures", "EnableZeroCopyTabCapture",
     "DXGIWaitableSwapChain:DXGIWaitableSwapChainMaxQueuedFrames/3",
-    "UseDMSAAForTiles", "WebAssemblyBaseline",
-    "WebAssemblyExperimentalStackSwitching",
-    "WebAssemblyLazyCompilation", "WebAssemblyTiering",
+    "UseDMSAAForTiles",
+    "WebAssemblyBaseline",
+    "WebAssemblyExperimentalJSPI",
+    "WebAssemblyGarbageCollection",
+    "WebAssemblyLazyCompilation",
+    "WebAssemblyStringref",
+    "WebAssemblyTiering",
     //"Vulkan" // not supported in single proc mode
   };
 
   public static readonly string[] CommandLineArguments = {
-    "enable-quic",
-    //"force-app-mode",
     "allow-no-sandbox-job",
+    "no-sandbox",
     "single-process",
     "in-process-gpu",
-    "no-sandbox",
+    "in-process-broker",
+    "ppapi-in-process",
+    //"force-app-mode",
+    "enable-quic",
     "allow-pre-commit-input",
     "no-first-run",
     "no-proxy-server",
@@ -89,11 +97,9 @@ public static class Customizations {
     "no-service-autorun",
     "no-vr-runtime",
     "noerrdialogs",
-    "in-process-broker",
     "disable-crash-reporter",
     "disable-component-update",
     "no-report-upload",
-    "ppapi-in-process",
     "disable-notifications",
     "enable-experimental-web-platform-features",
     "enable-gpu-rasterization",

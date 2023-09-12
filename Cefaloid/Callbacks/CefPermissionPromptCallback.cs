@@ -6,6 +6,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPermissionPromptCallback : ICefRefCountedBase<CefPermissionPromptCallback> {
 
+  /// <see cref="CefPermissionPromptCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPermissionPromptCallback() {
   }

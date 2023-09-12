@@ -13,6 +13,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefTask : ICefRefCountedBase<CefTask> {
 
+  /// <inheritdoc cref="CefTask"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefTask() {
   }

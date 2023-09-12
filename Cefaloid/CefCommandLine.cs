@@ -15,6 +15,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCommandLine : ICefRefCountedBase<CefCommandLine> {
 
+  /// <inheritdoc cref="CefCommandLine"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefCommandLine() {
   }

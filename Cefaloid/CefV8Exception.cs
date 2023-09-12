@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8Exception : ICefRefCountedBase<CefV8Exception> {
 
+  /// <inheritdoc cref="CefV8Exception"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8Exception() {
   }

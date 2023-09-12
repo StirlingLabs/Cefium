@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefListValue : ICefRefCountedBase<CefListValue> {
 
+  /// <inheritdoc cref="CefListValue"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefListValue() {
   }

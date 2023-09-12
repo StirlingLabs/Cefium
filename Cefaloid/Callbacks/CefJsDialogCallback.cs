@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefJsDialogCallback : ICefRefCountedBase<CefJsDialogCallback> {
 
+  /// <see cref="CefJsDialogCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefJsDialogCallback() {
   }

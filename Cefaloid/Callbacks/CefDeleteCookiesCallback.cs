@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDeleteCookiesCallback : ICefRefCountedBase<CefDeleteCookiesCallback> {
 
+  /// <see cref="CefDeleteCookiesCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDeleteCookiesCallback() {
   }

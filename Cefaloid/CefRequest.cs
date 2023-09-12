@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRequest : ICefRefCountedBase<CefRequest> {
 
+  /// <inheritdoc cref="CefRequest"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRequest() {
   }

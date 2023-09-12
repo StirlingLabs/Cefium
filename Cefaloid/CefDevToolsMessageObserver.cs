@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessageObserver> {
 
+  /// <inheritdoc cref="CefDevToolsMessageObserver"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDevToolsMessageObserver() {
   }

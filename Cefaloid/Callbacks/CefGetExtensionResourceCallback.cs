@@ -10,6 +10,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefGetExtensionResourceCallback : ICefRefCountedBase<CefGetExtensionResourceCallback> {
 
+  /// <see cref="CefGetExtensionResourceCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefGetExtensionResourceCallback() {
   }

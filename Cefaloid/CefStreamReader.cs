@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefStreamReader : ICefRefCountedBase<CefStreamReader> {
 
+  /// <inheritdoc cref="CefStreamReader"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefStreamReader() {
   }

@@ -12,6 +12,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefFrame : ICefRefCountedBase<CefFrame> {
 
+  /// <inheritdoc cref="CefFrame"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefFrame() {
   }

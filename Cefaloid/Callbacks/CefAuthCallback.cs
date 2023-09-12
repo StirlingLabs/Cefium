@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefAuthCallback : ICefRefCountedBase<CefAuthCallback> {
 
+  /// <see cref="CefAuthCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefAuthCallback() {
   }

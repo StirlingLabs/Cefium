@@ -22,7 +22,7 @@ public class Tests {
 
     public ulong Cookie;
 
-    public static void Initialize(ref CefTestApp self)
+    static void ICefRefCountedBase<CefTestApp>.Initialize(ref CefTestApp self)
       => self.Cookie = 0x123456789ABCDEF;
 
   }
@@ -95,6 +95,7 @@ public class Tests {
     //Environment.SetEnvironmentVariable("DXVK_LOG_LEVEL", "debug");
     Environment.SetEnvironmentVariable("CHROME_HEADLESS", "0");
     Environment.SetEnvironmentVariable("CHROME_IPC_LOGGING", "1");
+    Environment.SetEnvironmentVariable("CHROME_LOG_FILE", @"\\.\CON");
 
     /*
     var output = TestContext.Progress;
@@ -114,7 +115,16 @@ public class Tests {
     Environment.SetEnvironmentVariable("CHROME_LOG_FILE", pipePath);
     */
 
-    EnableHighDpiSupportForWindows();
+    static void EnableDpiAwareness() {
+      [DllImport("user32", EntryPoint = "SetProcessDpiAwarenessContext", SetLastError = true)]
+      [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+      static extern bool SetProcessDpiAwarenessContext(int value);
+
+      SetProcessDpiAwarenessContext(-4); // DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
+    }
+
+    EnableDpiAwareness();
+
 
     Cefaloid.Initialize();
 
@@ -180,8 +190,8 @@ public class Tests {
     cachePath.CreateCefString(out settings.CachePath);
     cachePath.CreateCefString(out settings.RootCachePath);
 
-    var userPath = Path.Combine(Cefaloid.LocalAppDataPathBase, "DefaultUser");
-    userPath.CreateCefString(out settings.UserDataPath);
+    //var userPath = Path.Combine(Cefaloid.LocalAppDataPathBase, "DefaultUser");
+    //userPath.CreateCefString(out settings.UserDataPath);
     Cefaloid.LocalAppDataPath
       .CreateCefString(out settings.ResourcesDirPath);
 
@@ -306,9 +316,10 @@ public class Tests {
     */
 
     var success = cefApp.Target.App.Initialize(ref mainArgs, ref settings);
-    Thread.Sleep(125);
 
     success.Should().BeTrue();
+
+    Thread.Sleep(125);
 
     CefWindowInfo windowInfo = new() {
       WindowlessRenderingEnabled = false,
@@ -464,7 +475,7 @@ public class Tests {
 
       var extraInfo = New<CefDictionaryValue>();
 
-      var initUrl = "about:blank"
+      var initUrl = "data:text/plain,Loaded"
         .CreateCefString();
 
       /*var created = CefBrowserHost.CreateBrowser(

@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPrintHandler : ICefRefCountedBase<CefPrintHandler> {
 
+  /// <inheritdoc cref="CefPrintHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPrintHandler() {
   }

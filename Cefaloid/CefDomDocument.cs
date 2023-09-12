@@ -8,7 +8,7 @@ namespace Cefaloid;
 /// <seealso cref="CefDomDocumentExtensions"/>
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDomDocument : ICefRefCountedBase<CefDomDocument> {
-
+  /// <inheritdoc cref="CefDomDocument"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDomDocument() {
   }
@@ -54,7 +54,9 @@ public struct CefDomDocument : ICefRefCountedBase<CefDomDocument> {
   /// Returns the document element with the specified ID value.
   /// <c>struct _cef_domnode_t*(CEF_CALLBACK* get_element_by_id)(struct _cef_domdocument_t* self, const cef_string_t* id);</c>
   /// </summary>
-  ///
+  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDomDocument*, CefString*, CefDomNode*> _GetElementById;
+
+  /// <summary>
   /// Returns the node that currently has keyboard focus.
   /// <c>struct _cef_domnode_t*(CEF_CALLBACK* get_focused_node)(struct _cef_domdocument_t* self);</c>
   /// </summary>

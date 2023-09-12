@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
 
+  /// <inheritdoc cref="CefCookieManager"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefCookieManager() {
   }

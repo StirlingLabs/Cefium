@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResponse : ICefRefCountedBase<CefResponse> {
 
+  /// <inheritdoc cref="CefResponse"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResponse() {
   }

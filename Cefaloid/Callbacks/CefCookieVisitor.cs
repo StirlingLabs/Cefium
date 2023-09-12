@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefCookieVisitor : ICefRefCountedBase<CefCookieVisitor> {
 
+  /// <see cref="CefCookieVisitor"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefCookieVisitor() {
   }

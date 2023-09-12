@@ -154,16 +154,6 @@ public static class Cef {
   public static extern long NowFromSystemTraceTime();
 
   /// <summary>
-  /// Call during process startup to enable High-DPI support on Windows 7 or
-  /// newer. Older versions of Windows should be left DPI-unaware because they do
-  /// not support DirectWrite and GDI fonts are kerned very badly.
-  /// <c>CEF_EXPORT void cef_enable_highdpi_support(void);</c>
-  /// </summary>
-  [SupportedOSPlatform("windows")]
-  [DllImport("cef", EntryPoint = "cef_enable_highdpi_support", CallingConvention = CallingConvention.Cdecl)]
-  public static extern void EnableHighDpiSupportForWindows();
-
-  /// <summary>
   /// Set to true (1) before calling Windows APIs like TrackPopupMenu that enter a
   /// modal message loop. Set to false (0) after exiting the modal message loop.
   /// <c>CEF_EXPORT void cef_set_osmodal_loop(int osModalLoop);</c>
@@ -172,7 +162,7 @@ public static class Cef {
   [DllImport("cef", EntryPoint = "cef_set_osmodal_loop", CallingConvention = CallingConvention.Cdecl)]
   private static extern void SetOsModalLoopForWindows(int osModalLoop);
 
-  /// <inheritdoc cref="SetOsModalLoopForWindows"/>
+  /// <inheritdoc cref="SetOsModalLoopForWindows(int)"/>
   [SupportedOSPlatform("windows")]
   public static void SetOsModalLoopForWindows(bool osModalLoop)
     => SetOsModalLoopForWindows(osModalLoop ? 1 : 0);

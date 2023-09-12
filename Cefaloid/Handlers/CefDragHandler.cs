@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDragHandler : ICefRefCountedBase<CefDragHandler> {
 
+  /// <inheritdoc cref="CefDragHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDragHandler() {
   }

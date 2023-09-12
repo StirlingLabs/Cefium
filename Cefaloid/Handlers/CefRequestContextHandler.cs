@@ -9,6 +9,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRequestContextHandler : ICefRefCountedBase<CefRequestContextHandler> {
 
+  /// <inheritdoc cref="CefRequestContextHandler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRequestContextHandler() {
   }

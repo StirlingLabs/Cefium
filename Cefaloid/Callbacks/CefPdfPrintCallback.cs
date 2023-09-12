@@ -8,6 +8,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefPdfPrintCallback : ICefRefCountedBase<CefPdfPrintCallback> {
 
+  /// <see cref="CefPdfPrintCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefPdfPrintCallback() {
   }

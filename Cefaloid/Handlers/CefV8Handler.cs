@@ -10,6 +10,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefV8Handler : ICefRefCountedBase<CefV8Handler> {
 
+  /// <inheritdoc cref="CefV8Handler"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefV8Handler() {
   }

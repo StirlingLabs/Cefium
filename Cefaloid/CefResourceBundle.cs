@@ -12,6 +12,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResourceBundle : ICefRefCountedBase<CefResourceBundle> {
 
+  /// <inheritdoc cref="CefResourceBundle"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResourceBundle() {
   }

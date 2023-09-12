@@ -11,6 +11,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefMediaRoute : ICefRefCountedBase<CefMediaRoute> {
 
+  /// <inheritdoc cref="CefMediaRoute"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefMediaRoute() {
   }

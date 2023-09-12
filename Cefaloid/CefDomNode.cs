@@ -9,6 +9,7 @@ namespace Cefaloid;
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefDomNode : ICefRefCountedBase<CefDomNode> {
 
+  /// <inheritdoc cref="CefDomNode"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefDomNode() {
   }

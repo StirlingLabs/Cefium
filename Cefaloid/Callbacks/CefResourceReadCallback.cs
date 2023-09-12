@@ -7,6 +7,7 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefResourceReadCallback : ICefRefCountedBase<CefResourceReadCallback> {
 
+  /// <see cref="CefResourceReadCallback"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefResourceReadCallback() {
   }
