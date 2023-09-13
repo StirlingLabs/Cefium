@@ -1656,6 +1656,12 @@ public enum CefErrorCode {
   CertDatabaseChanged = -714,
 
   /// <summary>
+  /// The certificate verifier configuration changed in some way.
+  /// <c>NET_ERROR(CERT_VERIFIER_CHANGED, -716)</c>
+  /// </summary>
+  CertVerifierChanged = -714,
+
+  /// <summary>
   /// Error -715 was removed (CHANNEL_ID_IMPORT_FAILED)
   /// DNS error codes.
   /// DNS resolver received a malformed response.

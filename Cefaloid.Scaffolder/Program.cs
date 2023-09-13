@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Reflection;
@@ -272,7 +273,10 @@ Dictionary<string, string> manualTypeNameReplacements = new() {
   {"CefStringUtf16", "CefString"},
   {"CefMainArgs", "CefMainArgsForWindows"},
   {"CefWindowInfo", "CefWindowInfoForWindows"},
-  {"CefUrlrequestClient", "CefUrlRequestClient"}
+  {"CefUrlrequestClient", "CefUrlRequestClient"},
+  {"Topleft", "TopLeft"},
+  {"Topright", "TopRight"},
+  {"Bottomcenter", "BottomCenter"},
 };
 
 Dictionary<string, string> manualFieldNameReplacements = new() {
@@ -309,7 +313,7 @@ static string GetBasicTypeName(uint basicType) {
     case BasicType.Float:
       return "float";
     case BasicType.Bcd:
-      return "bcd";
+      throw new NotImplementedException();
     case BasicType.Bool:
       return "bool";
     case BasicType.Unk11:
@@ -320,6 +324,61 @@ static string GetBasicTypeName(uint basicType) {
       return "long";
     case BasicType.ULong:
       return "ulong";
+    case BasicType.Currency:
+      throw new NotImplementedException(); // decimal?
+    case BasicType.Date:
+      throw new NotImplementedException(); // DateTime?
+    case BasicType.Variant:
+      throw new NotImplementedException(); // VARIANT
+    case BasicType.Complex:
+      throw new NotImplementedException(); // ???
+    case BasicType.Bit:
+      throw new NotImplementedException(); // ???
+    case BasicType.BStr:
+      throw new NotImplementedException(); // BSTR
+    case BasicType.Hresult:
+      throw new NotImplementedException(); // HRESULT
+    default:
+      throw new NotImplementedException(); // $"unk{basicType}";
+  }
+}
+
+static Type GetBasicClrType(uint basicType) {
+  switch ((BasicType) basicType) {
+    case BasicType.NoType:
+      throw new NotImplementedException();
+    case BasicType.Void:
+      return typeof(void);
+    case BasicType.Char8:
+      return typeof(byte);
+    case BasicType.Sbyte:
+      return typeof(sbyte);
+    case BasicType.Char16:
+    case BasicType.Char:
+      return typeof(char);
+    case BasicType.Short:
+      return typeof(short);
+    case BasicType.UShort:
+      return typeof(ushort);
+    case BasicType.Int:
+      return typeof(int);
+    case BasicType.Char32:
+    case BasicType.UInt:
+      return typeof(uint);
+    case BasicType.Float:
+      return typeof(float);
+    case BasicType.Bcd:
+      throw new NotImplementedException();
+    case BasicType.Bool:
+      return typeof(bool);
+    case BasicType.Unk11:
+      throw new NotImplementedException(); // byte?
+    case BasicType.Unk12:
+      throw new NotImplementedException(); // double?
+    case BasicType.Long:
+      return typeof(long);
+    case BasicType.ULong:
+      return typeof(ulong);
     case BasicType.Currency:
       throw new NotImplementedException(); // decimal?
     case BasicType.Date:
@@ -424,6 +483,7 @@ string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
 
       extraEnums[typeName] = (type, extraEnumChildren);
     }
+
     typeName = ConvertToPascalCase(typeName, true);
     if (manualTypeNameReplacements.TryGetValue(typeName, out var replacement))
       typeName = replacement;
@@ -515,6 +575,26 @@ unsafe int GetOffsetOf(FieldInfo f) {
   return offset;
 }
 
+Dictionary<(Type,Type),Delegate> CasterCache = new();
+
+[return: NotNullIfNotNull(nameof(o))]
+object? CastToType(object? o, Type destType) {
+  if (o is null) return null;
+
+  var srcType = o.GetType();
+
+  if (CasterCache.TryGetValue((srcType, destType), out var caster))
+    return caster?.DynamicInvoke(o)!;
+
+  var srcParam = Expression.Parameter(srcType);
+  var lambda = Expression.Lambda
+    (Expression.Convert(srcParam, destType), srcParam);
+
+  caster = lambda.Compile(false);
+
+  return caster?.DynamicInvoke(o)!;
+}
+
 var asmLoadCtx = AssemblyLoadContext.Default;
 using var reflectionScope = asmLoadCtx.EnterContextualReflection();
 
@@ -541,9 +621,11 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
   if (manualTypeNameReplacements.TryGetValue(convertedName, out var replacementName))
     convertedName = replacementName;
   string? maybeUnderlyingType = null;
+  Type? maybeClrType = null;
   if (isEnum) {
     var underlyingType = diaSymbol.baseType;
     maybeUnderlyingType = $" : {GetBasicTypeName(underlyingType)}";
+    maybeClrType = GetBasicClrType(underlyingType);
   }
 
   var cefaloidType = cefaloidAsm?.GetType($"Cefaloid.{convertedName}", false, true);
@@ -591,7 +673,18 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
     if (isEnum) {
       object? managedValue = null;
       cefaloidEnum?.TryGetValue(convertedFieldName, out managedValue);
-      var valueStr = fieldSym.value.ToString();
+      var fieldValue = fieldSym.value;
+      var fieldValueType = fieldValue.GetType();
+      var cefaloidEnumUnderlyingValue = cefaloidTypeIsEnum
+        ? cefaloidType!.GetEnumUnderlyingType()
+        : null;
+      var valueStr = cefaloidTypeIsEnum
+        ? fieldValueType == cefaloidEnumUnderlyingValue
+          ? fieldValue.ToString()
+          : CastToType(fieldValue, cefaloidEnumUnderlyingValue).ToString()
+        : fieldValueType == maybeClrType
+          ? fieldValue.ToString()
+          : CastToType(fieldValue, maybeClrType).ToString();
       var managedValueStr = managedValue?.ToString();
       var isMissing = cefaloidType is not null && managedValue is null;
       if (isMissing) {
@@ -600,7 +693,7 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
         var cefaloidEnumValues = cefaloidValues.Cast<object>()
           .Select(v => (Name: Enum.GetName(cefaloidType!, v), Value: v));
         foreach (var (enumName, enumValue) in cefaloidEnumValues) {
-          var enumValueStr = enumValue.ToString();
+          var enumValueStr = ((IConvertible) enumValue).ToType(cefaloidEnumUnderlyingValue, null).ToString();
           if (enumValueStr == valueStr) {
             convertedFieldName = enumName;
             managedValue = enumValue;
