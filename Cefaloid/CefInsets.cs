@@ -17,13 +17,13 @@ public struct CefInsets
     IAdditionOperators<CefInsets, CefSize, CefInsets>,
     ISubtractionOperators<CefInsets, CefSize, CefInsets> {
 
-  public int Left;
-
   public int Top;
 
-  public int Right;
+  public int Left;
 
   public int Bottom;
+
+  public int Right;
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   public int GetWidth() => Right - Left;
