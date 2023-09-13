@@ -269,6 +269,7 @@ string? ConvertToPascalCase(string? source, bool stripUnderscoreT) {
 }
 
 Dictionary<string, string> manualTypeNameReplacements = new() {
+  {"CefDomdocument", "CefDomDocument"},
   {"CefBaseRefCounted", "CefRefCountedBase"},
   {"CefStringUtf16", "CefString"},
   {"CefMainArgs", "CefMainArgsForWindows"},
@@ -575,7 +576,7 @@ unsafe int GetOffsetOf(FieldInfo f) {
   return offset;
 }
 
-Dictionary<(Type,Type),Delegate> CasterCache = new();
+Dictionary<(Type, Type), Delegate> CasterCache = new();
 
 [return: NotNullIfNotNull(nameof(o))]
 object? CastToType(object? o, Type destType) {
@@ -647,7 +648,10 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
 
   if (!isEnum)
     Console.WriteLine($"[PublicAPI, StructLayout(LayoutKind.Sequential, Size={diaSymbol.length})]");
-  Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {convertedName}{maybeUnderlyingType} {{ // {name}");
+  if (cefaloidType is not null)
+    Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {cefaloidType.Name}{maybeUnderlyingType} {{ // {name}");
+  else
+    Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {convertedName}{maybeUnderlyingType} {{ // {name}");
 
   Dictionary<string, object?>? cefaloidEnum = null;
   if (cefaloidTypeIsEnum && isEnum) {
