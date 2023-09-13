@@ -38,16 +38,16 @@ public class ReadOnlyFileMemoryMappingComStream : IStream, IDisposable {
 
   public void RemoteSeek(_LARGE_INTEGER dlibMove, uint dwOrigin, [UnscopedRef] out _ULARGE_INTEGER plibNewPosition) {
     long newPos;
-    switch ((STREAM_SEEK) dwOrigin) {
-      case STREAM_SEEK.SET:
+    switch ((StreamSeek) dwOrigin) {
+      case StreamSeek.Set:
         newPos = dlibMove.QuadPart;
         break;
 
-      case STREAM_SEEK.CUR:
+      case StreamSeek.Current:
         newPos = _index + dlibMove.QuadPart;
         break;
 
-      case STREAM_SEEK.END:
+      case StreamSeek.End:
         newPos = (long) (_fileMapping.Length - (ulong) dlibMove.QuadPart);
         break;
 
@@ -93,7 +93,7 @@ public class ReadOnlyFileMemoryMappingComStream : IStream, IDisposable {
     var ctime = fi.CreationTime.ToFileTime();
     var mtime = fi.LastWriteTime.ToFileTime();
     pstatstg = new() {
-      type = (uint) STGTY.STREAM,
+      type = (uint) StorageType.Stream,
       atime = Unsafe.As<long, _FILETIME>(ref atime),
       ctime = Unsafe.As<long, _FILETIME>(ref ctime),
       mtime = Unsafe.As<long, _FILETIME>(ref mtime),

@@ -14,6 +14,7 @@ using Dia2Lib;
 using ICSharpCode.SharpZipLib.BZip2;
 using ICSharpCode.SharpZipLib.Tar;
 using Microsoft.DiaSymReader;
+using CallingConvention = Cefaloid.Scaffolder.CallingConvention;
 
 const string CefVersion = "116.0.21";
 const string CefVersionMetadata = "g9c7dc32";
@@ -97,15 +98,24 @@ session.getEnumTables(out var enumTables);
 Dictionary<string, IDiaTable> tables = new();
 foreach (IDiaTable table in enumTables) {
   tables[table.name] = table;
+  Console.WriteLine($"// TABLE {table.name}");
 }
+
+/* empty
+session.getExports(out var exports);
+foreach (IDiaSymbol sym in exports)
+  Console.WriteLine($"// EXPORT {(SymTagEnum) sym.symTag} {sym.name}");
+*/
 
 var syms = tables["Symbols"];
 
-var typedefs = new Dictionary<string, IDiaSymbol11>();
+var typedefs = new Dictionary<string, IDiaSymbol>();
 var reverseTypedef = new Dictionary<uint, string>();
-var structsOrEnums = new Dictionary<string, (IDiaSymbol11, Dictionary<string, IDiaSymbol11>)>();
+var structsOrEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
 
-foreach (IDiaSymbol11 sym in syms) {
+var extraEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
+
+foreach (IDiaSymbol sym in syms) {
   if (sym is null) break;
 
   switch ((SymTagEnum) sym.symTag) {
@@ -117,7 +127,7 @@ foreach (IDiaSymbol11 sym in syms) {
       if (symName.Contains("::")) continue; // skip namespaced typedefs
 
       typedefs[symName] = sym;
-      AddStructOrEnum(sym.type as IDiaSymbol11, symName);
+      AddStructOrEnum(sym.type as IDiaSymbol, symName);
       break;
     }
     case SymTagEnum.SymTagEnum:
@@ -128,13 +138,64 @@ foreach (IDiaSymbol11 sym in syms) {
       if (!symName.StartsWith("cef")) continue; // skip non-cef typedefs
       if (symName.Contains("::")) continue; // skip namespaced typedefs
 
-      AddStructOrEnum(sym.type as IDiaSymbol11, null);
+      AddStructOrEnum(sym.type as IDiaSymbol, null);
       break;
     }
+    case SymTagEnum.SymTagData: {
+      var symName = sym.name;
+      if (symName is null) continue; // skip unnamed for now?
+
+      if (!symName.StartsWith("cef")) continue; // skip non-cef typedefs
+      if (symName.Contains("::")) continue; // skip namespaced typedefs
+
+      var dataKind = (DataKind) sym.dataKind;
+      throw new NotImplementedException();
+
+      break;
+    }
+    case SymTagEnum.SymTagPublicSymbol: {
+      var symName = sym.name;
+      if (symName is null) continue; // skip unnamed for now?
+
+      if (!symName.StartsWith("cef")) continue; // skip non-cef typedefs
+      if (symName.Contains("::")) continue; // skip namespaced typedefs
+
+      var isFunc = sym.function != 0;
+      var loc = (LocationType) sym.locationType;
+      if (loc is LocationType.IsConstant) {
+        var value = sym.value;
+        Console.WriteLine($"// TODO: CONST {sym.name} = {value}");
+      }
+      else if (isFunc) {
+        Console.WriteLine($"// TODO: FUNC {sym.name} {loc}");
+      }
+      else {
+        Console.WriteLine($"// TODO: {sym.name} {loc}");
+      }
+
+      break;
+    }
+    case SymTagEnum.SymTagExe:
+    case SymTagEnum.SymTagCompiland:
+      break;
+
+#if DEBUG
+    default: {
+      var symName = sym.name;
+      if (symName is null) continue; // skip unnamed for now?
+
+      if (!symName.StartsWith("cef")) continue; // skip non-cef typedefs
+      if (symName.Contains("::")) continue; // skip namespaced typedefs
+
+      throw new NotImplementedException();
+
+      break;
+    }
+#endif
   }
 }
 
-void AddStructOrEnum(IDiaSymbol11? sym, string? typedefName) {
+void AddStructOrEnum(IDiaSymbol? sym, string? typedefName) {
   if (sym is null) return;
 
   if (typedefName is not null)
@@ -144,14 +205,14 @@ void AddStructOrEnum(IDiaSymbol11? sym, string? typedefName) {
 
   if ((SymTagEnum) sym.symTag is SymTagEnum.SymTagTypedef) {
     typedefs[symName] = sym;
-    AddStructOrEnum(sym.type as IDiaSymbol11, typedefName);
+    AddStructOrEnum(sym.type as IDiaSymbol, typedefName);
   }
 
   if (symName is null) return; // skip unnamed for now?
 
   sym.findChildren(SymTagEnum.SymTagNull, null, 0, out var children);
-  var fields = new Dictionary<string, IDiaSymbol11>();
-  foreach (IDiaSymbol11 child in children) {
+  var fields = new Dictionary<string, IDiaSymbol>();
+  foreach (IDiaSymbol child in children) {
     if ((SymTagEnum) child.symTag is SymTagEnum.SymTagData) {
       var childName = child.name;
       if (childName == null) continue; // skip unnamed for now?
@@ -183,9 +244,10 @@ string? ConvertToPascalCase(string? source, bool stripUnderscoreT) {
         continue;
 
       case >= 'A' and <= 'Z':
-        prevChar = prevChar is >= 'A' and <= 'Z'
-          ? sb[i] = char.ToLowerInvariant(sb[i])
-          : sb[i];
+        var temp = sb[i]; // for continued uppercase runs
+        if (prevChar is >= 'A' and <= 'Z')
+          sb[i] = char.ToLowerInvariant(sb[i]);
+        prevChar = temp;
         continue;
 
       case '_':
@@ -277,24 +339,24 @@ static string GetBasicTypeName(uint basicType) {
   }
 }
 
-string ResolveFunctionType(IDiaSymbol11 func, int pointerDepth) {
+string ResolveFunctionType(IDiaSymbol func, int pointerDepth) {
   var sb = new StringBuilder();
   var paramCount = func.count;
-  var retType = (IDiaSymbol11) func.type;
-  var cc = (CV_call_e) func.callingConvention;
+  var retType = (IDiaSymbol) func.type;
+  var cc = (CallingConvention) func.callingConvention;
   sb.Append(cc switch {
-    CV_call_e.NEAR_C => "unsafe delegate * unmanaged[Cdecl]",
-    CV_call_e.NEAR_FAST => "unsafe delegate * unmanaged[Fastcall]",
-    CV_call_e.NEAR_STD => "unsafe delegate * unmanaged[Stdcall]",
-    CV_call_e.THISCALL => "unsafe delegate * unmanaged[Thiscall]",
-    CV_call_e.CLRCALL => "unsafe delegate * managed",
+    CallingConvention.NearC => "unsafe delegate * unmanaged[Cdecl]",
+    CallingConvention.NearFast => "unsafe delegate * unmanaged[Fastcall]",
+    CallingConvention.NearStd => "unsafe delegate * unmanaged[Stdcall]",
+    CallingConvention.ThisCall => "unsafe delegate * unmanaged[Thiscall]",
+    CallingConvention.ClrCall => "unsafe delegate * managed",
     _ => throw new NotImplementedException()
   });
   sb.Append('<');
   func.findChildren(SymTagEnum.SymTagNull, null, 0, out var args);
   var argTypes = new List<string>((int) (paramCount + 1));
-  foreach (IDiaSymbol11 arg in args) {
-    var argType = (IDiaSymbol11) arg.type;
+  foreach (IDiaSymbol arg in args) {
+    var argType = (IDiaSymbol) arg.type;
     var argTypeName = ResolveTypeName(argType);
     if (argTypeName is null)
       throw new NotImplementedException();
@@ -317,11 +379,11 @@ string ResolveFunctionType(IDiaSymbol11 func, int pointerDepth) {
   return sb.ToString();
 }
 
-string? ResolveTypeName2(IDiaSymbol11 type, out bool isFuncPtr) {
+string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
   isFuncPtr = false;
   var pointerDepth = 0;
   while ((SymTagEnum) type.symTag is SymTagEnum.SymTagPointerType) {
-    type = (IDiaSymbol11) type.type;
+    type = (IDiaSymbol) type.type;
     ++pointerDepth;
   }
 
@@ -345,8 +407,23 @@ string? ResolveTypeName2(IDiaSymbol11 type, out bool isFuncPtr) {
     }
   }
   else {
+    var isEnum = (SymTagEnum) type.symTag is SymTagEnum.SymTagEnum;
+
     if (reverseTypedef.TryGetValue(type.symIndexId, out var resolved))
       typeName = resolved;
+
+    if (isEnum && !structsOrEnums.ContainsKey(typeName)) {
+      type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
+      var extraEnumChildren = new Dictionary<string, IDiaSymbol>();
+      foreach (IDiaSymbol child in enumChildren) {
+        var childName = child.name;
+        if (childName == null) continue; // skip unnamed for now?
+
+        extraEnumChildren.Add(childName, child);
+      }
+
+      extraEnums[typeName] = (type, extraEnumChildren);
+    }
     typeName = ConvertToPascalCase(typeName, true);
     if (manualTypeNameReplacements.TryGetValue(typeName, out var replacement))
       typeName = replacement;
@@ -358,7 +435,7 @@ string? ResolveTypeName2(IDiaSymbol11 type, out bool isFuncPtr) {
   return typeName;
 }
 
-string? ResolveTypeName(IDiaSymbol11 type)
+string? ResolveTypeName(IDiaSymbol type)
   => ResolveTypeName2(type, out _);
 
 var genericSizeOfMethod = typeof(Unsafe)
@@ -450,22 +527,22 @@ if (File.Exists(cefaloidPath)) {
 
 Console.WriteLine("namespace Cefaloid;");
 
-foreach (var (structName, (structSym, fields)) in structsOrEnums) {
-  var name = structName;
+void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaSymbol> diaSymbols) {
+  var name = s;
 
-  if (reverseTypedef.TryGetValue(structSym.symIndexId, out var resolved))
+  if (reverseTypedef.TryGetValue(diaSymbol.symIndexId, out var resolved))
     name = resolved;
 
-  if (structSym.constType != 0) throw new NotImplementedException();
-  if (structSym.isStatic != 0) throw new NotImplementedException();
+  if (diaSymbol.constType != 0) throw new NotImplementedException();
+  if (diaSymbol.isStatic != 0) throw new NotImplementedException();
 
-  var isEnum = (SymTagEnum) structSym.symTag is SymTagEnum.SymTagEnum;
+  var isEnum = (SymTagEnum) diaSymbol.symTag is SymTagEnum.SymTagEnum;
   var convertedName = ConvertToPascalCase(name, true);
   if (manualTypeNameReplacements.TryGetValue(convertedName, out var replacementName))
     convertedName = replacementName;
   string? maybeUnderlyingType = null;
   if (isEnum) {
-    var underlyingType = structSym.baseType;
+    var underlyingType = diaSymbol.baseType;
     maybeUnderlyingType = $" : {GetBasicTypeName(underlyingType)}";
   }
 
@@ -479,15 +556,15 @@ foreach (var (structName, (structSym, fields)) in structsOrEnums) {
     if (isEnum != cefaloidTypeIsEnum)
       Console.WriteLine("/* already defined !! WRONG TYPE");
     else {
-      if (cefaloidTypeSize != (int) structSym.length)
-        Console.WriteLine($"/* already defined !! WRONG SIZE {cefaloidTypeSize}, should be {structSym.length}");
+      if (cefaloidTypeSize != (int) diaSymbol.length)
+        Console.WriteLine($"/* already defined !! WRONG SIZE {cefaloidTypeSize}, should be {diaSymbol.length}");
       else
         Console.WriteLine("/* already defined");
     }
   }
 
   if (!isEnum)
-    Console.WriteLine($"[PublicAPI, StructLayout(LayoutKind.Sequential, Size={structSym.length})]");
+    Console.WriteLine($"[PublicAPI, StructLayout(LayoutKind.Sequential, Size={diaSymbol.length})]");
   Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {convertedName}{maybeUnderlyingType} {{ // {name}");
 
   Dictionary<string, object?>? cefaloidEnum = null;
@@ -499,12 +576,15 @@ foreach (var (structName, (structSym, fields)) in structsOrEnums) {
     }
   }
 
-  foreach (var (fieldName, fieldSym) in fields) {
-    var fieldType = (IDiaSymbol11) fieldSym.type;
+  foreach (var (fieldName, fieldSym) in diaSymbols) {
+    var fieldType = (IDiaSymbol) fieldSym.type;
 
     var fieldTypeName = ResolveTypeName2(fieldType, out var isFuncPtr);
 
-    var convertedFieldName = ConvertToPascalCase(fieldName, false);
+    var convertedFieldName = fieldName;
+    if (isEnum && fieldName.StartsWith(name) && fieldName[name.Length] == '_')
+      convertedFieldName = fieldName[(name.Length + 1)..];
+    convertedFieldName = ConvertToPascalCase(convertedFieldName, false);
     foreach (var (match, replacement) in manualTextReplacements)
       convertedName = convertedName.Replace(match, replacement);
 
@@ -588,6 +668,12 @@ foreach (var (structName, (structSym, fields)) in structsOrEnums) {
     Console.WriteLine("*/");
   Console.WriteLine();
 }
+
+foreach (var (structName, (structSym, fields)) in structsOrEnums)
+  GenerateDefinition(structName, structSym, fields);
+
+foreach (var (structName, (structSym, fields)) in extraEnums)
+  GenerateDefinition(structName, structSym, fields);
 
 // TODO: use reflection to load the dll and get the types
 // compare against the pdb
