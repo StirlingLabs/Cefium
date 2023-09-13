@@ -10,12 +10,14 @@ using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Unicode;
 using Cefaloid.Scaffolder;
 using Dia2Lib;
 using ICSharpCode.SharpZipLib.BZip2;
 using ICSharpCode.SharpZipLib.Tar;
 using Microsoft.DiaSymReader;
 using CallingConvention = Cefaloid.Scaffolder.CallingConvention;
+using ImageFileMachine = Cefaloid.Scaffolder.ImageFileMachine;
 
 const string CefVersion = "116.0.21";
 const string CefVersionMetadata = "g9c7dc32";
@@ -86,6 +88,58 @@ if (!File.Exists(pdbFilePath)) {
   }
 }
 
+var exportNames = new HashSet<string>();
+
+unsafe void ResolveExportNames() {
+  using var dllStream = new ReadOnlyFileMemoryMappingComStream(dllFilePath);
+
+  ref var imageBase = ref Unsafe.AsRef<ImageDosHeader>(dllStream.BasePointer);
+
+  if (imageBase.Magic != 0x5A4D) {
+    Console.Error.WriteLine("libcef.dll is not a valid PE file.");
+    return;
+  }
+
+  ref var newHeaders = ref imageBase.GetImageNtHeaders64();
+
+  if (newHeaders.Signature != 0x4550) {
+    Console.Error.WriteLine("libcef.dll is not a valid PE file.");
+    return;
+  }
+
+  if (newHeaders.FileHeader.Machine != ImageFileMachine.AMD64) {
+    Console.Error.WriteLine("libcef.dll is not a valid 64-bit PE file.");
+    return;
+  }
+
+  if ((ushort) newHeaders.FileHeader.Characteristics != 0x2022)
+    throw new NotImplementedException();
+
+  if ((ushort) newHeaders.FileHeader.Characteristics != 0x2022)
+    throw new NotImplementedException();
+
+  if (newHeaders.OptionalHeader.Magic != 0x20B) {
+    Console.Error.WriteLine("libcef.dll is not a valid PE file.");
+    return;
+  }
+
+  ref var exportTable = ref newHeaders.OptionalHeader.GetExportTable(imageBase);
+
+  var nameCount = exportTable.NumberOfNames;
+  var rvaNameRvas = exportTable.AddressOfNames;
+  var pNameRvas = (uint*) newHeaders.ResolveRva(rvaNameRvas, imageBase);
+  var nameRvasSpan = new ReadOnlySpan<uint>(pNameRvas, (int) nameCount);
+  for (var i = 0; i < nameCount; ++i) {
+    var nameRva = nameRvasSpan[i];
+    var pName = (byte*) newHeaders.ResolveRva(nameRva, imageBase);
+    var nameSpan = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(pName);
+    var name = Encoding.UTF8.GetString(nameSpan);
+    exportNames.Add(name);
+  }
+}
+
+ResolveExportNames();
+
 using var pdbStream = new ReadOnlyFileMemoryMappingComStream(pdbFilePath);
 
 var diaSource = new DiaSourceClass();
@@ -115,6 +169,8 @@ var reverseTypedef = new Dictionary<uint, string>();
 var structsOrEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
 
 var extraEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
+
+var exports = new Dictionary<string, IDiaSymbol>();
 
 foreach (IDiaSymbol sym in syms) {
   if (sym is null) break;
@@ -168,7 +224,9 @@ foreach (IDiaSymbol sym in syms) {
         Console.WriteLine($"// TODO: CONST {sym.name} = {value}");
       }
       else if (isFunc) {
-        Console.WriteLine($"// TODO: FUNC {sym.name} {loc}");
+        var name = sym.name;
+        if (exportNames.Contains(name))
+          exports[name] = sym;
       }
       else {
         Console.WriteLine($"// TODO: {sym.name} {loc}");
@@ -399,44 +457,98 @@ static Type GetBasicClrType(uint basicType) {
   }
 }
 
-string ResolveFunctionType(IDiaSymbol func, int pointerDepth) {
+unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? trimPrefix = null) {
   var sb = new StringBuilder();
-  var paramCount = func.count;
-  var retType = (IDiaSymbol) func.type;
-  var cc = (CallingConvention) func.callingConvention;
-  sb.Append(cc switch {
-    CallingConvention.NearC => "unsafe delegate * unmanaged[Cdecl]",
-    CallingConvention.NearFast => "unsafe delegate * unmanaged[Fastcall]",
-    CallingConvention.NearStd => "unsafe delegate * unmanaged[Stdcall]",
-    CallingConvention.ThisCall => "unsafe delegate * unmanaged[Thiscall]",
-    CallingConvention.ClrCall => "unsafe delegate * managed",
-    _ => throw new NotImplementedException()
-  });
-  sb.Append('<');
-  func.findChildren(SymTagEnum.SymTagNull, null, 0, out var args);
-  var argTypes = new List<string>((int) (paramCount + 1));
-  foreach (IDiaSymbol arg in args) {
-    var argType = (IDiaSymbol) arg.type;
-    var argTypeName = ResolveTypeName(argType);
-    if (argTypeName is null)
+  if ((SymTagEnum) func.symTag == SymTagEnum.SymTagPublicSymbol) {
+    if (func.function == 0)
       throw new NotImplementedException();
 
-    argTypes.Add(argTypeName);
+    session.findSymbolByRVA(func.relativeVirtualAddress, SymTagEnum.SymTagFunction, out func);
+
   }
+  if ((SymTagEnum) func.symTag == SymTagEnum.SymTagFunction) {
+    if (pointerDepth != 0)
+      throw new NotImplementedException();
+    var name = func.name;
+    var funcType = func.type;
+    var paramCount = funcType.count;
+    var retType = (IDiaSymbol) funcType.type;
+    var cc = (CallingConvention) func.callingConvention;
+    sb.Append("  [DllImport(\"cef\", EntryPoint = \"");
+    sb.Append(name);
+    sb.Append("\", CallingConvention = CallingConvention.");
+    sb.Append(cc switch {
+      CallingConvention.NearC => "Cdecl",
+      //CallingConvention.NearFast => "Fastcall",
+      CallingConvention.NearStd => "Stdcall",
+      _ => throw new NotImplementedException()
+    });
+    sb.Append(")]\n  public static unsafe extern ");
+    sb.Append(ResolveTypeName(retType));
+    sb.Append(' ');
+    var convertedName = ConvertToPascalCase(name, true);
+    foreach (var (match, replacement) in manualTextReplacements)
+      convertedName = convertedName.Replace(match, replacement);
+    if (trimPrefix is not null && convertedName.StartsWith(trimPrefix))
+      convertedName = convertedName[trimPrefix.Length..];
+    sb.Append(convertedName);
+    sb.Append('(');
+    funcType.findChildren(SymTagEnum.SymTagNull, null, 0, out var args);
+    var argTypes = new List<string>((int) paramCount);
+    foreach (IDiaSymbol arg in args) {
+      var argType = arg.type;
+      var argTypeName = ResolveTypeName(argType);
+      if (argTypeName is null)
+        throw new NotImplementedException();
 
-  argTypes.Add(ResolveTypeName(retType)!);
+      argTypes.Add(argTypeName);
+    }
 
-  //argTypes.RemoveAll(x => x is null);
+    sb.AppendJoin(',', argTypes);
+    sb.Append(");\n");
 
-  //if (argTypes.Count > 0)
+    return sb.ToString();
+  }
+  else {
+    if (pointerDepth == 0)
+      throw new NotImplementedException();
+    var paramCount = func.count;
+    var retType = (IDiaSymbol) func.type;
+    var cc = (CallingConvention) func.callingConvention;
+    sb.Append(cc switch {
+      CallingConvention.NearC => "unsafe delegate * unmanaged[Cdecl]",
+      //CallingConvention.NearFast => "unsafe delegate * unmanaged[Fastcall]",
+      CallingConvention.NearStd => "unsafe delegate * unmanaged[Stdcall]",
+      //CallingConvention.ThisCall => "unsafe delegate * unmanaged[Thiscall]",
+      //CallingConvention.ClrCall => "unsafe delegate * managed",
+      _ => throw new NotImplementedException()
+    });
+    sb.Append('<');
+    func.findChildren(SymTagEnum.SymTagNull, null, 0, out var args);
+    var argTypes = new List<string>((int) (paramCount + 1));
+    foreach (IDiaSymbol arg in args) {
+      var argType = (IDiaSymbol) arg.type;
+      var argTypeName = ResolveTypeName(argType);
+      if (argTypeName is null)
+        throw new NotImplementedException();
 
-  sb.AppendJoin(',', argTypes);
+      argTypes.Add(argTypeName);
+    }
 
-  sb.Append('>');
-  //while (pointerDepth-- > 0)
-  while (--pointerDepth > 0)
-    sb.Append('*');
-  return sb.ToString();
+    argTypes.Add(ResolveTypeName(retType)!);
+
+    //argTypes.RemoveAll(x => x is null);
+
+    //if (argTypes.Count > 0)
+
+    sb.AppendJoin(',', argTypes);
+
+    sb.Append('>');
+    //while (pointerDepth-- > 0)
+    while (--pointerDepth > 0)
+      sb.Append('*');
+    return sb.ToString();
+  }
 }
 
 string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
@@ -608,6 +720,9 @@ if (File.Exists(cefaloidPath)) {
 
 Console.WriteLine("namespace Cefaloid;");
 
+// TODO: during validation, check for static DllImport methods, validate
+HashSet<string> imported = new(); // throw them in here and don't generate stubs for them at the end
+
 void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaSymbol> diaSymbols) {
   var name = s;
 
@@ -772,7 +887,11 @@ foreach (var (structName, (structSym, fields)) in structsOrEnums)
 foreach (var (structName, (structSym, fields)) in extraEnums)
   GenerateDefinition(structName, structSym, fields);
 
-// TODO: use reflection to load the dll and get the types
-// compare against the pdb
+Console.WriteLine("public static unsafe partial class Cef {");
+foreach (var (name, sym) in exports.OrderBy(kv => kv.Key)) {
+  Console.WriteLine(ResolveFunctionType(sym, 0, "Cef"));
+}
+
+Console.WriteLine("}");
 
 return 0; // success

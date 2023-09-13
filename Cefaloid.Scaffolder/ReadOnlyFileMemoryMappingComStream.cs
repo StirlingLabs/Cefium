@@ -5,13 +5,17 @@ using Dia2Lib;
 
 namespace Cefaloid.Scaffolder;
 
-public class ReadOnlyFileMemoryMappingComStream : IStream, IDisposable {
+public class ReadOnlyFileMemoryMappingComStream : Stream, IStream, IDisposable {
 
   private readonly ReadOnlyFileMemoryMapping _fileMapping;
 
   private long _index;
 
   private readonly bool _disposesFileMapping;
+
+  public unsafe byte* BasePointer => _fileMapping.Pointer;
+
+  public unsafe byte* CurrentPointer => _fileMapping.Pointer + _index;
 
   public ReadOnlyFileMemoryMappingComStream(string path)
     => _fileMapping = new(path);
@@ -37,23 +41,12 @@ public class ReadOnlyFileMemoryMappingComStream : IStream, IDisposable {
     => throw new NotSupportedException();
 
   public void RemoteSeek(_LARGE_INTEGER dlibMove, uint dwOrigin, [UnscopedRef] out _ULARGE_INTEGER plibNewPosition) {
-    long newPos;
-    switch ((StreamSeek) dwOrigin) {
-      case StreamSeek.Set:
-        newPos = dlibMove.QuadPart;
-        break;
-
-      case StreamSeek.Current:
-        newPos = _index + dlibMove.QuadPart;
-        break;
-
-      case StreamSeek.End:
-        newPos = (long) (_fileMapping.Length - (ulong) dlibMove.QuadPart);
-        break;
-
-      default:
-        throw new NotSupportedException();
-    }
+    var newPos = (StreamSeek) dwOrigin switch {
+      StreamSeek.Set => dlibMove.QuadPart,
+      StreamSeek.Current => _index + dlibMove.QuadPart,
+      StreamSeek.End => (long) (_fileMapping.Length - (ulong) dlibMove.QuadPart),
+      _ => throw new NotSupportedException()
+    };
 
     _fileMapping.RangeCheck(newPos);
     plibNewPosition.QuadPart = (ulong) newPos;
@@ -111,6 +104,55 @@ public class ReadOnlyFileMemoryMappingComStream : IStream, IDisposable {
     _index = long.MinValue;
     if (_disposesFileMapping)
       _fileMapping.Dispose();
+  }
+
+  public override void Flush() {
+  }
+
+  public override int Read(byte[] buffer, int offset, int count) {
+    var copySize = count;
+    if (_index + copySize > (long) _fileMapping.Length)
+      copySize = checked((int) (_fileMapping.Length - (ulong) _index));
+    _fileMapping.AsSpan((ulong) _index, (ulong) copySize)
+      .CopyTo(buffer.AsSpan(offset, copySize));
+    _index += copySize;
+    return copySize;
+  }
+
+  public override long Seek(long offset, SeekOrigin origin) {
+    var newPos = origin switch {
+      SeekOrigin.Begin => offset,
+      SeekOrigin.Current => _index + offset,
+      SeekOrigin.End => (long) (_fileMapping.Length - (ulong) offset),
+      _ => throw new NotSupportedException()
+    };
+
+    _fileMapping.RangeCheck(newPos);
+    _index = newPos;
+    return newPos;
+  }
+
+  public override void SetLength(long value)
+    => throw new NotSupportedException();
+
+  public override void Write(byte[] buffer, int offset, int count)
+    => throw new NotSupportedException();
+
+  public override bool CanRead
+    => true;
+
+  public override bool CanSeek
+    => true;
+
+  public override bool CanWrite
+    => false;
+
+  public override long Length
+    => (long) _fileMapping.Length;
+
+  public override long Position {
+    get => _index;
+    set => Seek(value, SeekOrigin.Begin);
   }
 
 }

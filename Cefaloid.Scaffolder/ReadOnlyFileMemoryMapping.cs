@@ -15,6 +15,8 @@ public class ReadOnlyFileMemoryMapping : IReadOnlyList<byte>, IDisposable {
 
   private readonly unsafe byte* _pointer;
 
+  public unsafe byte* Pointer => _pointer;
+
   public readonly ulong Length;
 
   public unsafe ReadOnlyFileMemoryMapping(string path) {
