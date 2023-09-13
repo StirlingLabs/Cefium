@@ -745,12 +745,12 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
       }
       else {
         if (managedOffset == -1)
-          Console.WriteLine($"  {access} {fieldTypeName} {convertedFieldName}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes !! UNKNOWN FIELD LOCATION");
+          Console.WriteLine($"  {access} {cefaloidField.FieldType.Name} {cefaloidField.Name}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes !! UNKNOWN FIELD LOCATION");
         else {
           if (fieldSym.offset == managedOffset && fieldType.length == (ulong) managedSize)
-            Console.WriteLine($"  {access} {fieldTypeName} {convertedFieldName}; // {fieldName} @ {managedOffset}, {managedSize} bytes");
+            Console.WriteLine($"  {access} {cefaloidField.FieldType.Name} {cefaloidField.Name}; // {fieldName} @ {managedOffset}, {managedSize} bytes");
           else
-            Console.WriteLine($"  {access} {fieldTypeName} {convertedFieldName}; // {fieldName} @ {managedOffset}, {managedSize} bytes !! EXPECTED @ {fieldSym.offset}, {fieldType.length}");
+            Console.WriteLine($"  {access} {cefaloidField.FieldType.Name} {cefaloidField.Name}; // {fieldName} @ {managedOffset}, {managedSize} bytes !! EXPECTED @ {fieldSym.offset}, {fieldType.length}");
         }
       }
     }
