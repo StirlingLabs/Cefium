@@ -12,7 +12,7 @@ namespace Cefaloid;
 /// Mostly contains startup/shutdown/registration/global scope functions.
 /// </summary>
 [PublicAPI]
-public static class Cef {
+public static partial class Cef {
 
   /// <summary>
   /// Launches the process specified via |command_line|. Returns true (1) upon

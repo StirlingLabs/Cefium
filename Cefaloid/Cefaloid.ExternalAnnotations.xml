@@ -231,6 +231,9 @@
   <member name="T:Cefaloid.CefDownloadImageCallbackExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefDownloadInterruptReason">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefDownloadItem">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>

@@ -42,6 +42,14 @@ public struct CefDownloadItem : ICefRefCountedBase<CefDownloadItem> {
   /// </summary>
   internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDownloadItem*, int> _IsCanceled;
 
+  // TODO: document
+  // is_interrupted @ 72, 8 bytes
+  internal unsafe delegate * unmanaged[Cdecl]<CefDownloadItem*, int> _IsInterrupted;
+
+  // TODO: document
+  // get_interrupt_reason @ 80, 8 bytes
+  internal unsafe delegate * unmanaged[Cdecl]<CefDownloadItem*, CefDownloadInterruptReason> _GetInterruptReason;
+
   /// <summary>
   /// Returns a simple speed estimate in bytes/s.
   /// <c>int64(CEF_CALLBACK* get_current_speed)(struct _cef_download_item_t* self)</c>
