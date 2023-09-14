@@ -48,6 +48,12 @@
   <member name="T:Cefaloid.CefBinaryValue">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefBoxLayout">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefBoxLayoutSettings">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefBrowser">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -64,6 +70,18 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefBrowserSettings">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefBrowserView">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefBrowserViewDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefButton">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefButtonDelegate">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefCallback">
@@ -288,6 +306,9 @@
   <member name="T:Cefaloid.CefFileDialogMode">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefFillLayout">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefFindHandler">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -346,6 +367,12 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefKeyEventType">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefLabelButton">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefLayout">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefLifeSpanHandler">
@@ -417,6 +444,15 @@
   <member name="T:Cefaloid.CefMediaSource">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefMenuButton">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefMenuButtonDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefMenuButtonPressedLock">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefMenuColorType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -441,7 +477,16 @@
   <member name="T:Cefaloid.CefNavigationEntryVisitor">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefOverlayController">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefPaintElementType">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefPanel">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefPanelDelegate">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefPdfPrintCallback">
@@ -669,10 +714,19 @@
   <member name="T:Cefaloid.CefScreenInfo">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefScrollView">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefSelectClientCertificateCallback">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefSelectClientCertificateCallbackExtensions">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefServer">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefServerHandler">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefSetCookieCallback">
@@ -688,6 +742,9 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefSharedMemoryRegionExtensions">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefSharedProcessMessageBuilder">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefSize">
@@ -762,10 +819,16 @@
   <member name="T:Cefaloid.CefStringUserFreeExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefStringUtf8">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefStringVisitor">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefStringVisitorExtensions">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefStringWide">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefTask">
@@ -783,7 +846,25 @@
   <member name="T:Cefaloid.CefTerminationStatus">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefTestServer">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefTestServerConnection">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefTestServerHandler">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefTextfield">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefTextfieldDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefTextInputMode">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefThread">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefThreadId">
@@ -801,10 +882,16 @@
   <member name="T:Cefaloid.CefTouchEventType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefTouchHandleState">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefTouchHandleStateFlags">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefTransitionType">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefUrlparts">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefUrlRequest">
@@ -885,6 +972,21 @@
   <member name="T:Cefaloid.CefValueType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
+  <member name="T:Cefaloid.CefView">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefViewDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefWaitableEvent">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefWindow">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefWindowDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="T:Cefaloid.CefWindowInfo">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -907,6 +1009,12 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.CefX509CertPrincipal">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefXmlReader">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefaloid.CefZipReader">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefaloid.Helpers">

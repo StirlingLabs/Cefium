@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Buffers;
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -152,15 +153,41 @@ diaSource.openSession(out var session);
 session.getEnumTables(out var enumTables);
 
 Dictionary<string, IDiaTable> tables = new();
-foreach (IDiaTable table in enumTables) {
-  tables[table.name] = table;
-  Console.WriteLine($"// TABLE {table.name}");
+//IDiaEnumInjectedSources injectedSrcs = null;
+foreach (object maybeTable in enumTables) {
+  /*if (maybeTable is IDiaEnumInjectedSources srcs)
+    injectedSrcs = srcs;
+  else*/
+  if (maybeTable is IDiaTable table) {
+    tables[table.name] = table;
+    Console.WriteLine($"// TABLE {table.name}");
+  }
 }
 
 /* empty
 session.getExports(out var exports);
 foreach (IDiaSymbol sym in exports)
   Console.WriteLine($"// EXPORT {(SymTagEnum) sym.symTag} {sym.name}");
+*/
+/*if (injectedSrcs is not null) {
+  void DumpInjectedSources() {
+    foreach (var srcInjX in injectedSrcs) {
+      var srcInj = (Cefaloid.Scaffolder.Dia2.IDiaInjectedSource) srcInjX;
+      if (srcInj is null) break;
+
+      var srcName = srcInj.fileName;
+      var srcVirtName = srcInj.virtualFilename;
+
+      var size = srcInj.length;
+      var buffer = ArrayPool<byte>.Shared.Rent(checked((int) size));
+      srcInj.get_source(checked((uint) size), out var wrote, ref buffer[0]);
+      var srcContent = new ReadOnlySpan<byte>(buffer, 0, (int) wrote);
+      var srcContentStr = Encoding.UTF8.GetString(srcContent);
+    }
+  }
+
+  DumpInjectedSources();
+}
 */
 
 var syms = tables["Symbols"];
@@ -346,6 +373,8 @@ Dictionary<string, string> manualTypeNameReplacements = new() {
   {"Topleft", "TopLeft"},
   {"Topright", "TopRight"},
   {"Bottomcenter", "BottomCenter"},
+  {"CefBasetime", "CefBaseTime"},
+  {"CefUrlparts", "CefUrlParts"}
 };
 
 Dictionary<string, string> manualFieldNameReplacements = new() {
@@ -363,6 +392,10 @@ List<(string Match, string Replacement)> manualTextReplacements = new() {
   ("Jsonand", "JsonAnd"),
   ("Crlsets", "CrlSets"),
   ("Vlog", "VLog"),
+  ("Basetime", "BaseTime"),
+  ("Urlparts", "UrlParts"),
+  ("Uridecode", "UriDecode"),
+  ("Uriencode", "UriEncode"),
 };
 
 static string GetBasicTypeName(uint basicType) {
@@ -475,6 +508,8 @@ static Type GetBasicClrType(uint basicType) {
   }
 }
 
+// TODO: add MethodInfo parameter and validate while resolving
+// TODO: when on .NET8, add Type parameter for function pointer types and validate while resolving
 unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? trimPrefix = null) {
   var sb = new StringBuilder();
   if ((SymTagEnum) func.symTag == SymTagEnum.SymTagPublicSymbol) {
@@ -513,17 +548,20 @@ unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? tri
     sb.Append(convertedName);
     sb.Append('(');
     funcType.findChildren(SymTagEnum.SymTagNull, null, 0, out var args);
-    var argTypes = new List<string>((int) paramCount);
+    var argStrs = new List<string>((int) paramCount);
+    var argIndex = 0;
     foreach (IDiaSymbol arg in args) {
       var argType = arg.type;
-      var argTypeName = ResolveTypeName(argType);
-      if (argTypeName is null)
+      var argStr = ResolveTypeName(argType);
+      if (argStr is null)
         throw new NotImplementedException();
 
-      argTypes.Add(argTypeName);
+      // TODO: look up parameter names, fix casing
+      argStr += $" arg{argIndex++}";
+      argStrs.Add(argStr);
     }
 
-    sb.AppendJoin(',', argTypes);
+    sb.AppendJoin(',', argStrs);
     sb.Append(");\n");
 
     return sb.ToString();
@@ -536,11 +574,11 @@ unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? tri
     var retType = (IDiaSymbol) func.type;
     var cc = (CallingConvention) func.callingConvention;
     sb.Append(cc switch {
-      CallingConvention.NearC => "unsafe delegate * unmanaged[Cdecl]",
-      //CallingConvention.NearFast => "unsafe delegate * unmanaged[Fastcall]",
-      CallingConvention.NearStd => "unsafe delegate * unmanaged[Stdcall]",
-      //CallingConvention.ThisCall => "unsafe delegate * unmanaged[Thiscall]",
-      //CallingConvention.ClrCall => "unsafe delegate * managed",
+      CallingConvention.NearC => "delegate * unmanaged[Cdecl]",
+      //CallingConvention.NearFast => "delegate * unmanaged[Fastcall]",
+      CallingConvention.NearStd => "delegate * unmanaged[Stdcall]",
+      //CallingConvention.ThisCall => "delegate * unmanaged[Thiscall]",
+      //CallingConvention.ClrCall => "delegate * managed",
       _ => throw new NotImplementedException()
     });
     sb.Append('<');
@@ -650,14 +688,6 @@ int GetSizeOf(Type type) {
   //return Marshal.SizeOf(type); // screws up char
 }
 
-/*
-unsafe int OffsetRetrievalTemplate<T>() where T: unmanaged {
-  ref var nullRef = ref Unsafe.NullRef<T>();
-  ref var offset = ref nullRef.Field;
-  return (int)(nint)Unsafe.AsPointer(ref offset);
-}
-*/
-
 Dictionary<FieldInfo, int> fieldOffsetCache = new();
 var dynAsmName = new AssemblyName("Cefaloid.Dynamic");
 var dynAsm = AssemblyBuilder.DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.RunAndCollect,
@@ -742,7 +772,13 @@ if (File.Exists(cefaloidPath)) {
   Console.WriteLine("// validating against a build of Cefaloid");
 }
 
+Console.WriteLine("using System;");
+Console.WriteLine("using System.Runtime.CompilerServices;");
+Console.WriteLine("using System.Runtime.InteropServices;");
+Console.WriteLine("using JetBrains.Annotations;");
+Console.WriteLine();
 Console.WriteLine("namespace Cefaloid;");
+Console.WriteLine();
 
 // TODO: during validation, check for static DllImport methods, validate
 HashSet<string> imported = new(); // throw them in here and don't generate stubs for them at the end
@@ -760,6 +796,9 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
   var convertedName = ConvertToPascalCase(name, true);
   if (manualTypeNameReplacements.TryGetValue(convertedName, out var replacementName))
     convertedName = replacementName;
+  foreach (var (match, replacement) in manualTextReplacements)
+    convertedName = convertedName.Replace(match, replacement);
+
   string? maybeUnderlyingType = null;
   Type? maybeClrType = null;
   if (isEnum) {
@@ -785,19 +824,27 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
     }
   }
 
+  // TODO: instead of emitting '{' immediately, check if we need to do inheritance
+  // e.g. if there's a 'base' field of cef_base_ref_counted_t, apply ICefRefCountedBase<T>
+
+  // TODO: handle emitting a special case default ctor
+  // e.g. [Obsolete(DoNotConstructDirectly, true)] public T() {}
+
+  // TODO: doc comments
   if (!isEnum)
     Console.WriteLine($"[PublicAPI, StructLayout(LayoutKind.Sequential, Size={diaSymbol.length})]");
   if (cefaloidType is not null)
-    Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {cefaloidType.Name}{maybeUnderlyingType} {{ // {name}");
+    Console.WriteLine($"{(isEnum ? "public enum" : "public struct")} {cefaloidType.Name}{maybeUnderlyingType} {{ // {name}");
   else
-    Console.WriteLine($"{(isEnum ? "public enum" : "pubic struct")} {convertedName}{maybeUnderlyingType} {{ // {name}");
+    Console.WriteLine($"{(isEnum ? "public enum" : "public struct")} {convertedName}{maybeUnderlyingType} {{ // {name}");
 
   Dictionary<string, object?>? cefaloidEnum = null;
   if (cefaloidTypeIsEnum && isEnum) {
     cefaloidEnum = new();
-    foreach (var cefaloidEnumValue in Enum.GetValues(cefaloidType!)) {
+    var underlyingType = cefaloidType!.GetEnumUnderlyingType();
+    foreach (var cefaloidEnumValue in Enum.GetValues(cefaloidType)) {
       var cefaloidEnumName = Enum.GetName(cefaloidType!, cefaloidEnumValue);
-      cefaloidEnum[cefaloidEnumName!] = cefaloidEnumValue;
+      cefaloidEnum[cefaloidEnumName!] = CastToType(cefaloidEnumValue, underlyingType);
     }
   }
 
@@ -908,12 +955,17 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
         ? GetSizeOf(cefaloidField.FieldType)
         : -1;
       var access = isFuncPtr ? "internal" : "public";
+
+      if (fieldTypeName!.Contains('*'))
+        fieldTypeName = "unsafe " + fieldTypeName;
+
       if (cefaloidType is null)
         Console.WriteLine($"  {access} {fieldTypeName} {convertedFieldName}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes");
       else if (cefaloidField is null) {
         Console.WriteLine($"  {access} {fieldTypeName} {convertedFieldName}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes !! MISSING");
       }
       else {
+#if NET8_0_OR_GREATER
         if (managedOffset == -1)
           Console.WriteLine($"  {access} {cefaloidField.FieldType.Name} {cefaloidField.Name}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes !! UNKNOWN FIELD LOCATION");
         else {
@@ -922,6 +974,21 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
           else
             Console.WriteLine($"  {access} {cefaloidField.FieldType.Name} {cefaloidField.Name}; // {fieldName} @ {managedOffset}, {managedSize} bytes !! EXPECTED @ {fieldSym.offset}, {fieldType.length}");
         }
+#else
+        var cefaloidFieldTypeName = cefaloidField.FieldType.Name;
+
+        if (cefaloidFieldTypeName.Contains('*'))
+          cefaloidFieldTypeName = "unsafe " + cefaloidFieldTypeName;
+
+        if (managedOffset == -1)
+          Console.WriteLine($"  {access} {(isFuncPtr ? fieldTypeName : cefaloidFieldTypeName)} {cefaloidField.Name}; // {fieldName} @ {fieldSym.offset}, {fieldType.length} bytes !! UNKNOWN FIELD LOCATION");
+        else {
+          if (fieldSym.offset == managedOffset && fieldType.length == (ulong) managedSize)
+            Console.WriteLine($"  {access} {(isFuncPtr ? fieldTypeName : cefaloidFieldTypeName)} {cefaloidField.Name}; // {fieldName} @ {managedOffset}, {managedSize} bytes");
+          else
+            Console.WriteLine($"  {access} {(isFuncPtr ? fieldTypeName : cefaloidFieldTypeName)} {cefaloidField.Name}; // {fieldName} @ {managedOffset}, {managedSize} bytes !! EXPECTED @ {fieldSym.offset}, {fieldType.length}");
+        }
+#endif
       }
     }
   }
@@ -932,9 +999,15 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
   Console.WriteLine();
 }
 
+var generated = new HashSet<string>();
 while (generationQueue.TryDequeue(out var name)) {
   if (!structsOrEnums.TryGetValue(name, out var structOrEnum))
     throw new NotImplementedException();
+
+  var uniqueName = name;
+  if (reverseTypedef.TryGetValue(structOrEnum.Item1.symIndexId, out var typedefName))
+    uniqueName = typedefName;
+  if (!generated.Add(uniqueName)) continue;
 
   var (sym, fields) = structOrEnum;
   GenerateDefinition(name, sym, fields);

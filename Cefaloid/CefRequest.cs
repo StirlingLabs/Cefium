@@ -9,6 +9,14 @@
 [PublicAPI, StructLayout(LayoutKind.Sequential)]
 public struct CefRequest : ICefRefCountedBase<CefRequest> {
 
+  [DllImport("cef", EntryPoint = "cef_request_create", CallingConvention = CallingConvention.Cdecl)]
+  internal static extern unsafe CefRequest* _Create();
+
+  /// <inheritdoc cref="_Create"/>
+  public static unsafe ref CefRequest Create()
+    => ref Unsafe.AsRef<CefRequest>(_Create());
+
+
   /// <inheritdoc cref="CefRequest"/>
   [Obsolete(DoNotConstructDirectly, true)]
   public CefRequest() {
