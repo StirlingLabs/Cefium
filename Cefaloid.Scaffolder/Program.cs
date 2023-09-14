@@ -170,7 +170,8 @@ var reverseTypedef = new Dictionary<uint, string>();
 
 // using concurrent dictionary here only so the enumerator will continue
 // even while the collection is modified
-var structsOrEnums = new ConcurrentDictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>(1,0);
+var structsOrEnums = new ConcurrentDictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>(1, 0);
+var generationQueue = new ConcurrentQueue<string>();
 
 //var extraEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
 //var extraStructs = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
@@ -275,6 +276,8 @@ void AddStructOrEnum(IDiaSymbol? sym, string? typedefName) {
 
   if (symName is null) return; // skip unnamed for now?
 
+  if (structsOrEnums.ContainsKey(symName)) return; // already added
+
   sym.findChildren(SymTagEnum.SymTagNull, null, 0, out var children);
   var fields = new Dictionary<string, IDiaSymbol>();
   foreach (IDiaSymbol child in children) {
@@ -287,6 +290,7 @@ void AddStructOrEnum(IDiaSymbol? sym, string? typedefName) {
   }
 
   structsOrEnums[symName] = (sym, fields);
+  generationQueue.Enqueue(symName);
 }
 
 [return: NotNullIfNotNull(nameof(source))]
@@ -351,6 +355,14 @@ List<(string Match, string Replacement)> manualTextReplacements = new() {
   ("Byindex", "ByIndex"),
   ("Byname", "ByName"),
   ("Bykey", "ByKey"),
+  ("Textfield", "TextField"),
+  ("Osmodal", "OsModal"),
+  ("Doublet", "Double"),
+  ("Timet", "Time"),
+  ("Userfree", "UserFree"),
+  ("Jsonand", "JsonAnd"),
+  ("Crlsets", "CrlSets"),
+  ("Vlog", "VLog"),
 };
 
 static string GetBasicTypeName(uint basicType) {
@@ -587,39 +599,24 @@ string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
     }
   }
   else {
-    var isEnum = (SymTagEnum) type.symTag is SymTagEnum.SymTagEnum;
+    //var isEnum = (SymTagEnum) type.symTag is SymTagEnum.SymTagEnum;
 
     if (reverseTypedef.TryGetValue(type.symIndexId, out var resolved))
       typeName = resolved;
 
     if (!structsOrEnums.ContainsKey(typeName)) {
-      if (isEnum) {
-        type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
-        var extraEnumChildren = new Dictionary<string, IDiaSymbol>();
-        foreach (IDiaSymbol child in enumChildren) {
-          var childName = child.name;
-          if (childName == null) continue; // skip unnamed for now?
+      type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
+      var children = new Dictionary<string, IDiaSymbol>();
+      foreach (IDiaSymbol child in enumChildren) {
+        var childName = child.name;
+        if (childName == null) continue; // skip unnamed for now?
 
-          extraEnumChildren.Add(childName, child);
-        }
-
-        structsOrEnums[typeName] = (type, extraEnumChildren);
+        children.Add(childName, child);
       }
-      else {
-        type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
-        var extraStructChildren = new Dictionary<string, IDiaSymbol>();
-        foreach (IDiaSymbol child in enumChildren) {
-          var childName = child.name;
-          if (childName == null) continue; // skip unnamed for now?
 
-          extraStructChildren.Add(childName, child);
-        }
-
-        structsOrEnums[typeName] = (type, extraStructChildren);
-      }
+      structsOrEnums[typeName] = (type, children);
+      generationQueue.Enqueue(typeName);
     }
-
-
 
     typeName = ConvertToPascalCase(typeName, true);
     if (manualTypeNameReplacements.TryGetValue(typeName, out var replacement))
@@ -635,10 +632,8 @@ string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
 string? ResolveTypeName(IDiaSymbol type)
   => ResolveTypeName2(type, out _);
 
-
 foreach (var (name, sym) in exports.OrderBy(kv => kv.Key))
   exportSignatures[name] = ResolveFunctionType(sym, 0, "Cef");
-
 
 var genericSizeOfMethod = typeof(Unsafe)
   .GetMethod("SizeOf", BindingFlags.Public | BindingFlags.Static)!;
@@ -937,13 +932,13 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
   Console.WriteLine();
 }
 
-foreach (var (structName, (structSym, fields)) in structsOrEnums)
-  GenerateDefinition(structName, structSym, fields);
+while (generationQueue.TryDequeue(out var name)) {
+  if (!structsOrEnums.TryGetValue(name, out var structOrEnum))
+    throw new NotImplementedException();
 
-/*
-foreach (var (structName, (structSym, fields)) in extraEnums)
-  GenerateDefinition(structName, structSym, fields);
-  */
+  var (sym, fields) = structOrEnum;
+  GenerateDefinition(name, sym, fields);
+}
 
 Console.WriteLine("public static unsafe partial class Cef {");
 
