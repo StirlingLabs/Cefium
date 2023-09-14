@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -166,11 +167,16 @@ var syms = tables["Symbols"];
 
 var typedefs = new Dictionary<string, IDiaSymbol>();
 var reverseTypedef = new Dictionary<uint, string>();
-var structsOrEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
 
-var extraEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
+// using concurrent dictionary here only so the enumerator will continue
+// even while the collection is modified
+var structsOrEnums = new ConcurrentDictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>(1,0);
+
+//var extraEnums = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
+//var extraStructs = new Dictionary<string, (IDiaSymbol, Dictionary<string, IDiaSymbol>)>();
 
 var exports = new Dictionary<string, IDiaSymbol>();
+var exportSignatures = new Dictionary<string, string>();
 
 foreach (IDiaSymbol sym in syms) {
   if (sym is null) break;
@@ -464,11 +470,12 @@ unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? tri
       throw new NotImplementedException();
 
     session.findSymbolByRVA(func.relativeVirtualAddress, SymTagEnum.SymTagFunction, out func);
-
   }
+
   if ((SymTagEnum) func.symTag == SymTagEnum.SymTagFunction) {
     if (pointerDepth != 0)
       throw new NotImplementedException();
+
     var name = func.name;
     var funcType = func.type;
     var paramCount = funcType.count;
@@ -512,6 +519,7 @@ unsafe string ResolveFunctionType(IDiaSymbol func, int pointerDepth, string? tri
   else {
     if (pointerDepth == 0)
       throw new NotImplementedException();
+
     var paramCount = func.count;
     var retType = (IDiaSymbol) func.type;
     var cc = (CallingConvention) func.callingConvention;
@@ -584,18 +592,34 @@ string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
     if (reverseTypedef.TryGetValue(type.symIndexId, out var resolved))
       typeName = resolved;
 
-    if (isEnum && !structsOrEnums.ContainsKey(typeName)) {
-      type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
-      var extraEnumChildren = new Dictionary<string, IDiaSymbol>();
-      foreach (IDiaSymbol child in enumChildren) {
-        var childName = child.name;
-        if (childName == null) continue; // skip unnamed for now?
+    if (!structsOrEnums.ContainsKey(typeName)) {
+      if (isEnum) {
+        type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
+        var extraEnumChildren = new Dictionary<string, IDiaSymbol>();
+        foreach (IDiaSymbol child in enumChildren) {
+          var childName = child.name;
+          if (childName == null) continue; // skip unnamed for now?
 
-        extraEnumChildren.Add(childName, child);
+          extraEnumChildren.Add(childName, child);
+        }
+
+        structsOrEnums[typeName] = (type, extraEnumChildren);
       }
+      else {
+        type.findChildren(SymTagEnum.SymTagNull, null, 0, out var enumChildren);
+        var extraStructChildren = new Dictionary<string, IDiaSymbol>();
+        foreach (IDiaSymbol child in enumChildren) {
+          var childName = child.name;
+          if (childName == null) continue; // skip unnamed for now?
 
-      extraEnums[typeName] = (type, extraEnumChildren);
+          extraStructChildren.Add(childName, child);
+        }
+
+        structsOrEnums[typeName] = (type, extraStructChildren);
+      }
     }
+
+
 
     typeName = ConvertToPascalCase(typeName, true);
     if (manualTypeNameReplacements.TryGetValue(typeName, out var replacement))
@@ -610,6 +634,11 @@ string? ResolveTypeName2(IDiaSymbol type, out bool isFuncPtr) {
 
 string? ResolveTypeName(IDiaSymbol type)
   => ResolveTypeName2(type, out _);
+
+
+foreach (var (name, sym) in exports.OrderBy(kv => kv.Key))
+  exportSignatures[name] = ResolveFunctionType(sym, 0, "Cef");
+
 
 var genericSizeOfMethod = typeof(Unsafe)
   .GetMethod("SizeOf", BindingFlags.Public | BindingFlags.Static)!;
@@ -634,7 +663,7 @@ unsafe int OffsetRetrievalTemplate<T>() where T: unmanaged {
 }
 */
 
-Dictionary<FieldInfo, int> FieldOffsetCache = new();
+Dictionary<FieldInfo, int> fieldOffsetCache = new();
 var dynAsmName = new AssemblyName("Cefaloid.Dynamic");
 var dynAsm = AssemblyBuilder.DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.RunAndCollect,
   new CustomAttributeBuilder[] {
@@ -647,7 +676,7 @@ var dynAsm = AssemblyBuilder.DefineDynamicAssembly(dynAsmName, AssemblyBuilderAc
 var dynMod = dynAsm.DefineDynamicModule("Cefaloid.Dynamic");
 
 unsafe int GetOffsetOf(FieldInfo f) {
-  if (FieldOffsetCache.TryGetValue(f, out var offset))
+  if (fieldOffsetCache.TryGetValue(f, out var offset))
     return offset;
 
   var t = f.DeclaringType!;
@@ -684,7 +713,7 @@ unsafe int GetOffsetOf(FieldInfo f) {
   // compile it dammit
   var fp = (delegate * managed<int>) m.MethodHandle.GetFunctionPointer();
   offset = fp();
-  FieldOffsetCache[f] = offset;
+  fieldOffsetCache[f] = offset;
   return offset;
 }
 
@@ -774,6 +803,33 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
     foreach (var cefaloidEnumValue in Enum.GetValues(cefaloidType!)) {
       var cefaloidEnumName = Enum.GetName(cefaloidType!, cefaloidEnumValue);
       cefaloidEnum[cefaloidEnumName!] = cefaloidEnumValue;
+    }
+  }
+
+  if (cefaloidType is not null && !cefaloidTypeIsEnum) {
+    var publicStaticMethods = cefaloidType
+      .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+
+    foreach (var method in publicStaticMethods) {
+      /*// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
+      var isExtern = (method.MethodImplementationFlags
+        & MethodImplAttributes.InternalCall) != 0;
+
+      if (!isExtern) continue;
+      */
+
+      var dllImport = method.GetCustomAttribute<DllImportAttribute>();
+
+      if (dllImport is null) continue;
+
+      var entryPoint = dllImport.EntryPoint;
+
+      if (entryPoint is null) continue;
+
+      imported.Add(entryPoint);
+
+      // TODO: write and validate imported function signature
+      Console.WriteLine($"// TODO: imports {entryPoint} as {method.Name}");
     }
   }
 
@@ -884,12 +940,17 @@ void GenerateDefinition(string s, IDiaSymbol diaSymbol, Dictionary<string, IDiaS
 foreach (var (structName, (structSym, fields)) in structsOrEnums)
   GenerateDefinition(structName, structSym, fields);
 
+/*
 foreach (var (structName, (structSym, fields)) in extraEnums)
   GenerateDefinition(structName, structSym, fields);
+  */
 
 Console.WriteLine("public static unsafe partial class Cef {");
-foreach (var (name, sym) in exports.OrderBy(kv => kv.Key)) {
-  Console.WriteLine(ResolveFunctionType(sym, 0, "Cef"));
+
+foreach (var (name, signature) in exportSignatures.OrderBy(kv => kv.Key)) {
+  if (imported.Contains(name)) continue;
+
+  Console.WriteLine(signature);
 }
 
 Console.WriteLine("}");
