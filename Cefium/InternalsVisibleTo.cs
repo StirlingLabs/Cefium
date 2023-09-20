@@ -1,0 +1,6 @@
+﻿[assembly: InternalsVisibleTo("Cefium.Dynamic")]
+[assembly: InternalsVisibleTo("Cefium.Tests")]
+[assembly: InternalsVisibleTo("Cefium.Tests.Windows")]
+[assembly: InternalsVisibleTo("Cefium.Tests.Linux")]
+[assembly: InternalsVisibleTo("Cefium.Tests.Mac")]
+[assembly: InternalsVisibleTo("Cefium.Subprocess")]

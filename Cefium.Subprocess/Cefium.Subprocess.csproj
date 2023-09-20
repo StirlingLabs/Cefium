@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <PublishSingleFile>false</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>partial</TrimMode>
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+        <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+        <ILLinkTreatWarningsAsErrors>true</ILLinkTreatWarningsAsErrors>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
+        <TrimmerRemoveSymbols Condition="'$(Configuration)'!='Debug'">true</TrimmerRemoveSymbols>
+        <TrimmerRemoveSymbols Condition="'$(Configuration)'=='Debug'">false</TrimmerRemoveSymbols>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+        <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+        <EventSourceSupport>false</EventSourceSupport>
+        <InvariantGlobalization>true</InvariantGlobalization> <!-- maybe not? -->
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+        <StartupHookSupport>false</StartupHookSupport>
+        <AutoreleasePoolSupport>true</AutoreleasePoolSupport>
+        <EnableCppCLIHostActivation>false</EnableCppCLIHostActivation>
+        <CustomResourceTypesSupport>false</CustomResourceTypesSupport>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <DebuggerSupport Condition="'$(Configuration)'!='Debug'">false</DebuggerSupport>
+        <DebuggerSupport Condition="'$(Configuration)'=='Debug'">true</DebuggerSupport>
+        <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+        <MetadataUpdaterSupport Condition="'$(Configuration)'!='Debug'">false</MetadataUpdaterSupport>
+        <MetadataUpdaterSupport Condition="'$(Configuration)'=='Debug'">true</MetadataUpdaterSupport>
+        <UseSystemResourceKeys Condition="'$(Configuration)'!='Debug'">true</UseSystemResourceKeys>
+        <UseSystemResourceKeys Condition="'$(Configuration)'=='Debug'">false</UseSystemResourceKeys>
+        <PublishReadyToRun Condition="'$(Configuration)'!='Debug'">true</PublishReadyToRun>
+        <PublishReadyToRun Condition="'$(Configuration)'=='Debug'">false</PublishReadyToRun>
+
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">$(DefaultAppHostRuntimeIdentifier)</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">$(NETCoreSdkPortableRuntimeIdentifier)</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Cefium\Cefium.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <TrimmerRootAssembly Include="Cefium" />
+        <TrimmerRootAssembly Include="Cefium.Subprocess" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="!$(RuntimeIdentifier.StartsWith('win')) Or '$(Configuration)'=='Debug'">
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(RuntimeIdentifier.StartsWith('win')) And '$(Configuration)'!='Debug'">
+        <OutputType>WinExe</OutputType>
+    </PropertyGroup>
+</Project>

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.DiaSymReader" Version="2.0.0"/>
+        <PackageReference Include="Microsoft.DiaSymReader.Native" Version="1.7.0"/>
+        <PackageReference Include="SharpZipLib" Version="1.4.2"/>
+        <PackageReference Include="ZString" Version="2.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Dia2Lib">
+            <HintPath>..\Dia2\Dia2Lib.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Cefium.Shared\Cefium.Shared.csproj" />
+      <ProjectReference Include="..\Cefium\Cefium.csproj">
+          <PrivateAssets>all</PrivateAssets>
+          <Private>true</Private>
+      </ProjectReference>
+    </ItemGroup>
+
+
+
+
+</Project>
