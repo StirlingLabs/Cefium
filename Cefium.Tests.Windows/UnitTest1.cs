@@ -43,7 +43,10 @@ public class Tests {
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnWindowChanged(CefViewDelegate* _self, CefView* view, int added) {
         var self = (CefTestBrowserViewDelegate*) _self;
-        self->Window = view->GetWindow();
+        if (added != 0)
+          self->Window = view->GetWindow();
+        else
+          self->Window = null;
       }
 
       self.Base.Base._OnWindowChanged = &OnWindowChanged;
@@ -102,7 +105,9 @@ public class Tests {
 
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnWindowDestroyed(CefWindowDelegate* self, CefWindow* window) {
-        ((CefTestWindowDelegate*) self)->BrowserView->Release();
+        var view = ((CefTestWindowDelegate*) self)->BrowserView;
+        view->Base.Base.Size.Should().Be((uint)Unsafe.SizeOf<CefBrowserView>());
+        view->Release();
       }
 
       self.Base._OnWindowDestroyed = &OnWindowDestroyed;
@@ -1705,7 +1710,6 @@ public class Tests {
       created.Should().BeTrue();*/
 
       var dlgView = New<CefTestBrowserViewDelegate>();
-      dlgView.Target.AddRef();
       var view = CefBrowserView.Create(
         client,
         ref initUrl,
@@ -1713,12 +1717,15 @@ public class Tests {
         extraInfo,
         @delegate: &dlgView.Pointer->Base
       );
+      view->Base.Base.Size.Should().Be((nuint) Unsafe.SizeOf<CefBrowserView>());
 
       (view == null).Should().BeFalse();
 
       var dlgWnd = New<CefTestWindowDelegate>();
-      dlgWnd.Target.AddRef();
+      view->Base.AddRef();
+      view->Base.Base.Size.Should().Be((nuint) Unsafe.SizeOf<CefBrowserView>());
       dlgWnd.Target.BrowserView = view;
+      dlgWnd.Target.BrowserView->Base.Base.Size.Should().Be((nuint) Unsafe.SizeOf<CefBrowserView>());
       var window = CefWindow.CreateTopLevel(&dlgWnd.Pointer->Base);
       window->Base.AddChildView(&view->Base);
       window->Show();
@@ -1731,7 +1738,7 @@ public class Tests {
 
       var browser = view->GetBrowser();
 
-      (browser == null).Should().BeTrue();
+      (browser == null).Should().BeFalse();
 
       var toolbar = view->GetChromeToolbar();
 
