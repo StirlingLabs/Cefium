@@ -9,9 +9,6 @@
   <member name="T:Cefium.CefActionTask">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="T:Cefium.Cefium">
-    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
-  </member>
   <member name="T:Cefium.CefAlphaType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -76,6 +73,9 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefBrowserViewDelegate">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefium.CefBrowserViewExtensions">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefButton">
@@ -349,6 +349,9 @@
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefInsets">
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
+  <member name="T:Cefium.Cefium">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefJsDialogCallback">
@@ -855,7 +858,7 @@
   <member name="T:Cefium.CefTestServerHandler">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="T:Cefium.CefTextfield">
+  <member name="T:Cefium.CefTextField">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefTextfieldDelegate">
@@ -891,7 +894,7 @@
   <member name="T:Cefium.CefTransitionType">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="T:Cefium.CefUrlparts">
+  <member name="T:Cefium.CefUrlParts">
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
   <member name="T:Cefium.CefUrlRequest">

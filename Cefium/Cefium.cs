@@ -30,11 +30,21 @@ public static class Cefium {
         ? "linuxarm64"
         : "linux64";
 
-  private const string CefVersion = "116.0.21";
+  /// <summary>
+  /// The version of CEF (Chromium Embedded Framework) used by this version of Cefium.
+  /// Coincidentally, this will always match the version of Cefium.
+  /// </summary>
+  public const string CefVersion = "116.0.21";
 
-  private const string CefVersionMetadata = "g9c7dc32";
+  /// <summary>
+  /// The metadata of the CEF version used by this version of Cefium.
+  /// </summary>
+  public const string CefVersionMetadata = "g9c7dc32";
 
-  private const string ChromiumVersion = "116.0.5845.181";
+  /// <summary>
+  /// The version of Chromium this version of CEF is based on.
+  /// </summary>
+  public const string ChromiumVersion = "116.0.5845.181";
 
   internal static readonly string MinimalCefCdnUrl
     = $"https://cef-builds.spotifycdn.com/cef_binary_{CefVersion}%2B{CefVersionMetadata}%2Bchromium-{ChromiumVersion}_{LibraryOsId}_minimal.tar.bz2";

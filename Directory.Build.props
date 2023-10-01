@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <Version>116.0.21</Version>
+        <AssemblyVersion>116.0.21.0</AssemblyVersion>
+        <InformationalVersion>116.0.21+g9c7dc32</InformationalVersion>
+    </PropertyGroup>
+</Project>

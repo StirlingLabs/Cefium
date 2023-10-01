@@ -14,7 +14,6 @@ namespace Cefium.Tests;
 
 public class Tests {
 
-
   [StructLayout(LayoutKind.Sequential)]
   private struct CefTestApp : ICefRefCountedBase<CefTestApp> {
 
@@ -125,13 +124,12 @@ public class Tests {
 
     EnableDpiAwareness();
 
-
-    global::Cefium.Initialize();
+    Cefium.Initialize();
 
     var lastProgress = 0f;
-    while (global::Cefium.IsDownloading) {
-      if (global::Cefium.DownloadProgress > lastProgress) {
-        lastProgress = global::Cefium.DownloadProgress;
+    while (Cefium.IsDownloading) {
+      if (Cefium.DownloadProgress > lastProgress) {
+        lastProgress = Cefium.DownloadProgress;
         Trace.WriteLine($"Download progress: {lastProgress:P}");
       }
 
@@ -141,13 +139,13 @@ public class Tests {
       Thread.Sleep(1);
     }
 
-    if (!global::Cefium.IsReady)
+    if (!Cefium.IsReady)
       Trace.WriteLine("Extracting...");
     lastProgress = 0;
 
-    while (!global::Cefium.IsReady) {
-      if (global::Cefium.ExtractProgress > lastProgress) {
-        lastProgress = global::Cefium.ExtractProgress;
+    while (!Cefium.IsReady) {
+      if (Cefium.ExtractProgress > lastProgress) {
+        lastProgress = Cefium.ExtractProgress;
         Trace.WriteLine($"Extraction progress: {lastProgress:P}");
       }
 
@@ -157,7 +155,7 @@ public class Tests {
       Thread.Sleep(1);
     }
 
-    while (!global::Cefium.IsReady)
+    while (!Cefium.IsReady)
       Thread.Sleep(1);
 
     Trace.WriteLine("Ready!");
@@ -165,6 +163,7 @@ public class Tests {
     Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
     var settings = new CefSettings {
+      ChromeRuntime = true,
       CommandLineArgsDisabled = true,
       RemoteDebuggingPort = 9222,
       LogSeverity = CefLogSeverity.Verbose,
@@ -192,7 +191,7 @@ public class Tests {
 
     //var userPath = Path.Combine(Cefium.LocalAppDataPathBase, "DefaultUser");
     //userPath.CreateCefString(out settings.UserDataPath);
-    global::Cefium.LocalAppDataPath
+    Cefium.LocalAppDataPath
       .CreateCefString(out settings.ResourcesDirPath);
 
     //var subProcPath = Path.Combine(Cefium.LocalAppDataPath, "subproc", "Cefium.Subprocess.exe");
@@ -279,6 +278,8 @@ public class Tests {
           v8Ctx->Enter();
           try {
             var g = v8Ctx->GetGlobal();
+            if (g is null) return null;
+
             var exampleKey = "example".CreateCefString();
             var exampleValue = "Success!".CreateCefString();
             //var exampleKeyV8 = CefV8Value.CreateString(ref exampleKey);
@@ -286,7 +287,6 @@ public class Tests {
             g->SetValueByKey(ref exampleKey, exampleValueV8, CefV8PropertyAttribute.ReadOnly | CefV8PropertyAttribute.DontDelete);
             var cefHandler = New<CefDelegateV8Handler>();
             cefHandler.Target.SetHandler(static (name, o, count, arguments, retval, exception) => {
-
               var @true = CefV8Value.CreateBool(true);
               *retval = @true;
 
@@ -300,6 +300,7 @@ public class Tests {
             v8Ctx->Exit();
           }
         }
+
         return null;
       }
 
@@ -501,7 +502,7 @@ public class Tests {
       //CefApp.RunMessageLoop();
 
       var cts = new CancellationTokenSource();
-      cts.CancelAfter(2000);
+      cts.CancelAfter(100);
       do CefApp.DoMessageLoopWork();
       while (!cts.IsCancellationRequested);
 
@@ -578,9 +579,9 @@ public class Tests {
       RegisterExtension(ref cefExtName, ref cefExtCode, ref cefV8Handler.Target.V8Handler);*/
 
       if (!cts.TryReset())
-        cts = new(2000);
+        cts = new(100);
       else
-        cts.CancelAfter(2000);
+        cts.CancelAfter(100);
 
       /*do CefApp.DoMessageLoopWork();
       while (!taskCompleted.Wait(0) && !cts.IsCancellationRequested);
@@ -591,9 +592,9 @@ public class Tests {
       frame->ExecuteJavaScript(ref jsAlert, ref initUrl, 0);
 
       if (!cts.TryReset())
-        cts = new(2000);
+        cts = new(100);
       else
-        cts.CancelAfter(2000);
+        cts.CancelAfter(100);
 
       do CefApp.DoMessageLoopWork();
       while (!cts.IsCancellationRequested);
@@ -606,8 +607,23 @@ public class Tests {
 
       //var host = browser->GetHost();
       //var maybeClient = host->GetClient();
+      Thread.Sleep(100);
 
-      Thread.Sleep(1000);
+      if (Debugger.IsAttached) {
+        bool shutdown = false;
+        new Thread(() => {
+          MessageBox.Show("Click OK to terminate the test.");
+          shutdown = true;
+        }).UnsafeStart();
+
+        while (!shutdown)
+          CefApp.DoMessageLoopWork();
+        /*CefApp.Shutdown();
+        var t = Stopwatch.StartNew();
+        do
+          CefApp.DoMessageLoopWork();
+        while (t.ElapsedMilliseconds < 100);*/
+      }
     }
   }
 

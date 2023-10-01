@@ -15,7 +15,7 @@ public interface ICefRefCountedBase<T> where T : unmanaged, ICefRefCountedBase<T
     return p;
   }
 
-  internal virtual static void Initialize(ref T item) {
+  protected internal virtual static void Initialize(ref T item) {
     // default
   }
 
