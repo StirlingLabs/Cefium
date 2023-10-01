@@ -36,18 +36,18 @@ public struct CefV8StackTrace : ICefRefCountedBase<CefV8StackTrace> {
   /// returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_v8stack_trace_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int> _IsValid;
 
   /// <summary>
   /// Returns the number of stack frames.
   /// <c>int(CEF_CALLBACK* get_frame_count)(struct _cef_v8stack_trace_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int> _GetFrameCount;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int> _GetFrameCount;
 
   /// <summary>
   /// Returns the stack frame at the specified 0-based index.
   /// <c>struct _cef_v8stack_frame_t*(CEF_CALLBACK* get_frame)(struct _cef_v8stack_trace_t* self, int index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int, CefV8StackFrame*> _GetFrame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackTrace*, int, CefV8StackFrame*> _GetFrame;
 
 }

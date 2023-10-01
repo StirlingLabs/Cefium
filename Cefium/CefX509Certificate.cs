@@ -23,53 +23,53 @@ public struct CefX509Certificate : ICefRefCountedBase<CefX509Certificate> {
   /// subject should match the host name of the web server.
   /// <c>struct _cef_x509cert_principal_t*(CEF_CALLBACK* get_subject)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefX509CertPrincipal*> _GetSubject;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefX509CertPrincipal*> _GetSubject;
 
   /// <summary>
   /// Returns the issuer of the X.509 certificate.
   /// <c>struct _cef_x509cert_principal_t*(CEF_CALLBACK* get_issuer)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefX509CertPrincipal*> _GetIssuer;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefX509CertPrincipal*> _GetIssuer;
 
   /// <summary>
   /// Returns the DER encoded serial number for the X.509 certificate. The value
   /// possibly includes a leading 00 byte.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_serial_number)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetSerialNumber;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetSerialNumber;
 
   /// <summary>
   /// Returns the date before which the X.509 certificate is invalid.
   /// CefBaseTime.GetTimeT() will return 0 if no date was specified.
   /// <c>cef_basetime_t(CEF_CALLBACK* get_valid_start)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBaseTime> _GetValidStart;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBaseTime> _GetValidStart;
 
   /// <summary>
   /// Returns the date after which the X.509 certificate is invalid.
   /// CefBaseTime.GetTimeT() will return 0 if no date was specified.
   /// <c>cef_basetime_t(CEF_CALLBACK* get_valid_expiry)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBaseTime> _GetValidExpiry;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBaseTime> _GetValidExpiry;
 
   /// <summary>
   /// Returns the DER encoded data for the X.509 certificate.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_derencoded)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetDerEncoded;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetDerEncoded;
 
   /// <summary>
   /// Returns the PEM encoded data for the X.509 certificate.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_pemencoded)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetPemEncoded;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, CefBinaryValue*> _GetPemEncoded;
 
   /// <summary>
   /// Returns the number of certificates in the issuer chain. If 0, the
   /// certificate is self-signed.
   /// <c>size_t(CEF_CALLBACK* get_issuer_chain_size)(struct _cef_x509certificate_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint> _GetIssuerChainSize;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint> _GetIssuerChainSize;
 
   /// <summary>
   /// Returns the DER encoded data for the certificate issuer chain. If we
@@ -77,7 +77,7 @@ public struct CefX509Certificate : ICefRefCountedBase<CefX509Certificate> {
   /// array but is an NULL string.
   /// <c>void(CEF_CALLBACK* get_derencoded_issuer_chain)(struct _cef_x509certificate_t* self, size_t* chainCount, struct _cef_binary_value_t** chain)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint, CefBinaryValue**, void> _GetDerEncodedIssuerChain;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint, CefBinaryValue**, void> _GetDerEncodedIssuerChain;
 
   /// <summary>
   /// Returns the PEM encoded data for the certificate issuer chain. If we
@@ -85,6 +85,6 @@ public struct CefX509Certificate : ICefRefCountedBase<CefX509Certificate> {
   /// array but is an NULL string.
   /// <c>void(CEF_CALLBACK* get_pemencoded_issuer_chain)(struct _cef_x509certificate_t* self, size_t* chainCount, struct _cef_binary_value_t** chain)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint, CefBinaryValue**, void> _GetPemEncodedIssuerChain;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509Certificate*, nuint, CefBinaryValue**, void> _GetPemEncodedIssuerChain;
 
 }

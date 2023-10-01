@@ -58,14 +58,14 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// object.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_request_context_t* self, struct _cef_request_context_t* other);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContext*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContext*, int> _IsSame;
 
   /// <summary>
   /// Returns true (1) if this object is sharing the same storage as |that|
   /// object.
   /// <c>int(CEF_CALLBACK* is_sharing_with)(struct _cef_request_context_t* self, struct _cef_request_context_t* other);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContext*, int> _IsSharingWith;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContext*, int> _IsSharingWith;
 
   /// <summary>
   /// Returns true (1) if this object is the global context. The global context
@@ -73,13 +73,13 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// context argument.
   /// <c>int(CEF_CALLBACK* is_global)(struct _cef_request_context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, int> _IsGlobal;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, int> _IsGlobal;
 
   /// <summary>
   /// Returns the handler for this context if any.
   /// <c>struct _cef_request_context_handler_t*(CEF_CALLBACK* get_handler)(struct _cef_request_context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContextHandler*> _GetHandler;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefRequestContextHandler*> _GetHandler;
 
   /// <summary>
   /// Returns the cache path for this object. If NULL an "incognito mode" in-
@@ -88,7 +88,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_cache_path)(struct _cef_request_context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefStringUserFree*> _GetCachePath;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefStringUserFree*> _GetCachePath;
 
   /// <summary>
   /// Returns the cookie manager for this object. If |callback| is non-NULL it
@@ -96,7 +96,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// storage has been initialized.
   /// <c>struct _cef_cookie_manager_t*(CEF_CALLBACK* get_cookie_manager)(struct _cef_request_context_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, CefCookieManager*> _GetCookieManager;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, CefCookieManager*> _GetCookieManager;
 
   /// <summary>
   /// Register a scheme handler factory for the specified |scheme_name| and
@@ -112,14 +112,14 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// function may be called on any thread in the browser process.
   /// <c>int(CEF_CALLBACK* register_scheme_handler_factory)(struct _cef_request_context_t* self, const cef_string_t* scheme_name, const cef_string_t* domain_name, struct _cef_scheme_handler_factory_t* factory);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefString*, CefSchemeHandlerFactory*, int> _RegisterSchemeHandlerFactory;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefString*, CefSchemeHandlerFactory*, int> _RegisterSchemeHandlerFactory;
 
   /// <summary>
   /// Clear all registered scheme handler factories. Returns false (0) on error.
   /// This function may be called on any thread in the browser process.
   /// <c>int(CEF_CALLBACK* clear_scheme_handler_factories)(struct _cef_request_context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, int> _ClearSchemeHandlerFactories;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, int> _ClearSchemeHandlerFactories;
 
   /// <summary>
   /// Clears all certificate exceptions that were added as part of handling
@@ -130,7 +130,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// completion.
   /// <c>void(CEF_CALLBACK* clear_certificate_exceptions)(struct _cef_request_context_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _ClearCertificateExceptions;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _ClearCertificateExceptions;
 
   /// <summary>
   /// Clears all HTTP authentication credentials that were added as part of
@@ -138,7 +138,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// on the UI thread after completion.
   /// <c>void(CEF_CALLBACK* clear_http_auth_credentials)(struct _cef_request_context_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _ClearHttpAuthCredentials;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _ClearHttpAuthCredentials;
 
   /// <summary>
   /// Clears all active and idle connections that Chromium currently has. This
@@ -147,14 +147,14 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// executed on the UI thread after completion.
   /// <c>void(CEF_CALLBACK* close_all_connections)(struct _cef_request_context_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _CloseAllConnections;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, void> _CloseAllConnections;
 
   /// <summary>
   /// Attempts to resolve |origin| to a list of associated IP addresses.
   /// |callback| will be executed on the UI thread after completion.
   /// <c>void(CEF_CALLBACK* resolve_host)(struct _cef_request_context_t* self, const cef_string_t* origin, struct _cef_resolve_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefResolveCallback*, void> _ResolveHost;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefResolveCallback*, void> _ResolveHost;
 
   /// <summary>
   /// Load an extension.
@@ -205,7 +205,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// and usage documentation.
   /// <c>void(CEF_CALLBACK* load_extension)(struct _cef_request_context_t* self, const cef_string_t* root_directory, struct _cef_dictionary_value_t* manifest, struct _cef_extension_handler_t* handler);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefDictionaryValue*, CefExtensionHandler*, void> _LoadExtension;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefDictionaryValue*, CefExtensionHandler*, void> _LoadExtension;
 
   /// <summary>
   /// Returns true (1) if this context was used to load the extension identified
@@ -214,7 +214,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// on the browser process UI thread.
   /// <c>int(CEF_CALLBACK* did_load_extension)(struct _cef_request_context_t* self, const cef_string_t* extension_id);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, int> _DidLoadExtension;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, int> _DidLoadExtension;
 
   /// <summary>
   /// Returns true (1) if this context has access to the extension identified by
@@ -223,7 +223,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// browser process UI thread.
   /// <c>int(CEF_CALLBACK* has_extension)(struct _cef_request_context_t* self, const cef_string_t* extension_id);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, int> _HasExtension;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, int> _HasExtension;
 
   /// <summary>
   /// Retrieve the list of all extensions that this context has access to (see
@@ -232,7 +232,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// called on the browser process UI thread.
   /// <c>int(CEF_CALLBACK* get_extensions)(struct _cef_request_context_t* self, cef_string_list_t extension_ids);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefStringList*, int> _GetExtensions;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefStringList*, int> _GetExtensions;
 
   /// <summary>
   /// Returns the extension matching |extension_id| or NULL if no matching
@@ -240,7 +240,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// must be called on the browser process UI thread.
   /// <c>struct _cef_extension_t*(CEF_CALLBACK* get_extension)(struct _cef_request_context_t* self, const cef_string_t* extension_id);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefExtension*> _GetExtension;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefString*, CefExtension*> _GetExtension;
 
   /// <summary>
   /// Returns the MediaRouter object associated with this context.  If
@@ -248,7 +248,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// after the manager's context has been initialized.
   /// <c>struct _cef_media_router_t*(CEF_CALLBACK* get_media_router)(struct _cef_request_context_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, CefMediaRouter*> _GetMediaRouter;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRequestContext*, CefCompletionCallback*, CefMediaRouter*> _GetMediaRouter;
 
   /// <summary>
   /// Returns the current value for |content_type| that applies for the
@@ -257,7 +257,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// process UI thread.
   /// <c>struct _cef_value_t*(CEF_CALLBACK* get_website_setting)(struct _cef_request_context_t* self, const cef_string_t* requesting_url, const cef_string_t* top_level_url, cef_content_setting_types_t content_type);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefValue*> _GetWebsiteSetting;
+  public unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefValue*> _GetWebsiteSetting;
 
   /// <summary>
   /// Sets the current value for |content_type| for the specified URLs in the
@@ -274,7 +274,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// https://source.chromium.org/search?q=ContentSettingsType::POPUPS
   /// <c>void(CEF_CALLBACK* set_website_setting)(struct _cef_request_context_t* self, const cef_string_t* requesting_url, const cef_string_t* top_level_url, cef_content_setting_types_t content_type, struct _cef_value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefValue*, void> _SetWebsiteSetting;
+  public unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefValue*, void> _SetWebsiteSetting;
 
   /// <summary>
   /// Returns the current value for |content_type| that applies for the
@@ -283,7 +283,7 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// be called on the browser process UI thread.
   /// <c>cef_content_setting_values_t(CEF_CALLBACK* get_content_setting)(struct _cef_request_context_t* self, const cef_string_t* requesting_url, const cef_string_t* top_level_url, cef_content_setting_types_t content_type);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefContentSettingValues> _GetContentSetting;
+  public unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefContentSettingValues> _GetContentSetting;
 
   /// <summary>
   /// Sets the current value for |content_type| for the specified URLs in the
@@ -300,6 +300,6 @@ public struct CefRequestContext : ICefRefCountedBase<CefRequestContext> {
   /// https://source.chromium.org/search?q=ContentSettingsType::POPUPS
   /// <c>void(CEF_CALLBACK* set_content_setting)(struct _cef_request_context_t* self, const cef_string_t* requesting_url, const cef_string_t* top_level_url, cef_content_setting_types_t content_type, cef_content_setting_values_t value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefContentSettingValues, void> _SetContentSetting;
+  public unsafe delegate * unmanaged[Cdecl]<CefRequestContext*, CefString*, CefString*, CefContentSettingTypes, CefContentSettingValues, void> _SetContentSetting;
 
 }

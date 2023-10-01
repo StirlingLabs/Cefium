@@ -28,7 +28,7 @@ public struct CefV8Interceptor : ICefRefCountedBase<CefV8Interceptor> {
   /// Return true (1) if interceptor retrieval was handled, false (0) otherwise.
   /// <c>int(CEF_CALLBACK* get_byname)(struct _cef_v8interceptor_t* self, const cef_string_t* name, struct _cef_v8value_t* object, struct _cef_v8value_t** retval, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, ref CefString, ref CefV8Value, CefV8Value**, ref CefString, int> _GetByName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, ref CefString, ref CefV8Value, CefV8Value**, ref CefString, int> _GetByName;
 
   /// <summary>
   /// Handle retrieval of the interceptor value identified by |index|. |object|
@@ -39,7 +39,7 @@ public struct CefV8Interceptor : ICefRefCountedBase<CefV8Interceptor> {
   /// interceptor retrieval was handled, false (0) otherwise.
   /// <c>int(CEF_CALLBACK* get_byindex)(struct _cef_v8interceptor_t* self, int index, struct _cef_v8value_t* object, struct _cef_v8value_t** retval, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, int, ref CefV8Value, CefV8Value**, ref CefString, int> _GetByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, int, ref CefV8Value, CefV8Value**, ref CefString, int> _GetByIndex;
 
   /// <summary>
   /// Handle assignment of the interceptor value identified by |name|. |object|
@@ -50,7 +50,7 @@ public struct CefV8Interceptor : ICefRefCountedBase<CefV8Interceptor> {
   /// (1) if interceptor assignment was handled, false (0) otherwise.
   /// <c>int(CEF_CALLBACK* set_byname)(struct _cef_v8interceptor_t* self, const cef_string_t* name, struct _cef_v8value_t* object, struct _cef_v8value_t* value, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, ref CefString, ref CefV8Value, ref CefV8Value, ref CefString, int> _SetByName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, ref CefString, ref CefV8Value, ref CefV8Value, ref CefString, int> _SetByName;
 
   /// <summary>
   /// Handle assignment of the interceptor value identified by |index|. |object|
@@ -60,6 +60,6 @@ public struct CefV8Interceptor : ICefRefCountedBase<CefV8Interceptor> {
   /// interceptor assignment was handled, false (0) otherwise.
   /// <c>int(CEF_CALLBACK* set_byindex)(struct _cef_v8interceptor_t* self, int index, struct _cef_v8value_t* object, struct _cef_v8value_t* value, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, int, ref CefV8Value, ref CefV8Value, ref CefString, int> _SetByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Interceptor*, int, ref CefV8Value, ref CefV8Value, ref CefString, int> _SetByIndex;
 
 }

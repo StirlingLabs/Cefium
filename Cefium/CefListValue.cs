@@ -35,20 +35,20 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// call any other functions if this function returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsValid;
 
   /// <summary>
   /// Returns true (1) if this object is currently owned by another object.
   /// <c>int(CEF_CALLBACK* is_owned)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsOwned;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsOwned;
 
   /// <summary>
   /// Returns true (1) if the values of this object are read-only. Some APIs may
   /// expose read-only objects.
   /// <c>int(CEF_CALLBACK* is_read_only)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsReadOnly;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _IsReadOnly;
 
   /// <summary>
   /// Returns true (1) if this object and |that| object have the same underlying
@@ -56,51 +56,51 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// object and vice-versa.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_list_value_t* self, struct _cef_list_value_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*, int> _IsSame;
 
   /// <summary>
   /// Returns true (1) if this object and |that| object have an equivalent
   /// underlying value but are not necessarily the same object.
   /// <c>int(CEF_CALLBACK* is_equal)(struct _cef_list_value_t* self, struct _cef_list_value_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*, int> _IsEqual;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*, int> _IsEqual;
 
   /// <summary>
   /// Returns a writable copy of this object.
   /// <c>struct _cef_list_value_t*(CEF_CALLBACK* copy)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*> _Copy;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, CefListValue*> _Copy;
 
   /// <summary>
   /// Sets the number of values. If the number of values is expanded all new
   /// value slots will default to type null. Returns true (1) on success.
   /// <c>int(CEF_CALLBACK* set_size)(struct _cef_list_value_t* self, size_t size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _SetSize;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _SetSize;
 
   /// <summary>
   /// Returns the number of values.
   /// <c>size_t(CEF_CALLBACK* get_size)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint> _GetSize;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint> _GetSize;
 
   /// <summary>
   /// Removes all values. Returns true (1) on success.
   /// <c>int(CEF_CALLBACK* clear)(struct _cef_list_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _Clear;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, int> _Clear;
 
   /// <summary>
   /// Removes the value at the specified index.
   /// <c>int(CEF_CALLBACK* remove)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _Remove;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _Remove;
 
   /// <summary>
   /// Returns the value type at the specified index.
   /// <c>cef_value_type_t(CEF_CALLBACK* get_type)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValueType> _GetType;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValueType> _GetType;
 
   /// <summary>
   /// Returns the value at the specified index. For simple types the returned
@@ -110,25 +110,25 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// will modify this object.
   /// <c>struct _cef_value_t*(CEF_CALLBACK* get_value)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValue*> _GetValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValue*> _GetValue;
 
   /// <summary>
   /// Returns the value at the specified index as type bool.
   /// <c>int(CEF_CALLBACK* get_bool)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _GetBool;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _GetBool;
 
   /// <summary>
   /// Returns the value at the specified index as type int.
   /// <c>int(CEF_CALLBACK* get_int)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _GetInt;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _GetInt;
 
   /// <summary>
   /// Returns the value at the specified index as type double.
   /// <c>double(CEF_CALLBACK* get_double)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, double> _GetDouble;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, double> _GetDouble;
 
   /// <summary>
   /// Returns the value at the specified index as type string.
@@ -136,14 +136,14 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_string)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefStringUserFree*> _GetString;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefStringUserFree*> _GetString;
 
   /// <summary>
   /// Returns the value at the specified index as type binary. The returned
   /// value will reference existing data.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_binary)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefBinaryValue*> _GetBinary;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefBinaryValue*> _GetBinary;
 
   /// <summary>
   /// Returns the value at the specified index as type dictionary. The returned
@@ -151,7 +151,7 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// modify this object.
   /// <c>struct _cef_dictionary_value_t*(CEF_CALLBACK* get_dictionary)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefDictionaryValue*> _GetDictionary;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefDictionaryValue*> _GetDictionary;
 
   /// <summary>
   /// Returns the value at the specified index as type list. The returned value
@@ -159,7 +159,7 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// this object.
   /// <c>struct _cef_list_value_t*(CEF_CALLBACK* get_list)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefListValue*> _GetList;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefListValue*> _GetList;
 
   /// <summary>
   /// Sets the value at the specified index. Returns true (1) if the value was
@@ -170,42 +170,42 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// will modify this object.
   /// <c>int(CEF_CALLBACK* set_value)(struct _cef_list_value_t* self, size_t index, struct _cef_value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValue*, int> _SetValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefValue*, int> _SetValue;
 
   /// <summary>
   /// Sets the value at the specified index as type null. Returns true (1) if
   /// the value was set successfully.
   /// <c>int(CEF_CALLBACK* set_null)(struct _cef_list_value_t* self, size_t index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _SetNull;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int> _SetNull;
 
   /// <summary>
   /// Sets the value at the specified index as type bool. Returns true (1) if
   /// the value was set successfully.
   /// <c>int(CEF_CALLBACK* set_bool)(struct _cef_list_value_t* self, size_t index, int value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int, int> _SetBool;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int, int> _SetBool;
 
   /// <summary>
   /// Sets the value at the specified index as type int. Returns true (1) if the
   /// value was set successfully.
   /// <c>int(CEF_CALLBACK* set_int)(struct _cef_list_value_t* self, size_t index, int value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int, int> _SetInt;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, int, int> _SetInt;
 
   /// <summary>
   /// Sets the value at the specified index as type double. Returns true (1) if
   /// the value was set successfully.
   /// <c>int(CEF_CALLBACK* set_double)(struct _cef_list_value_t* self, size_t index, double value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, double, int> _SetDouble;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, double, int> _SetDouble;
 
   /// <summary>
   /// Sets the value at the specified index as type string. Returns true (1) if
   /// the value was set successfully.
   /// <c>int(CEF_CALLBACK* set_string)(struct _cef_list_value_t* self, size_t index, const cef_string_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefString*, int> _SetString;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefString*, int> _SetString;
 
   /// <summary>
   /// Sets the value at the specified index as type binary. Returns true (1) if
@@ -215,7 +215,7 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// |value| reference will be invalidated.
   /// <c>int(CEF_CALLBACK* set_binary)(struct _cef_list_value_t* self, size_t index, struct _cef_binary_value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefBinaryValue*, int> _SetBinary;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefBinaryValue*, int> _SetBinary;
 
   /// <summary>
   /// Sets the value at the specified index as type dict. Returns true (1) if
@@ -225,7 +225,7 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// |value| reference will be invalidated.
   /// <c>int(CEF_CALLBACK* set_dictionary)(struct _cef_list_value_t* self, size_t index, struct _cef_dictionary_value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefDictionaryValue*, int> _SetDictionary;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefDictionaryValue*, int> _SetDictionary;
 
   /// <summary>
   /// Sets the value at the specified index as type list. Returns true (1) if
@@ -235,6 +235,6 @@ public struct CefListValue : ICefRefCountedBase<CefListValue> {
   /// |value| reference will be invalidated.
   /// <c>int(CEF_CALLBACK* set_list)(struct _cef_list_value_t* self, size_t index, struct _cef_list_value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefListValue*, int> _SetList;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefListValue*, nuint, CefListValue*, int> _SetList;
 
 }

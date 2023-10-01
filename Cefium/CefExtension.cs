@@ -26,7 +26,7 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_identifier)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefStringUserFree*> _GetIdentifier;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefStringUserFree*> _GetIdentifier;
 
   /// <summary>
   /// Returns the absolute path to the extension directory on disk. This value
@@ -36,14 +36,14 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_path)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefStringUserFree*> _GetPath;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefStringUserFree*> _GetPath;
 
   /// <summary>
   /// Returns the extension manifest contents as a cef_dictionary_value_t
   /// object. See https://developer.chrome.com/extensions/manifest for details.
   /// <c>struct _cef_dictionary_value_t*(CEF_CALLBACK* get_manifest)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefDictionaryValue*> _GetManifest;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefDictionaryValue*> _GetManifest;
 
   /// <summary>
   /// Returns true (1) if this object is the same extension as |that| object.
@@ -51,7 +51,7 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// match.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_extension_t* self, struct _cef_extension_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefExtension*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefExtension*, int> _IsSame;
 
   /// <summary>
   /// Returns the handler for this extension. Will return NULL for internal
@@ -59,7 +59,7 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// cef_request_context_t::LoadExtension.
   /// <c>struct _cef_extension_handler_t*(CEF_CALLBACK* get_handler)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefExtensionHandler*> _GetHandler;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefExtensionHandler*> _GetHandler;
 
   /// <summary>
   /// Returns the request context that loaded this extension. Will return NULL
@@ -68,14 +68,14 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// about loader contexts. Must be called on the browser process UI thread.
   /// <c>struct _cef_request_context_t*(CEF_CALLBACK* get_loader_context)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefRequestContext*> _GetLoaderContext;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, CefRequestContext*> _GetLoaderContext;
 
   /// <summary>
   /// Returns true (1) if this extension is currently loaded. Must be called on
   /// the browser process UI thread.
   /// <c>int(CEF_CALLBACK* is_loaded)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, int> _IsLoaded;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, int> _IsLoaded;
 
   /// <summary>
   /// Unload this extension if it is not an internal extension and is currently
@@ -83,6 +83,6 @@ public struct CefExtension : ICefRefCountedBase<CefExtension> {
   /// cef_extension_handler_t::OnExtensionUnloaded on success.
   /// <c>void(CEF_CALLBACK* unload)(struct _cef_extension_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, void> _Unload;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefExtension*, void> _Unload;
 
 }

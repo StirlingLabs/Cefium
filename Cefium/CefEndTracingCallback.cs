@@ -21,6 +21,6 @@ public struct CefEndTracingCallback {
   /// deleting |tracing_file|.
   /// <c>void(CEF_CALLBACK* on_end_tracing_complete)(struct _cef_end_tracing_callback_t* self, const cef_string_t* tracing_file);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefEndTracingCallback*, CefString*, void> _OnEndTracingComplete;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefEndTracingCallback*, CefString*, void> _OnEndTracingComplete;
 
 }

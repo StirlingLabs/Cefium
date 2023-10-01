@@ -30,26 +30,26 @@ public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
   /// |that| object.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_task_runner_t* self, struct _cef_task_runner_t* that)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTaskRunner*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTaskRunner*, int> _IsSame;
 
   /// <summary>
   /// Returns true (1) if this task runner belongs to the current thread.
   /// <c>int(CEF_CALLBACK* belongs_to_current_thread)(struct _cef_task_runner_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, int> _BelongsToCurrentThread;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, int> _BelongsToCurrentThread;
 
   /// <summary>
   /// Returns true (1) if this task runner is for the specified CEF thread.
   /// <c>int(CEF_CALLBACK* belongs_to_thread)(struct _cef_task_runner_t* self, cef_thread_id_t threadId);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefThreadId, int> _BelongsToThread;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefThreadId, int> _BelongsToThread;
 
   /// <summary>
   /// Post a task for execution on the thread associated with this task runner.
   /// Execution will occur asynchronously.
   /// <c>int(CEF_CALLBACK* post_task)(struct _cef_task_runner_t* self, struct _cef_task_t* task);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTask*, int> _PostTask;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTask*, int> _PostTask;
 
   /// <summary>
   /// Post a task for delayed execution on the thread associated with this task
@@ -58,7 +58,7 @@ public struct CefTaskRunner : ICefRefCountedBase<CefTaskRunner> {
   /// specified delay.
   /// <c>int(CEF_CALLBACK* post_delayed_task)(struct _cef_task_runner_t* self, struct _cef_task_t* task, int64 delay_ms);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTask*, long, int> _PostDelayedTask;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefTaskRunner*, CefTask*, long, int> _PostDelayedTask;
 
   /// <summary>
   /// Returns the task runner for the current thread. Only CEF threads will have

@@ -196,122 +196,122 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsValid;
 
   /// <summary>
   /// True if the value type is undefined.
   /// <c>int(CEF_CALLBACK* is_undefined)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUndefined;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUndefined;
 
   /// <summary>
   /// True if the value type is null.
   /// <c>int(CEF_CALLBACK* is_null)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsNull;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsNull;
 
   /// <summary>
   /// True if the value type is bool.
   /// <c>int(CEF_CALLBACK* is_bool)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsBool;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsBool;
 
   /// <summary>
   /// True if the value type is int.
   /// <c>int(CEF_CALLBACK* is_int)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsInt;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsInt;
 
   /// <summary>
   /// True if the value type is unsigned int.
   /// <c>int(CEF_CALLBACK* is_uint)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUInt;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUInt;
 
   /// <summary>
   /// True if the value type is double.
   /// <c>int(CEF_CALLBACK* is_double)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsDouble;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsDouble;
 
   /// <summary>
   /// True if the value type is Date.
   /// <c>int(CEF_CALLBACK* is_date)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsDate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsDate;
 
   /// <summary>
   /// True if the value type is string.
   /// <c>int(CEF_CALLBACK* is_string)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsString;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsString;
 
   /// <summary>
   /// True if the value type is object.
   /// <c>int(CEF_CALLBACK* is_object)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsObject;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsObject;
 
   /// <summary>
   /// True if the value type is array.
   /// <c>int(CEF_CALLBACK* is_array)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsArray;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsArray;
 
   /// <summary>
   /// True if the value type is an ArrayBuffer.
   /// <c>int(CEF_CALLBACK* is_array_buffer)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsArrayBuffer;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsArrayBuffer;
 
   /// <summary>
   /// True if the value type is function.
   /// <c>int(CEF_CALLBACK* is_function)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsFunction;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsFunction;
 
   /// <summary>
   /// True if the value type is a Promise.
   /// <c>int(CEF_CALLBACK* is_promise)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsPromise;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsPromise;
 
   /// <summary>
   /// Returns true (1) if this object is pointing to the same handle as |that|
   /// object.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_v8value_t* self, struct _cef_v8value_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, int> _IsSame;
 
   /// <summary>
   /// Return a bool value.
   /// <c>int(CEF_CALLBACK* get_bool_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetBoolValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetBoolValue;
 
   /// <summary>
   /// Return an int value.
   /// <c>int32(CEF_CALLBACK* get_int_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetIntValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetIntValue;
 
   /// <summary>
   /// Return an unsigned int value.
   /// <c>uint32(CEF_CALLBACK* get_uint_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, uint> _GetUIntValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, uint> _GetUIntValue;
 
   /// <summary>
   /// Return a double value.
   /// <c>double(CEF_CALLBACK* get_double_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, double> _GetDoubleValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, double> _GetDoubleValue;
 
   /// <summary>
   /// Return a Date value.
   /// <c>cef_basetime_t(CEF_CALLBACK* get_date_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefBaseTime> _GetDateValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefBaseTime> _GetDateValue;
 
   /// <summary>
   /// Return a string value.
@@ -319,40 +319,40 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_string_value)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*> _GetStringValue;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*> _GetStringValue;
 
   /// <summary>
   /// Returns true (1) if this is a user created object.
   /// <c>int(CEF_CALLBACK* is_user_created)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUserCreated;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _IsUserCreated;
 
   /// <summary>
   /// Returns true (1) if the last function call resulted in an exception. This
   /// attribute exists only in the scope of the current CEF value object.
   /// <c>int(CEF_CALLBACK* has_exception)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _HasException;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _HasException;
 
   /// <summary>
   /// Returns the exception resulting from the last function call. This
   /// attribute exists only in the scope of the current CEF value object.
   /// <c>struct _cef_v8exception_t*(CEF_CALLBACK* get_exception)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Exception*> _GetException;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Exception*> _GetException;
 
   /// <summary>
   /// Clears the last exception and returns true (1) on success.
   /// <c>int(CEF_CALLBACK* clear_exception)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _ClearException;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _ClearException;
 
   /// <summary>
   /// Returns true (1) if this object will re-throw future exceptions. This
   /// attribute exists only in the scope of the current CEF value object.
   /// <c>int(CEF_CALLBACK* will_rethrow_exceptions)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _WillRethrowExceptions;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _WillRethrowExceptions;
 
   /// <summary>
   /// Set whether this object will re-throw future exceptions. By default
@@ -362,19 +362,19 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// exists only in the scope of the current CEF value object.
   /// <c>int(CEF_CALLBACK* set_rethrow_exceptions)(struct _cef_v8value_t* self, int rethrow);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _SetRethrowExceptions;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _SetRethrowExceptions;
 
   /// <summary>
   /// Returns true (1) if the object has a value with the specified identifier.
   /// <c>int(CEF_CALLBACK* has_value_bykey)(struct _cef_v8value_t* self, const cef_string_t* key);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _HasValueByKey;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _HasValueByKey;
 
   /// <summary>
   /// Returns true (1) if the object has a value with the specified identifier.
   /// <c>int(CEF_CALLBACK* has_value_byindex)(struct _cef_v8value_t* self, int index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _HasValueByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _HasValueByIndex;
 
   /// <summary>
   /// Deletes the value with the specified identifier and returns true (1) on
@@ -383,7 +383,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// will return true (1) even though deletion failed.
   /// <c>int(CEF_CALLBACK* delete_value_bykey)(struct _cef_v8value_t* self, const cef_string_t* key);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _DeleteValueByKey;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _DeleteValueByKey;
 
   /// <summary>
   /// Deletes the value with the specified identifier and returns true (1) on
@@ -392,21 +392,21 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// values this function will return true (1) even though deletion failed.
   /// <c>int(CEF_CALLBACK* delete_value_byindex)(struct _cef_v8value_t* self, int index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _DeleteValueByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _DeleteValueByIndex;
 
   /// <summary>
   /// Returns the value with the specified identifier on success. Returns NULL
   /// if this function is called incorrectly or an exception is thrown.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* get_value_bykey)(struct _cef_v8value_t* self, const cef_string_t* key);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8Value*> _GetValueByKey;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8Value*> _GetValueByKey;
 
   /// <summary>
   /// Returns the value with the specified identifier on success. Returns NULL
   /// if this function is called incorrectly or an exception is thrown.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* get_value_byindex)(struct _cef_v8value_t* self, int index);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, CefV8Value*> _GetValueByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, CefV8Value*> _GetValueByIndex;
 
   /// <summary>
   /// Associates a value with the specified identifier and returns true (1) on
@@ -415,7 +415,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// (1) even though assignment failed.
   /// <c>int(CEF_CALLBACK* set_value_bykey)(struct _cef_v8value_t* self, const cef_string_t* key, struct _cef_v8value_t* value, cef_v8_propertyattribute_t attribute);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8Value*, CefV8PropertyAttribute, int> _SetValueByKey;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8Value*, CefV8PropertyAttribute, int> _SetValueByKey;
 
   /// <summary>
   /// Associates a value with the specified identifier and returns true (1) on
@@ -424,7 +424,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// (1) even though assignment failed.
   /// <c>int(CEF_CALLBACK* set_value_byindex)(struct _cef_v8value_t* self, int index, struct _cef_v8value_t* value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, CefV8Value*, int> _SetValueByIndex;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, CefV8Value*, int> _SetValueByIndex;
 
   /// <summary>
   /// Registers an identifier and returns true (1) on success. Access to the
@@ -434,14 +434,14 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// values this function will return true (1) even though assignment failed.
   /// <c>int(CEF_CALLBACK* set_value_byaccessor)(struct _cef_v8value_t* self, const cef_string_t* key, cef_v8_accesscontrol_t settings, cef_v8_propertyattribute_t attribute);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8AccessControl, CefV8PropertyAttribute, int> _SetValueByAccessor;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, CefV8AccessControl, CefV8PropertyAttribute, int> _SetValueByAccessor;
 
   /// <summary>
   /// Read the keys for the object's values into the specified vector. Integer-
   /// based keys will also be returned as strings.
   /// <c>int(CEF_CALLBACK* get_keys)(struct _cef_v8value_t* self, cef_string_list_t keys);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefStringList*, int> _GetKeys;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefStringList*, int> _GetKeys;
 
   /// <summary>
   /// Sets the user data for this object and returns true (1) on success.
@@ -449,20 +449,20 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// can only be called on user created objects.
   /// <c>int(CEF_CALLBACK* set_user_data)(struct _cef_v8value_t* self, struct _cef_base_ref_counted_t* user_data);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefRefCountedBase*, int> _SetUserData;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefRefCountedBase*, int> _SetUserData;
 
   /// <summary>
   /// Returns the user data, if any, assigned to this object.
   /// <c>struct _cef_base_ref_counted_t*(CEF_CALLBACK* get_user_data)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefRefCountedBase*> _GetUserData;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefRefCountedBase*> _GetUserData;
 
   /// <summary>
   /// Returns the amount of externally allocated memory registered for the
   /// object.
   /// <c>int(CEF_CALLBACK* get_externally_allocated_memory)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetExternallyAllocatedMemory;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetExternallyAllocatedMemory;
 
   /// <summary>
   /// Adjusts the amount of registered external memory for the object. Used to
@@ -476,20 +476,20 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// adjustment. This function can only be called on user created objects.
   /// <c>int(CEF_CALLBACK* adjust_externally_allocated_memory)(struct _cef_v8value_t* self, int change_in_bytes);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _AdjustExternallyAllocatedMemory;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int, int> _AdjustExternallyAllocatedMemory;
 
   /// <summary>
   /// Returns the number of elements in the array.
   /// <c>int(CEF_CALLBACK* get_array_length)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetArrayLength;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _GetArrayLength;
 
   /// <summary>
   /// Returns the ReleaseCallback object associated with the ArrayBuffer or NULL
   /// if the ArrayBuffer was not created with CreateArrayBuffer.
   /// <c>struct _cef_v8array_buffer_release_callback_t*(CEF_CALLBACK* get_array_buffer_release_callback)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8ArrayBufferReleaseCallback*> _GetArrayBufferReleaseCallback;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8ArrayBufferReleaseCallback*> _GetArrayBufferReleaseCallback;
 
   /// <summary>
   /// Prevent the ArrayBuffer from using it's memory block by setting the length
@@ -499,7 +499,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// release the underlying buffer.
   /// <c>int(CEF_CALLBACK* neuter_array_buffer)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _NeuterArrayBuffer;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, int> _NeuterArrayBuffer;
 
   /// <summary>
   /// Returns the function name.
@@ -507,13 +507,13 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_function_name)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefStringUserFree*> _GetFunctionName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefStringUserFree*> _GetFunctionName;
 
   /// <summary>
   /// Returns the function handler or NULL if not a CEF-created function.
   /// <c>struct _cef_v8handler_t*(CEF_CALLBACK* get_function_handler)(struct _cef_v8value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Handler*> _GetFunctionHandler;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Handler*> _GetFunctionHandler;
 
   /// <summary>
   /// Execute the function using the current V8 context. This function should
@@ -527,7 +527,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// thrown.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* execute_function)(struct _cef_v8value_t* self, struct _cef_v8value_t* object, size_t argumentsCount, struct _cef_v8value_t* const* arguments);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, uint, CefV8Value*, CefV8Value*> _ExecuteFunction;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, uint, CefV8Value*, CefV8Value*> _ExecuteFunction;
 
   /// <summary>
   /// Execute the function using the specified V8 context. |object| is the
@@ -538,7 +538,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// an exception is thrown.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* execute_function_with_context)(struct _cef_v8value_t* self, struct _cef_v8context_t* context, struct _cef_v8value_t* object, size_t argumentsCount, struct _cef_v8value_t* const* arguments);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Context*, CefV8Value*, uint, CefV8Value*, CefV8Value*> _ExecuteFunctionWithContext;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Context*, CefV8Value*, uint, CefV8Value*, CefV8Value*> _ExecuteFunctionWithContext;
 
   /// <summary>
   /// Resolve the Promise using the current V8 context. This function should
@@ -549,7 +549,7 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// this function is called incorrectly or an exception is thrown.
   /// <c>int(CEF_CALLBACK* resolve_promise)(struct _cef_v8value_t* self, struct _cef_v8value_t* arg);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, int> _ResolvePromise;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefV8Value*, int> _ResolvePromise;
 
   /// <summary>
   /// Reject the Promise using the current V8 context. This function should only
@@ -559,6 +559,6 @@ public struct CefV8Value : ICefRefCountedBase<CefV8Value> {
   /// if this function is called incorrectly or an exception is thrown.
   /// <c>int(CEF_CALLBACK* reject_promise)(struct _cef_v8value_t* self, const cef_string_t* errorMsg);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _RejectPromise;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Value*, CefString*, int> _RejectPromise;
 
 }

@@ -119,9 +119,6 @@ public static class Helpers {
   internal static unsafe T* AsPointer<T>(ref this T self) where T : unmanaged
     => (T*) Unsafe.AsPointer(ref self);
 
-  internal static ref T AsRef<T>(ref this T self) where T : unmanaged
-    => ref Unsafe.AsRef(self);
-
   internal static unsafe void** AsPointer(ref void* self) {
     IL.Emit.Ldarg_0();
     IL.Emit.Ret();

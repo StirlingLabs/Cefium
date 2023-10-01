@@ -36,8 +36,6 @@ public struct CefUrlParts {
     return success != 0;
   }
 
-
-
   public CefString Spec; // spec @ 0, 24 bytes
 
   public CefString Scheme; // scheme @ 24, 24 bytes

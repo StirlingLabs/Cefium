@@ -17,7 +17,7 @@ public struct CefRefCountedBase {
   /// for every new copy of a pointer to a given object.
   /// <c>void(CEF_CALLBACK* add_ref)(struct _cef_base_ref_counted_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, void> _AddRef;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, void> _AddRef;
 
   /// <summary>
   /// Called to decrement the reference count for the object. If the reference
@@ -25,18 +25,18 @@ public struct CefRefCountedBase {
   /// resulting reference count is 0.
   /// <c>int(CEF_CALLBACK* release)(struct _cef_base_ref_counted_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _Release;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _Release;
 
   /// <summary>
   /// Returns true (1) if the current reference count is 1.
   /// <c>int(CEF_CALLBACK* has_one_ref)(struct _cef_base_ref_counted_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _HasOneRef;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _HasOneRef;
 
   /// <summary>
   /// Returns true (1) if the current reference count is at least 1.
   /// <c>int(CEF_CALLBACK* has_at_least_one_ref)(struct _cef_base_ref_counted_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _HasAtLeastOneRef;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefRefCountedBase*, int> _HasAtLeastOneRef;
 
 }

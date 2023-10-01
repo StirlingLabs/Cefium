@@ -24,6 +24,6 @@ public struct CefPreferenceRegistrar {
   /// cef_browser_process_handler_t::OnRegisterCustomPreferences callback.
   /// <c>int(CEF_CALLBACK* add_preference)(struct _cef_preference_registrar_t* self, const cef_string_t* name, struct _cef_value_t* default_value);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceRegistrar*, CefString*, CefValue*, int> _AddPreference;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceRegistrar*, CefString*, CefValue*, int> _AddPreference;
 
 }

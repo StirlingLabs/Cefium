@@ -26,49 +26,49 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// True if this object is currently attached to a valid frame.
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsValid;
 
   /// <summary>
   /// Execute undo in this frame.
   /// <c>void(CEF_CALLBACK* undo)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Undo;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Undo;
 
   /// <summary>
   /// Execute redo in this frame.
   /// <c>void(CEF_CALLBACK* redo)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Redo;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Redo;
 
   /// <summary>
   /// Execute cut in this frame.
   /// <c>void(CEF_CALLBACK* cut)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Cut;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Cut;
 
   /// <summary>
   /// Execute copy in this frame.
   /// <c>void(CEF_CALLBACK* copy)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Copy;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Copy;
 
   /// <summary>
   /// Execute paste in this frame.
   /// <c>void(CEF_CALLBACK* paste)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Paste;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Paste;
 
   /// <summary>
   /// Execute delete in this frame.
   /// <c>void(CEF_CALLBACK* del)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Delete;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _Delete;
 
   /// <summary>
   /// Execute select all in this frame.
   /// <c>void(CEF_CALLBACK* select_all)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _SelectAll;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _SelectAll;
 
   /// <summary>
   /// Save this frame's HTML source to a temporary file and open it in the
@@ -76,21 +76,21 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// the browser process.
   /// <c>void(CEF_CALLBACK* view_source)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _ViewSource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, void> _ViewSource;
 
   /// <summary>
   /// Retrieve this frame's HTML source as a string sent to the specified
   /// visitor.
   /// <c>void(CEF_CALLBACK* get_source)(struct _cef_frame_t* self, struct _cef_string_visitor_t* visitor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringVisitor*, void> _GetSource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringVisitor*, void> _GetSource;
 
   /// <summary>
   /// Retrieve this frame's display text as a string sent to the specified
   /// visitor.
   /// <c>void(CEF_CALLBACK* get_text)(struct _cef_frame_t* self, struct _cef_string_visitor_t* visitor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringVisitor*, void> _GetText;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringVisitor*, void> _GetText;
 
   /// <summary>
   /// Load the request represented by the |request| object.
@@ -101,13 +101,13 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   ///
   /// <c>void(CEF_CALLBACK* load_request)(struct _cef_frame_t* self, struct _cef_request_t* request);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefRequest*, void> _LoadRequest;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefRequest*, void> _LoadRequest;
 
   /// <summary>
   /// Load the specified |url|.
   /// <c>void(CEF_CALLBACK* load_url)(struct _cef_frame_t* self, const cef_string_t* url);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefString*, void> _LoadUrl;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefString*, void> _LoadUrl;
 
   /// <summary>
   /// Execute a string of JavaScript code in this frame. The |script_url|
@@ -117,19 +117,19 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// error reporting.
   /// <c>void(CEF_CALLBACK* execute_java_script)(struct _cef_frame_t* self, const cef_string_t* code, const cef_string_t* script_url, int start_line);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefString*, CefString*, int, void> _ExecuteJavaScript;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefString*, CefString*, int, void> _ExecuteJavaScript;
 
   /// <summary>
   /// Returns true (1) if this is the main (top-level) frame.
   /// <c>int(CEF_CALLBACK* is_main)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsMain;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsMain;
 
   /// <summary>
   /// Returns true (1) if this is the focused frame.
   /// <c>int(CEF_CALLBACK* is_focused)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsFocused;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, int> _IsFocused;
 
   /// <summary>
   /// Returns the name for this frame. If the frame has an assigned name (for
@@ -141,7 +141,7 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_name)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringUserFree*> _GetName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringUserFree*> _GetName;
 
   /// <summary>
   /// Returns the globally unique identifier for this frame or &lt; 0 if the
@@ -149,14 +149,14 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   ///
   /// <c>int64(CEF_CALLBACK* get_identifier)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, long> _GetIdentifier;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, long> _GetIdentifier;
 
   /// <summary>
   /// Returns the parent of this frame or NULL if this is the main (top-level)
   /// frame.
   /// <c>struct _cef_frame_t*(CEF_CALLBACK* get_parent)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefFrame*> _GetParent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefFrame*> _GetParent;
 
   /// <summary>
   /// Returns the URL currently loaded in this frame.
@@ -164,27 +164,27 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_url)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringUserFree*> _GetUrl;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefStringUserFree*> _GetUrl;
 
   /// <summary>
   /// Returns the browser that this frame belongs to.
   /// <c>struct _cef_browser_t*(CEF_CALLBACK* get_browser)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefBrowser*> _GetBrowser;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefBrowser*> _GetBrowser;
 
   /// <summary>
   /// Get the V8 context associated with the frame. This function can only be
   /// called from the render process.
   /// <c>struct _cef_v8context_t*(CEF_CALLBACK* get_v8context)(struct _cef_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefV8Context*> _GetV8Context;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefV8Context*> _GetV8Context;
 
   /// <summary>
   /// Visit the DOM document. This function can only be called from the render
   /// process.
   /// <c>void(CEF_CALLBACK* visit_dom)(struct _cef_frame_t* self, struct _cef_domvisitor_t* visitor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefDomVisitor*, void> _VisitDom;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefDomVisitor*, void> _VisitDom;
 
   /// <summary>
   /// Create a new URL request that will be treated as originating from this
@@ -210,7 +210,7 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// function.
   /// <c>struct _cef_urlrequest_t*(CEF_CALLBACK* create_urlrequest)(struct _cef_frame_t* self, struct _cef_request_t* request, struct _cef_urlrequest_client_t* client);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefRequest*, CefUrlRequestClient*, CefUrlRequest*> _CreateUrlRequest;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefRequest*, CefUrlRequestClient*, CefUrlRequest*> _CreateUrlRequest;
 
   /// <summary>
   /// Send a message to the specified |target_process|. Ownership of the message
@@ -221,6 +221,6 @@ public struct CefFrame : ICefRefCountedBase<CefFrame> {
   /// required.
   /// <c>void(CEF_CALLBACK* send_process_message)(struct _cef_frame_t* self, cef_process_id_t target_process, struct _cef_process_message_t* message);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefProcessId, CefProcessMessage*, void> _SendProcessMessage;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefFrame*, CefProcessId, CefProcessMessage*, void> _SendProcessMessage;
 
 }

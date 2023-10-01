@@ -103,7 +103,6 @@ public unsafe struct CefString {
   public ReadOnlySpan<int> AsIntSpan() => new(Str, checked((int) Length));
 
 #if DEBUG
-
   [Obsolete("This is only for the debugger.")]
   public string DebugString {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

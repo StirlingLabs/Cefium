@@ -27,9 +27,11 @@ public static class CefStringMapExtensions {
     => CefStringMap._Append(self.AsPointer(), key.AsPointer(), value.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefStringMap._Clear"/>
-  public static unsafe void Clear(ref this CefStringMap self) => CefStringMap._Clear(self.AsPointer());
+  public static unsafe void Clear(ref this CefStringMap self)
+    => CefStringMap._Clear(self.AsPointer());
 
   /// <inheritdoc cref="CefStringMap._Free"/>
-  public static unsafe void Free(ref this CefStringMap self) => CefStringMap._Free(self.AsPointer());
+  public static unsafe void Free(ref this CefStringMap self)
+    => CefStringMap._Free(self.AsPointer());
 
 }

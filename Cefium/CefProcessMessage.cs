@@ -30,40 +30,40 @@ public struct CefProcessMessage : ICefRefCountedBase<CefProcessMessage> {
   /// if this function returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, int> _IsValid;
 
   /// <summary>
   /// Returns true (1) if the values of this object are read-only. Some APIs may
   /// expose read-only objects.
   /// <c>int(CEF_CALLBACK* is_read_only)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, int> _IsReadOnly;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, int> _IsReadOnly;
 
   /// <summary>
   /// Returns a writable copy of this object. Returns nullptr when message
   /// contains a shared memory region.
   /// <c>struct _cef_process_message_t*(CEF_CALLBACK* copy)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefProcessMessage*> _Copy;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefProcessMessage*> _Copy;
 
   /// <summary>
   /// Returns the message name.
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_name)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefStringUserFree*> _GetName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefStringUserFree*> _GetName;
 
   /// <summary>
   /// Returns the list of arguments. Returns nullptr when message contains a
   /// shared memory region.
   /// <c>struct _cef_list_value_t*(CEF_CALLBACK* get_argument_list)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Cdecl]<CefProcessMessage*, CefListValue*> _GetArgumentList;
+  public unsafe delegate * unmanaged[Cdecl]<CefProcessMessage*, CefListValue*> _GetArgumentList;
 
   /// <summary>
   /// Returns the shared memory region. Returns nullptr when message contains an
   /// argument list.
   /// <c>struct _cef_shared_memory_region_t*(CEF_CALLBACK* get_shared_memory_region)(struct _cef_process_message_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefSharedMemoryRegion*> _GetSharedMemoryRegion;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefProcessMessage*, CefSharedMemoryRegion*> _GetSharedMemoryRegion;
 
 }

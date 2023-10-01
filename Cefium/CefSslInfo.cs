@@ -22,12 +22,12 @@ public struct CefSslInfo : ICefRefCountedBase<CefSslInfo> {
   /// certificate.
   /// <c>cef_cert_status_t(CEF_CALLBACK* get_cert_status)(struct _cef_sslinfo_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSslInfo*, CefCertStatus> _GetCertStatus;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSslInfo*, CefCertStatus> _GetCertStatus;
 
   /// <summary>
   /// Returns the X.509 certificate.
   /// <c>struct _cef_x509certificate_t*(CEF_CALLBACK* get_x509certificate)(struct _cef_sslinfo_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSslInfo*, CefX509Certificate*> _GetX509certificate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSslInfo*, CefX509Certificate*> _GetX509certificate;
 
 }

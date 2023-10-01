@@ -25,6 +25,6 @@ public struct CefMediaRouteCreateCallback : ICefRefCountedBase<CefMediaRouteCrea
   /// resulting route, or NULL if the route creation failed.
   /// <c>void(CEF_CALLBACK* on_media_route_create_finished)(struct _cef_media_route_create_callback_t* self, cef_media_route_create_result_t result, const cef_string_t* error, struct _cef_media_route_t* route);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouteCreateCallback*, CefMediaRouteCreateResult, CefString*, CefMediaRoute*, void> _OnMediaRouteCreateFinished;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouteCreateCallback*, CefMediaRouteCreateResult, CefString*, CefMediaRoute*, void> _OnMediaRouteCreateFinished;
 
 }

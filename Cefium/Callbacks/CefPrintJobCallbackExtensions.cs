@@ -5,7 +5,11 @@ namespace Cefium;
 public static class CefPrintJobCallbackExtensions {
 
   /// <inheritdoc cref="CefPrintJobCallback._Continue"/>
-  public static unsafe void Continue(ref this CefPrintJobCallback self)
-    => self._Continue(self.AsPointer());
+  public static unsafe bool Continue(ref this CefPrintJobCallback self) {
+    if (self._Continue is null) return false;
+
+    self._Continue(self.AsPointer());
+    return true;
+  }
 
 }

@@ -24,26 +24,26 @@ public struct CefMediaObserver : ICefRefCountedBase<CefMediaObserver> {
   /// cef_media_router_t::NotifyCurrentSinks was called.
   /// <c>void(CEF_CALLBACK* on_sinks)(struct _cef_media_observer_t* self, size_t sinksCount, struct _cef_media_sink_t* const* sinks);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, nuint, CefMediaSink**, void> _OnSinks;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, nuint, CefMediaSink**, void> _OnSinks;
 
   /// <summary>
   /// The list of available media routes has changed or
   /// cef_media_router_t::NotifyCurrentRoutes was called.
   /// <c>void(CEF_CALLBACK* on_routes)(struct _cef_media_observer_t* self, size_t routesCount, struct _cef_media_route_t* const* routes);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, nuint, CefMediaRoute**, void> _OnRoutes;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, nuint, CefMediaRoute**, void> _OnRoutes;
 
   /// <summary>
   /// The connection state of |route| has changed.
   /// <c>void(CEF_CALLBACK* on_route_state_changed)(struct _cef_media_observer_t* self, struct _cef_media_route_t* route, cef_media_route_connection_state_t state);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, CefMediaRoute*, CefMediaRouteConnectionState, void> _OnRouteStateChanged;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, CefMediaRoute*, CefMediaRouteConnectionState, void> _OnRouteStateChanged;
 
   /// <summary>
   /// A message was recieved over |route|. |message| is only valid for the scope
   /// of this callback and should be copied if necessary.
   /// <c>void(CEF_CALLBACK* on_route_message_received)(struct _cef_media_observer_t* self, struct _cef_media_route_t* route, const void* message, size_t message_size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, CefMediaRoute*, void*, nuint, void> _OnRouteMessageReceived;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaObserver*, CefMediaRoute*, void*, nuint, void> _OnRouteMessageReceived;
 
 }

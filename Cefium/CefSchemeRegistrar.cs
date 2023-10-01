@@ -23,6 +23,6 @@ public struct CefSchemeRegistrar {
   /// if an error occurs this function will return false (0).
   /// <c>int(CEF_CALLBACK* add_custom_scheme)(struct _cef_scheme_registrar_t* self, const cef_string_t* scheme_name, int options);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSchemeRegistrar*, CefString*, int, int> _AddCustomScheme;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSchemeRegistrar*, CefString*, int, int> _AddCustomScheme;
 
 }

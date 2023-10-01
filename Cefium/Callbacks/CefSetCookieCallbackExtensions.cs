@@ -5,7 +5,11 @@ namespace Cefium;
 public static class CefSetCookieCallbackExtensions {
 
   /// <inheritdoc cref="CefSetCookieCallback._OnComplete"/>
-  public static unsafe void OnComplete(ref this CefSetCookieCallback self, bool success)
-    => self._OnComplete(self.AsPointer(), success ? 1 : 0);
+  public static unsafe bool OnComplete(ref this CefSetCookieCallback self, bool success) {
+    if (self._OnComplete is null) return false;
+
+    self._OnComplete(self.AsPointer(), success ? 1 : 0);
+    return true;
+  }
 
 }

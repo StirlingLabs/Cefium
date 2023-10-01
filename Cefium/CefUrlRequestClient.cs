@@ -25,7 +25,7 @@ public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
   /// was successful or not.
   /// <c>void(CEF_CALLBACK* on_request_complete)(struct _cef_urlrequest_client_t* self, struct _cef_urlrequest_t* request)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, void> _OnRequestComplete;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, void> _OnRequestComplete;
 
   /// <summary>
   /// Notifies the client of upload progress. |current| denotes the number of
@@ -34,7 +34,7 @@ public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
   /// UR_FLAG_REPORT_UPLOAD_PROGRESS flag is set on the request.
   /// <c>void(CEF_CALLBACK* on_upload_progress)(struct _cef_urlrequest_client_t* self, struct _cef_urlrequest_t* request, int64 current, int64 total)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, long, long, void> _OnUploadProgress;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, long, long, void> _OnUploadProgress;
 
   /// <summary>
   /// Notifies the client of download progress. |current| denotes the number of
@@ -42,7 +42,7 @@ public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
   /// the response (or -1 if not determined).
   /// <c>void(CEF_CALLBACK* on_download_progress)(struct _cef_urlrequest_client_t* self, struct _cef_urlrequest_t* request, int64 current, int64 total)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, long, long, void> _OnDownloadProgress;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, long, long, void> _OnDownloadProgress;
 
   /// <summary>
   /// Called when some part of the response is read. |data| contains the current
@@ -50,7 +50,7 @@ public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
   /// the UR_FLAG_NO_DOWNLOAD_DATA flag is set on the request.
   /// <c>void(CEF_CALLBACK* on_download_data)(struct _cef_urlrequest_client_t* self, struct _cef_urlrequest_t* request, const void* data, size_t data_length)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, void*, nuint, void> _OnDownloadData;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, CefUrlRequest*, void*, nuint, void> _OnDownloadData;
 
   /// <summary>
   /// Called on the IO thread when the browser needs credentials from the user.
@@ -65,6 +65,6 @@ public struct CefUrlRequestClient : ICefRefCountedBase<CefUrlRequestClient> {
   /// the browser process.
   /// <c>int(CEF_CALLBACK* get_auth_credentials)(struct _cef_urlrequest_client_t* self, int isProxy, const cef_string_t* host, int port, const cef_string_t* realm, const cef_string_t* scheme, struct _cef_auth_callback_t* callback)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, int, CefString*, int, CefString*, CefString*, CefAuthCallback*, int> _GetAuthCredentials;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequestClient*, int, CefString*, int, CefString*, CefString*, CefAuthCallback*, int> _GetAuthCredentials;
 
 }

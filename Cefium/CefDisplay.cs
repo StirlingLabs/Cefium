@@ -98,7 +98,7 @@ public struct CefDisplay : ICefRefCountedBase<CefDisplay> {
   /// Returns the unique identifier for this Display.
   /// <c>int64(CEF_CALLBACK* get_id)(struct _cef_display_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, long> GetIdDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, long> GetIdDelegate;
 
   /// <summary>
   /// Returns this Display's device pixel scale factor. This specifies how much
@@ -107,40 +107,40 @@ public struct CefDisplay : ICefRefCountedBase<CefDisplay> {
   /// values differ by platform.
   /// <c>float(CEF_CALLBACK* get_device_scale_factor)(struct _cef_display_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, float> GetDeviceScaleFactorDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, float> GetDeviceScaleFactorDelegate;
 
   /// <summary>
   /// Convert |point| from DIP coordinates to pixel coordinates using this
   /// Display's device scale factor.
   /// <c>void(CEF_CALLBACK* convert_point_to_pixels)(struct _cef_display_t* self, cef_point_t* point);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefPoint*, void> ConvertPointToPixelsDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefPoint*, void> ConvertPointToPixelsDelegate;
 
   /// <summary>
   /// Convert |point| from pixel coordinates to DIP coordinates using this
   /// Display's device scale factor.
   /// <c>void(CEF_CALLBACK* convert_point_from_pixels)(struct _cef_display_t* self, cef_point_t* point);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefPoint*, void> ConvertPointFromPixelsDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefPoint*, void> ConvertPointFromPixelsDelegate;
 
   /// <summary>
   /// Returns this Display's bounds in DIP screen coordinates. This is the full
   /// size of the display.
   /// <c>cef_rect_t(CEF_CALLBACK* get_bounds)(struct _cef_display_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefRect> GetBoundsDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefRect> GetBoundsDelegate;
 
   /// <summary>
   /// Returns this Display's work area in DIP screen coordinates. This excludes
   /// areas of the display that are occupied with window manager toolbars, etc.
   /// <c>cef_rect_t(CEF_CALLBACK* get_work_area)(struct _cef_display_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefRect> GetWorkAreaDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, CefRect> GetWorkAreaDelegate;
 
   /// <summary>
   /// Returns this Display's rotation in degrees.
   /// <c>int(CEF_CALLBACK* get_rotation)(struct _cef_display_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, int> GetRotationDelegate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDisplay*, int> GetRotationDelegate;
 
 }

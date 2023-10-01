@@ -44,7 +44,7 @@ public struct CefStreamReader : ICefRefCountedBase<CefStreamReader> {
   /// Read raw binary data.
   /// <c>size_t(CEF_CALLBACK* read)(struct _cef_stream_reader_t* self, void* ptr, size_t size, size_t n);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, void*, nuint, nuint, nuint> _Read;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, void*, nuint, nuint, nuint> _Read;
 
   /// <summary>
   /// Seek to the specified offset position. |whence| may be any one of
@@ -52,19 +52,19 @@ public struct CefStreamReader : ICefRefCountedBase<CefStreamReader> {
   /// failure.
   /// <c>int(CEF_CALLBACK* seek)(struct _cef_stream_reader_t* self, int64 offset, int whence);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, long, int, int> _Seek;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, long, int, int> _Seek;
 
   /// <summary>
   /// Return the current offset position.
   /// <c>int64(CEF_CALLBACK* tell)(struct _cef_stream_reader_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, long> _Tell;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, long> _Tell;
 
   /// <summary>
   /// Return non-zero if at end of file.
   /// <c>int(CEF_CALLBACK* eof)(struct _cef_stream_reader_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, int> _Eof;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, int> _Eof;
 
   /// <summary>
   /// Returns true (1) if this reader performs work like accessing the file
@@ -72,6 +72,6 @@ public struct CefStreamReader : ICefRefCountedBase<CefStreamReader> {
   /// access the reader from.
   /// <c>int(CEF_CALLBACK* may_block)(struct _cef_stream_reader_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, int> _MayBlock;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefStreamReader*, int> _MayBlock;
 
 }

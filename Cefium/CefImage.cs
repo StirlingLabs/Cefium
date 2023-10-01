@@ -38,14 +38,14 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// Returns true (1) if this Image is NULL.
   /// <c>int(CEF_CALLBACK* is_empty)(struct _cef_image_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, int> _IsEmpty;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, int> _IsEmpty;
 
   /// <summary>
   /// Returns true (1) if this Image and |that| Image share the same underlying
   /// storage. Will also return true (1) if both images are NULL.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_image_t* self, struct _cef_image_t* that)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, CefImage*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, CefImage*, int> _IsSame;
 
   /// <summary>
   /// Add a bitmap image representation for |scale_factor|. Only 32-bit
@@ -55,7 +55,7 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// size. |color_type| and |alpha_type| values specify the pixel format.
   /// <c>int(CEF_CALLBACK* add_bitmap)(struct _cef_image_t* self, float scale_factor, int pixel_width, int pixel_height, cef_color_type_t color_type, cef_alpha_type_t alpha_type, const void* pixel_data, size_t pixel_data_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int, CefColorType, CefAlphaType, void*, nuint, int> _AddBitmap;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int, CefColorType, CefAlphaType, void*, nuint, int> _AddBitmap;
 
   /// <summary>
   /// Add a PNG image representation for |scale_factor|. |png_data| is the image
@@ -63,7 +63,7 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// be maintained.
   /// <c>int(CEF_CALLBACK* add_png)(struct _cef_image_t* self, float scale_factor, const void* png_data, size_t png_data_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, void*, nuint, int> _AddPng;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, void*, nuint, int> _AddPng;
 
   /// <summary>
   /// Create a JPEG image representation for |scale_factor|. |jpeg_data| is the
@@ -71,33 +71,33 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// transparency so the alpha byte will be set to 0xFF for all pixels.
   /// <c>int(CEF_CALLBACK* add_jpeg)(struct _cef_image_t* self, float scale_factor, const void* jpeg_data, size_t jpeg_data_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, void*, nuint, int> _AddJpeg;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, void*, nuint, int> _AddJpeg;
 
   /// <summary>
   /// Returns the image width in density independent pixel (DIP) units.
   /// <c>size_t(CEF_CALLBACK* get_width)(struct _cef_image_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, nuint> _GetWidth;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, nuint> _GetWidth;
 
   /// <summary>
   /// Returns the image height in density independent pixel (DIP) units.
   /// <c>size_t(CEF_CALLBACK* get_height)(struct _cef_image_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, nuint> _GetHeight;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, nuint> _GetHeight;
 
   /// <summary>
   /// Returns true (1) if this image contains a representation for
   /// |scale_factor|.
   /// <c>int(CEF_CALLBACK* has_representation)(struct _cef_image_t* self, float scale_factor)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int> _HasRepresentation;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int> _HasRepresentation;
 
   /// <summary>
   /// Removes the representation for |scale_factor|. Returns true (1) on
   /// success.
   /// <c>int(CEF_CALLBACK* remove_representation)(struct _cef_image_t* self, float scale_factor)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int> _RemoveRepresentation;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int> _RemoveRepresentation;
 
   /// <summary>
   /// Returns information for the representation that most closely matches
@@ -106,7 +106,7 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// size in pixel coordinates. Returns true (1) on success.
   /// <c>int(CEF_CALLBACK* get_representation_info)(struct _cef_image_t* self, float scale_factor, float* actual_scale_factor, int* pixel_width, int* pixel_height)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, float*, int*, int*, int> _GetRepresentationInfo;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, float*, int*, int*, int> _GetRepresentationInfo;
 
   /// <summary>
   /// Returns the bitmap representation that most closely matches
@@ -117,7 +117,7 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// on success or NULL on failure.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_as_bitmap)(struct _cef_image_t* self, float scale_factor, cef_color_type_t color_type, cef_alpha_type_t alpha_type, int* pixel_width, int* pixel_height)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, CefColorType, CefAlphaType, int*, int*, CefBinaryValue*> _GetAsBitmap;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, CefColorType, CefAlphaType, int*, int*, CefBinaryValue*> _GetAsBitmap;
 
   /// <summary>
   /// Returns the PNG representation that most closely matches |scale_factor|.
@@ -128,7 +128,7 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// NULL on failure.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_as_png)(struct _cef_image_t* self, float scale_factor, int with_transparency, int* pixel_width, int* pixel_height)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int*, int*, CefBinaryValue*> _GetAsPng;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int*, int*, CefBinaryValue*> _GetAsPng;
 
   /// <summary>
   /// Returns the JPEG representation that most closely matches |scale_factor|.
@@ -140,6 +140,6 @@ public struct CefImage : ICefRefCountedBase<CefImage> {
   /// failure.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_as_jpeg)(struct _cef_image_t* self, float scale_factor, int quality, int* pixel_width, int* pixel_height)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int*, int*, CefBinaryValue*> _GetAsJpeg;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefImage*, float, int, int*, int*, CefBinaryValue*> _GetAsJpeg;
 
 }

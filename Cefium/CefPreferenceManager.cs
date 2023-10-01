@@ -22,7 +22,7 @@ public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
   /// function must be called on the browser process UI thread.
   /// <c>int(CEF_CALLBACK* has_preference)(struct _cef_preference_manager_t* self, const cef_string_t* name);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, int> _HasPreference;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, int> _HasPreference;
 
   /// <summary>
   /// Returns the value for the preference with the specified |name|. Returns
@@ -32,7 +32,7 @@ public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
   /// be called on the browser process UI thread.
   /// <c>struct _cef_value_t*(CEF_CALLBACK* get_preference)(struct _cef_preference_manager_t* self, const cef_string_t* name);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, CefValue*> _GetPreference;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, CefValue*> _GetPreference;
 
   /// <summary>
   /// Returns all preferences as a dictionary. If |include_defaults| is true (1)
@@ -43,7 +43,7 @@ public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
   /// thread.
   /// <c>struct _cef_dictionary_value_t*(CEF_CALLBACK* get_all_preferences)(struct _cef_preference_manager_t* self, int include_defaults);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, int, CefDictionaryValue*> _GetAllPreferences;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, int, CefDictionaryValue*> _GetAllPreferences;
 
   /// <summary>
   /// Returns true (1) if the preference with the specified |name| can be
@@ -52,7 +52,7 @@ public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
   /// the browser process UI thread.
   /// <c>int(CEF_CALLBACK* can_set_preference)(struct _cef_preference_manager_t* self, const cef_string_t* name);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, int> _CanSetPreference;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, int> _CanSetPreference;
 
   /// <summary>
   /// Set the |value| associated with preference |name|. Returns true (1) if the
@@ -63,6 +63,6 @@ public struct CefPreferenceManager : ICefRefCountedBase<CefPreferenceManager> {
   /// process UI thread.
   /// <c>int(CEF_CALLBACK* set_preference)(struct _cef_preference_manager_t* self, const cef_string_t* name, struct _cef_value_t* value, cef_string_t* error);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, CefValue*, CefString*, int> _SetPreference;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPreferenceManager*, CefString*, CefValue*, CefString*, int> _SetPreference;
 
 }

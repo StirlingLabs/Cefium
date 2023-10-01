@@ -16,8 +16,8 @@ public struct CefBrowserView : ICefRefCountedBase<CefBrowserView> {
   [DllImport("cef", EntryPoint = "cef_browser_view_create", CallingConvention = CallingConvention.Cdecl)]
   internal static extern unsafe CefBrowserView* _Create(CefClient* client, CefString* url, CefBrowserSettings* settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext, CefBrowserViewDelegate* @delegate);
 
-  public static unsafe ref CefBrowserView Create(ref CefClient client, ref CefString url, ref CefBrowserSettings settings, ref CefDictionaryValue extraInfo, ref CefRequestContext requestContext, ref CefBrowserViewDelegate @delegate)
-    => ref Unsafe.AsRef<CefBrowserView>(_Create(client.AsPointer(), url.AsPointer(), settings.AsPointer(), extraInfo.AsPointer(), requestContext.AsPointer(), @delegate.AsPointer()));
+  public static unsafe CefBrowserView* Create(CefClient* client, ref CefString url, ref CefBrowserSettings settings, CefDictionaryValue* extraInfo, CefRequestContext* requestContext = null, CefBrowserViewDelegate* @delegate = null)
+    => _Create(client, url.AsPointer(), settings.AsPointer(), extraInfo, requestContext, @delegate);
 
   /// <summary>
   /// Returns the BrowserView associated with |browser|.
@@ -31,27 +31,10 @@ public struct CefBrowserView : ICefRefCountedBase<CefBrowserView> {
 
   public CefView Base; // base @ 0, 440 bytes
 
-  internal unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, CefBrowser*> _GetBrowser; // get_browser @ 440, 8 bytes
+  public unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, CefBrowser*> _GetBrowser; // get_browser @ 440, 8 bytes
 
-  internal unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, CefView*> _GetChromeToolbar; // get_chrome_toolbar @ 448, 8 bytes
+  public unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, CefView*> _GetChromeToolbar; // get_chrome_toolbar @ 448, 8 bytes
 
-  internal unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, int, void> _SetPreferAccelerators; // set_prefer_accelerators @ 456, 8 bytes
-
-}
-
-[PublicAPI]
-public static class CefBrowserViewExtensions {
-
-  /// <inheritdoc cref="CefBrowserView._Create"/>
-  public static unsafe CefBrowser* GetBrowser(ref this CefBrowserView self)
-    => self._GetBrowser(self.AsPointer());
-
-  /// <inheritdoc cref="CefBrowserView._GetChromeToolbar"/>
-  public static unsafe CefView* GetChromeToolbar(ref this CefBrowserView self)
-    => self._GetChromeToolbar(self.AsPointer());
-
-  /// <inheritdoc cref="CefBrowserView._SetPreferAccelerators"/>
-  public static unsafe void SetPreferAccelerators(ref this CefBrowserView self, int preferAccelerators)
-    => self._SetPreferAccelerators(self.AsPointer(), preferAccelerators);
+  public unsafe delegate * unmanaged[Cdecl]<CefBrowserView*, int, void> _SetPreferAccelerators; // set_prefer_accelerators @ 456, 8 bytes
 
 }

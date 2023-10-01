@@ -4,9 +4,15 @@
 [PublicAPI]
 public static class CefStringExtensions {
 
+  /// <summary>
+  /// Reinterpret casts a <see cref="CefStringUserFree"/> as a <see cref="CefString"/>.
+  /// </summary>
   public static ref CefString AsCefString(ref this CefStringUserFree self)
     => ref Unsafe.As<CefStringUserFree, CefString>(ref self);
 
+  /// <summary>
+  /// Reinterpret casts a <see cref="CefString"/> as a <see cref="CefStringUserFree"/>.
+  /// </summary>
   public static ref CefStringUserFree AsCefStringUserFree(ref this CefString self)
     => ref Unsafe.As<CefString, CefStringUserFree>(ref self);
 
@@ -25,6 +31,7 @@ public static class CefStringExtensions {
     fixed (char* pSrc = src)
       return _SetUtf16(pSrc, (nuint) src.Length, output.AsPointer(), copy ? 1 : 0) != 0;
   }
+
   /// <inheritdoc cref="_SetUtf16"/>
   public static unsafe bool SetCefString(this string src, CefString* output, bool copy = true) {
     // assuming CEF_STRING_TYPE_UTF16
@@ -32,6 +39,7 @@ public static class CefStringExtensions {
       return _SetUtf16(pSrc, (nuint) src.Length, output, copy ? 1 : 0) != 0;
   }
 
+  /// <inheritdoc cref="_SetUtf16"/>
   public static ref CefString CreateCefString(this string str, [UnscopedRef] out CefString cefStr) {
     // assuming CEF_STRING_TYPE_UTF16
     cefStr = new();
@@ -40,6 +48,8 @@ public static class CefStringExtensions {
 
     return ref cefStr;
   }
+
+  /// <inheritdoc cref="_SetUtf16"/>
   public static unsafe ref CefString CreateCefString(this string str, CefString* cefStr) {
     // assuming CEF_STRING_TYPE_UTF16
     *cefStr = new();
@@ -49,6 +59,7 @@ public static class CefStringExtensions {
     return ref Unsafe.AsRef<CefString>(cefStr);
   }
 
+  /// <inheritdoc cref="_SetUtf16"/>
   public static CefString CreateCefString(this string str) {
     // assuming CEF_STRING_TYPE_UTF16
     str.CreateCefString(out var cefStr);

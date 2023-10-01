@@ -25,7 +25,7 @@ public struct CefMediaSink : ICefRefCountedBase<CefMediaSink> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_id)(struct _cef_media_sink_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefStringUserFree*> _GetId;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefStringUserFree*> _GetId;
 
   /// <summary>
   /// Returns the name of this sink.
@@ -33,36 +33,36 @@ public struct CefMediaSink : ICefRefCountedBase<CefMediaSink> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_name)(struct _cef_media_sink_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefStringUserFree*> _GetName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefStringUserFree*> _GetName;
 
   /// <summary>
   /// Returns the icon type for this sink.
   /// <c>cef_media_sink_icon_type_t(CEF_CALLBACK* get_icon_type)(struct _cef_media_sink_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSinkIconType> _GetIconType;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSinkIconType> _GetIconType;
 
   /// <summary>
   /// Asynchronously retrieves device info.
   /// <c>void(CEF_CALLBACK* get_device_info)(struct _cef_media_sink_t* self, struct _cef_media_sink_device_info_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSinkDeviceInfoCallback*, void> _GetDeviceInfo;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSinkDeviceInfoCallback*, void> _GetDeviceInfo;
 
   /// <summary>
   /// Returns true (1) if this sink accepts content via Cast.
   /// <c>int(CEF_CALLBACK* is_cast_sink)(struct _cef_media_sink_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, int> _IsCastSink;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, int> _IsCastSink;
 
   /// <summary>
   /// Returns true (1) if this sink accepts content via DIAL.
   /// <c>int(CEF_CALLBACK* is_dial_sink)(struct _cef_media_sink_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, int> _IsDialSink;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, int> _IsDialSink;
 
   /// <summary>
   /// Returns true (1) if this sink is compatible with |source|.
   /// <c>int(CEF_CALLBACK* is_compatible_with)(struct _cef_media_sink_t* self, struct _cef_media_source_t* source);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSource*, int> _IsCompatibleWith;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSink*, CefMediaSource*, int> _IsCompatibleWith;
 
 }

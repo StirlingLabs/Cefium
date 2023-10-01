@@ -51,7 +51,7 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// be called on any render process thread.
   /// <c>struct _cef_task_runner_t*(CEF_CALLBACK* get_task_runner)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefTaskRunner*> _GetTaskRunner;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefTaskRunner*> _GetTaskRunner;
 
   /// <summary>
   /// Returns true (1) if the underlying handle is valid and it can be accessed
@@ -59,28 +59,28 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _IsValid;
 
   /// <summary>
   /// Returns the browser for this context. This function will return an NULL
   /// reference for WebWorker contexts.
   /// <c>struct _cef_browser_t*(CEF_CALLBACK* get_browser)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefBrowser*> _GetBrowser;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefBrowser*> _GetBrowser;
 
   /// <summary>
   /// Returns the frame for this context. This function will return an NULL
   /// reference for WebWorker contexts.
   /// <c>struct _cef_frame_t*(CEF_CALLBACK* get_frame)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefFrame*> _GetFrame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefFrame*> _GetFrame;
 
   /// <summary>
   /// Returns the global object for this context. The context must be entered
   /// before calling this function.
   /// <c>struct _cef_v8value_t*(CEF_CALLBACK* get_global)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefV8Value*> _GetGlobal;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefV8Value*> _GetGlobal;
 
   /// <summary>
   /// Enter this context. A context must be explicitly entered before creating a
@@ -90,21 +90,21 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// if the scope was entered successfully.
   /// <c>int(CEF_CALLBACK* enter)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _Enter;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _Enter;
 
   /// <summary>
   /// Exit this context. Call this function only after calling enter(). Returns
   /// true (1) if the scope was exited successfully.
   /// <c>int(CEF_CALLBACK* exit)(struct _cef_v8context_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _Exit;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, int> _Exit;
 
   /// <summary>
   /// Returns true (1) if this object is pointing to the same handle as |that|
   /// object.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_v8context_t* self, struct _cef_v8context_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefV8Context*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefV8Context*, int> _IsSame;
 
   /// <summary>
   /// Execute a string of JavaScript code in this V8 context. The |script_url|
@@ -115,6 +115,6 @@ public struct CefV8Context : ICefRefCountedBase<CefV8Context> {
   /// to the exception, if any, and the function will return false (0).
   /// <c>int(CEF_CALLBACK* eval)(struct _cef_v8context_t* self, const cef_string_t* code, const cef_string_t* script_url, int start_line, struct _cef_v8value_t** retval, struct _cef_v8exception_t** exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefString*, CefString*, int, CefV8Value**, CefV8Exception**, int> _Eval;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Context*, CefString*, CefString*, int, CefV8Value**, CefV8Exception**, int> _Eval;
 
 }

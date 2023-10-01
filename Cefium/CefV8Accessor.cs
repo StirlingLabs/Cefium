@@ -26,7 +26,7 @@ public struct CefV8Accessor : ICefRefCountedBase<CefV8Accessor> {
   /// handled.
   /// <c>int(CEF_CALLBACK* get)(struct _cef_v8accessor_t* self, const cef_string_t* name, struct _cef_v8value_t* object, struct _cef_v8value_t** retval, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Accessor*, ref CefString, ref CefV8Value, CefV8Value**, ref CefString, int> _Get;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Accessor*, ref CefString, ref CefV8Value, CefV8Value**, ref CefString, int> _Get;
 
   /// <summary>
   /// Handle assignment of the accessor value identified by |name|. |object| is
@@ -36,6 +36,6 @@ public struct CefV8Accessor : ICefRefCountedBase<CefV8Accessor> {
   /// handled.
   /// <c>int(CEF_CALLBACK* set)(struct _cef_v8accessor_t* self, const cef_string_t* name, struct _cef_v8value_t* object, struct _cef_v8value_t* value, cef_string_t* exception);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Accessor*, ref CefString, ref CefV8Value, ref CefV8Value, ref CefString, int> _Set;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Accessor*, ref CefString, ref CefV8Value, ref CefV8Value, ref CefString, int> _Set;
 
 }

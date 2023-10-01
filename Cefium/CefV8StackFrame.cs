@@ -28,7 +28,7 @@ public struct CefV8StackFrame : ICefRefCountedBase<CefV8StackFrame> {
   /// returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsValid;
 
   /// <summary>
   /// Returns the name of the resource script that contains the function.
@@ -36,7 +36,7 @@ public struct CefV8StackFrame : ICefRefCountedBase<CefV8StackFrame> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_script_name)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetScriptName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetScriptName;
 
   /// <summary>
   /// Returns the name of the resource script that contains the function or the
@@ -46,7 +46,7 @@ public struct CefV8StackFrame : ICefRefCountedBase<CefV8StackFrame> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_script_name_or_source_url)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetScriptNameOrSourceUrl;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetScriptNameOrSourceUrl;
 
   /// <summary>
   /// Returns the name of the function.
@@ -54,31 +54,31 @@ public struct CefV8StackFrame : ICefRefCountedBase<CefV8StackFrame> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_function_name)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetFunctionName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, CefStringUserFree*> _GetFunctionName;
 
   /// <summary>
   /// Returns the 1-based line number for the function call or 0 if unknown.
   /// <c>int(CEF_CALLBACK* get_line_number)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _GetLineNumber;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _GetLineNumber;
 
   /// <summary>
   /// Returns the 1-based column offset on the line for the function call or 0
   /// if unknown.
   /// <c>int(CEF_CALLBACK* get_column)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _GetColumn;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _GetColumn;
 
   /// <summary>
   /// Returns true (1) if the function was compiled using eval().
   /// <c>int(CEF_CALLBACK* is_eval)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsEval;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsEval;
 
   /// <summary>
   /// Returns true (1) if the function was called as a constructor via "new".
   /// <c>int(CEF_CALLBACK* is_constructor)(struct _cef_v8stack_frame_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsConstructor;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8StackFrame*, int> _IsConstructor;
 
 }

@@ -6,6 +6,6 @@ public static class CefCommandHandlerExtensions {
 
   /// <inheritdoc cref="CefCommandHandler._OnChromeCommand"/>
   public static unsafe bool OnChromeCommand(ref this CefCommandHandler self, ref CefBrowser browser, int commandId, CefWindowOpenDisposition disposition)
-    => self._OnChromeCommand(self.AsPointer(), browser.AsPointer(), commandId, disposition) != 0;
+    => self._OnChromeCommand is not null && self._OnChromeCommand(self.AsPointer(), browser.AsPointer(), commandId, disposition) != 0;
 
 }

@@ -41,7 +41,7 @@ public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessage
   /// large messages (some of which may exceed 1MB in size).
   /// <c>int(CEF_CALLBACK* on_dev_tools_message)(struct _cef_dev_tools_message_observer_t* self, struct _cef_browser_t* browser, const void* message, size_t message_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void*, nuint, int> _OnDevToolsMessage;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void*, nuint, int> _OnDevToolsMessage;
 
   /// <summary>
   /// Method that will be called after attempted execution of a DevTools
@@ -56,7 +56,7 @@ public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessage
   /// on |result| contents.
   /// <c>void(CEF_CALLBACK* on_dev_tools_method_result)(struct _cef_dev_tools_message_observer_t* self, struct _cef_browser_t* browser, int message_id, int success, const void* result, size_t result_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, int, int, void*, nuint, void> _OnDevToolsMethodResult;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, int, int, void*, nuint, void> _OnDevToolsMethodResult;
 
   /// <summary>
   /// Method that will be called on receipt of a DevTools protocol event.
@@ -67,7 +67,7 @@ public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessage
   /// documentation for additional details on |params| contents.
   /// <c>void(CEF_CALLBACK* on_dev_tools_event)(struct _cef_dev_tools_message_observer_t* self, struct _cef_browser_t* browser, const cef_string_t* method, const void* params, size_t params_size)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, CefString*, void*, nuint, void> _OnDevToolsEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, CefString*, void*, nuint, void> _OnDevToolsEvent;
 
   /// <summary>
   /// Method that will be called when the DevTools agent has attached. |browser|
@@ -75,7 +75,7 @@ public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessage
   /// to the first message sent while the agent is detached.
   /// <c>void(CEF_CALLBACK* on_dev_tools_agent_attached)(struct _cef_dev_tools_message_observer_t* self, struct _cef_browser_t* browser)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void> _OnDevToolsAgentAttached;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void> _OnDevToolsAgentAttached;
 
   /// <summary>
   /// Method that will be called when the DevTools agent has detached. |browser|
@@ -84,6 +84,6 @@ public struct CefDevToolsMessageObserver : ICefRefCountedBase<CefDevToolsMessage
   /// active event subscriptions will be canceled.
   /// <c>void(CEF_CALLBACK* on_dev_tools_agent_detached)(struct _cef_dev_tools_message_observer_t* self, struct _cef_browser_t* browser)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void> _OnDevToolsAgentDetached;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefDevToolsMessageObserver*, CefBrowser*, void> _OnDevToolsAgentDetached;
 
 }

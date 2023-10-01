@@ -33,46 +33,46 @@ public struct CefBinaryValue : ICefRefCountedBase<CefBinaryValue> {
   /// call any other functions if this function returns false (0).
   /// <c>int(CEF_CALLBACK* is_valid)(struct _cef_binary_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, int> _IsValid;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, int> _IsValid;
 
   /// <summary>
   /// Returns true (1) if this object is currently owned by another object.
   /// <c>int(CEF_CALLBACK* is_owned)(struct _cef_binary_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, int> _IsOwned;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, int> _IsOwned;
 
   /// <summary>
   /// Returns true (1) if this object and |that| object have the same underlying
   /// data.
   /// <c>int(CEF_CALLBACK* is_same)(struct _cef_binary_value_t* self, struct _cef_binary_value_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*, int> _IsSame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*, int> _IsSame;
 
   /// <summary>
   /// Returns true (1) if this object and |that| object have an equivalent
   /// underlying value but are not necessarily the same object.
   /// <c>int(CEF_CALLBACK* is_equal)(struct _cef_binary_value_t* self, struct _cef_binary_value_t* that);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*, int> _IsEqual;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*, int> _IsEqual;
 
   /// <summary>
   /// Returns a copy of this object. The data in this object will also be
   /// copied.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* copy)(struct _cef_binary_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*> _Copy;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, CefBinaryValue*> _Copy;
 
   /// <summary>
   /// Returns the data size.
   /// <c>size_t(CEF_CALLBACK* get_size)(struct _cef_binary_value_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, nuint> _GetSize;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, nuint> _GetSize;
 
   /// <summary>
   /// Read up to |buffer_size| number of bytes into |buffer|. Reading begins at
   /// the specified byte |data_offset|. Returns the number of bytes read.
   /// <c>size_t(CEF_CALLBACK* get_data)(struct _cef_binary_value_t* self,void* buffer, size_t buffer_size, size_t data_offset);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, void*, nuint, nuint, nuint> _GetData;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBinaryValue*, void*, nuint, nuint, nuint> _GetData;
 
 }

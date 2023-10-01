@@ -26,7 +26,7 @@ public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHan
   /// cef_pack_strings.h for a listing of valid string ID values.
   /// <c>int(CEF_CALLBACK* get_localized_string)(struct _cef_resource_bundle_handler_t* self, int string_id, cef_string_t* string);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, CefString*, int> _GetLocalizedString;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, CefString*, int> _GetLocalizedString;
 
   /// <summary>
   /// Called to retrieve data for the specified scale independent |resource_id|.
@@ -37,7 +37,7 @@ public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHan
   /// of valid resource ID values.
   /// <c>int(CEF_CALLBACK* get_data_resource)(struct _cef_resource_bundle_handler_t* self, int resource_id, void** data, size_t* data_size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, void**, nuint*, int> _GetDataResource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, void**, nuint*, int> _GetDataResource;
 
   /// <summary>
   /// Called to retrieve data for the specified |resource_id| nearest the scale
@@ -48,6 +48,6 @@ public struct CefResourceBundleHandler : ICefRefCountedBase<CefResourceBundleHan
   /// cef_pack_resources.h for a listing of valid resource ID values.
   /// <c>int(CEF_CALLBACK* get_data_resource_for_scale)(struct _cef_resource_bundle_handler_t* self, int resource_id, cef_scale_factor_t scale_factor, void** data, size_t* data_size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, CefScaleFactor, void**, nuint*, int> _GetDataResourceForScale;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundleHandler*, int, CefScaleFactor, void**, nuint*, int> _GetDataResourceForScale;
 
 }

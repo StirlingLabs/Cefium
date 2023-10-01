@@ -59,7 +59,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// Returns the hosted browser object.
   /// <c>struct _cef_browser_t*(CEF_CALLBACK* get_browser)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefBrowser*> _GetBrowser;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefBrowser*> _GetBrowser;
 
   /// <summary>
   /// Request that the browser close. The JavaScript 'onbeforeunload' event will
@@ -72,7 +72,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// information.
   /// <c>void(CEF_CALLBACK* close_browser)(struct _cef_browser_host_t* self, int force_close);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _CloseBrowser;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _CloseBrowser;
 
   /// <summary>
   /// Helper for closing a browser. Call this function from the top-level window
@@ -84,13 +84,13 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// process UI thread.
   /// <c>int(CEF_CALLBACK* try_close_browser)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _TryCloseBrowser;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _TryCloseBrowser;
 
   /// <summary>
   /// Set whether the browser is focused.
   /// <c>void(CEF_CALLBACK* set_focus)(struct _cef_browser_host_t* self, int focus);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetFocus;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetFocus;
 
   /// <summary>
   /// Retrieve the window handle (if any) for this browser. If this browser is
@@ -99,7 +99,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// native window.
   /// <c>cef_window_handle_t(CEF_CALLBACK* get_window_handle)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, nint> _GetWindowHandle;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, nint> _GetWindowHandle;
 
   /// <summary>
   /// Retrieve the window handle (if any) of the browser that opened this
@@ -108,32 +108,32 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// with custom handling of modal windows.
   /// <c>cef_window_handle_t(CEF_CALLBACK* get_opener_window_handle)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, nint> _GetOpenerWindowHandle;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, nint> _GetOpenerWindowHandle;
 
   /// <summary>
   /// Returns true (1) if this browser is wrapped in a cef_browser_view_t.
   /// <c>int(CEF_CALLBACK* has_view)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _HasView;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _HasView;
 
   /// <summary>
   /// Returns the client for this browser.
   /// <c>struct _cef_client_t*(CEF_CALLBACK* get_client)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefClient*> _GetClient;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefClient*> _GetClient;
 
   /// <summary>
   /// Returns the request context for this browser.
   /// <c>struct _cef_request_context_t*(CEF_CALLBACK* get_request_context)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefRequestContext*> _GetRequestContext;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefRequestContext*> _GetRequestContext;
 
   /// <summary>
   /// Get the current zoom level. The default zoom level is 0.0. This function
   /// can only be called on the UI thread.
   /// <c>double(CEF_CALLBACK* get_zoom_level)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, double> _GetZoomLevel;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, double> _GetZoomLevel;
 
   /// <summary>
   /// Change the zoom level to the specified value. Specify 0.0 to reset the
@@ -142,7 +142,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// UI thread.
   /// <c>void(CEF_CALLBACK* set_zoom_level)(struct _cef_browser_host_t* self, double zoomLevel);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, double, void> _SetZoomLevel;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, double, void> _SetZoomLevel;
 
   /// <summary>
   /// Call to run a file chooser dialog. Only a single file chooser dialog may
@@ -160,13 +160,13 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// will be initiated asynchronously on the UI thread.
   /// <c>void(CEF_CALLBACK* run_file_dialog)(struct _cef_browser_host_t* self, cef_file_dialog_mode_t mode, const cef_string_t* title, const cef_string_t* default_file_path, cef_string_list_t accept_filters, struct _cef_run_file_dialog_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefFileDialogMode, CefString*, CefString*, CefStringList*, CefRunFileDialogCallback*, void> _RunFileDialog;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefFileDialogMode, CefString*, CefString*, CefStringList*, CefRunFileDialogCallback*, void> _RunFileDialog;
 
   /// <summary>
   /// Download the file at |url| using cef_download_handler_t.
   /// <c>void(CEF_CALLBACK* start_download)(struct _cef_browser_host_t* self, const cef_string_t* url);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _StartDownload;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _StartDownload;
 
   /// <summary>
   /// Download |image_url| and execute |callback| on completion with the images
@@ -181,13 +181,13 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// requested from the server even if it is present in the browser cache.
   /// <c>void(CEF_CALLBACK* download_image)(struct _cef_browser_host_t* self, const cef_string_t* image_url, int is_favicon, uint32 max_image_size, int bypass_cache, struct _cef_download_image_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, int, uint, int, CefDownloadImageCallback*, void> _DownloadImage;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, int, uint, int, CefDownloadImageCallback*, void> _DownloadImage;
 
   /// <summary>
   /// Print the current browser contents.
   /// <c>void(CEF_CALLBACK* print)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _Print;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _Print;
 
   /// <summary>
   /// Print the current browser contents to the PDF file specified by |path| and
@@ -196,7 +196,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// cef_print_handler_t::GetPdfPaperSize function.
   /// <c>void(CEF_CALLBACK* print_to_pdf)(struct _cef_browser_host_t* self, const cef_string_t* path, const struct _cef_pdf_print_settings_t* settings, struct _cef_pdf_print_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, CefPdfPrintSettings*, CefPdfPrintCallback*, void> _PrintToPdf;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, CefPdfPrintSettings*, CefPdfPrintCallback*, void> _PrintToPdf;
 
   /// <summary>
   /// Search for |searchText|. |forward| indicates whether to search forward or
@@ -208,13 +208,13 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// cef_client_t::GetFindHandler will be called to report find results.
   /// <c>void(CEF_CALLBACK* find)(struct _cef_browser_host_t* self, const cef_string_t* searchText, int forward, int matchCase, int findNext);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, int, int, int, void> _Find;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, int, int, int, void> _Find;
 
   /// <summary>
   /// Cancel all searches that are currently going on.
   /// <c>void(CEF_CALLBACK* stop_finding)(struct _cef_browser_host_t* self, int clearSelection);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _StopFinding;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _StopFinding;
 
   /// <summary>
   /// Open developer tools (DevTools) in its own browser. The DevTools browser
@@ -226,20 +226,20 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// this browser is wrapped in a cef_browser_view_t.
   /// <c>void(CEF_CALLBACK* show_dev_tools)(struct _cef_browser_host_t* self, const struct _cef_window_info_t* windowInfo, struct _cef_client_t* client, const struct _cef_browser_settings_t* settings, const cef_point_t* inspect_element_at);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefWindowInfo*, CefClient*, CefBrowserSettings*, CefPoint*, void> _ShowDevTools;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefWindowInfo*, CefClient*, CefBrowserSettings*, CefPoint*, void> _ShowDevTools;
 
   /// <summary>
   /// Explicitly close the associated DevTools browser, if any.
   /// <c>void(CEF_CALLBACK* close_dev_tools)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _CloseDevTools;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _CloseDevTools;
 
   /// <summary>
   /// Returns true (1) if this browser currently has an associated DevTools
   /// browser. Must be called on the browser process UI thread.
   /// <c>int(CEF_CALLBACK* has_dev_tools)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _HasDevTools;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _HasDevTools;
 
   /// <summary>
   /// Send a function call message over the DevTools protocol. |message| must be
@@ -275,7 +275,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// file=&lt;path&gt;` command-line flag.
   /// <c>int(CEF_CALLBACK* send_dev_tools_message)(struct _cef_browser_host_t* self, const void* message, size_t message_size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void*, nuint, int> _SendDevToolsMessage;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void*, nuint, int> _SendDevToolsMessage;
 
   /// <summary>
   /// Execute a function call over the DevTools protocol. This is a more
@@ -291,7 +291,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// information.
   /// <c>int(CEF_CALLBACK* execute_dev_tools_method)(struct _cef_browser_host_t* self, int message_id, const cef_string_t* method, struct _cef_dictionary_value_t* params);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, CefString*, CefDictionaryValue*, int> _ExecuteDevToolsMethod;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, CefString*, CefDictionaryValue*, int> _ExecuteDevToolsMethod;
 
   /// <summary>
   /// Add an observer for DevTools protocol messages (function results and
@@ -300,7 +300,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// documentation for additional usage information.
   /// <c>struct _cef_registration_t*(CEF_CALLBACK* add_dev_tools_message_observer)(struct _cef_browser_host_t* self, struct _cef_dev_tools_message_observer_t* observer);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefDevToolsMessageObserver*, CefRegistration*> _AddDevToolsMessageObserver;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefDevToolsMessageObserver*, CefRegistration*> _AddDevToolsMessageObserver;
 
   /// <summary>
   /// Retrieve a snapshot of current navigation entries as values sent to the
@@ -309,26 +309,26 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// sent.
   /// <c>void(CEF_CALLBACK* get_navigation_entries)(struct _cef_browser_host_t* self, struct _cef_navigation_entry_visitor_t* visitor, int current_only);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefNavigationEntryVisitor*, int, void> _GetNavigationEntries;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefNavigationEntryVisitor*, int, void> _GetNavigationEntries;
 
   /// <summary>
   /// If a misspelled word is currently selected in an editable node calling
   /// this function will replace it with the specified |word|.
   /// <c>void(CEF_CALLBACK* replace_misspelling)(struct _cef_browser_host_t* self, const cef_string_t* word);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _ReplaceMisspelling;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _ReplaceMisspelling;
 
   /// <summary>
   /// Add the specified |word| to the spelling dictionary.
   /// <c>void(CEF_CALLBACK* add_word_to_dictionary)(struct _cef_browser_host_t* self, const cef_string_t* word);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _AddWordToDictionary;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, void> _AddWordToDictionary;
 
   /// <summary>
   /// Returns true (1) if window rendering is disabled.
   /// <c>int(CEF_CALLBACK* is_window_rendering_disabled)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsWindowRenderingDisabled;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsWindowRenderingDisabled;
 
   /// <summary>
   /// Notify the browser that the widget has been resized. The browser will
@@ -337,7 +337,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// regions. This function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* was_resized)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _WasResized;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _WasResized;
 
   /// <summary>
   /// Notify the browser that it has been hidden or shown. Layouting and
@@ -345,7 +345,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// hidden. This function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* was_hidden)(struct _cef_browser_host_t* self, int hidden);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _WasHidden;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _WasHidden;
 
   /// <summary>
   /// Send a notification to the browser that the screen info has changed. The
@@ -356,7 +356,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// disabled.
   /// <c>void(CEF_CALLBACK* notify_screen_info_changed)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _NotifyScreenInfoChanged;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _NotifyScreenInfoChanged;
 
   /// <summary>
   /// Invalidate the view. The browser will call cef_render_handler_t::OnPaint
@@ -364,34 +364,34 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// disabled.
   /// <c>void(CEF_CALLBACK* invalidate)(struct _cef_browser_host_t* self, cef_paint_element_type_t type);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefPaintElementType, void> _Invalidate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefPaintElementType, void> _Invalidate;
 
   /// <summary>
   /// Issue a BeginFrame request to Chromium.  Only valid when
   /// cef_window_tInfo::external_begin_frame_enabled is set to true (1).
   /// <c>void(CEF_CALLBACK* send_external_begin_frame)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _SendExternalBeginFrame;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _SendExternalBeginFrame;
 
   /// <summary>
   /// Send a key event to the browser.
   /// <c>void(CEF_CALLBACK* send_key_event)(struct _cef_browser_host_t* self, const cef_key_event_t* event);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefKeyEvent*, void> _SendKeyEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefKeyEvent*, void> _SendKeyEvent;
 
   /// <summary>
   /// Send a mouse click event to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   /// <c>void(CEF_CALLBACK* send_mouse_click_event)(struct _cef_browser_host_t* self, const cef_mouse_event_t* event, cef_mouse_button_type_t type, int mouseUp, int clickCount);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, CefMouseButton, int, int, void> _SendMouseClickEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, CefMouseButton, int, int, void> _SendMouseClickEvent;
 
   /// <summary>
   /// Send a mouse move event to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   /// <c>void(CEF_CALLBACK* send_mouse_move_event)(struct _cef_browser_host_t* self, const cef_mouse_event_t* event, int mouseLeave);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, int, void> _SendMouseMoveEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, int, void> _SendMouseMoveEvent;
 
   /// <summary>
   /// Send a mouse wheel event to the browser. The |x| and |y| coordinates are
@@ -402,26 +402,26 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// implemented properly.
   /// <c>void(CEF_CALLBACK* send_mouse_wheel_event)(struct _cef_browser_host_t* self, const cef_mouse_event_t* event, int deltaX, int deltaY);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, int, int, void> _SendMouseWheelEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, int, int, void> _SendMouseWheelEvent;
 
   /// <summary>
   /// Send a touch event to the browser for a windowless browser.
   /// <c>void(CEF_CALLBACK* send_touch_event)(struct _cef_browser_host_t* self, const cef_touch_event_t* event);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefTouchEvent*, void> _SendTouchEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefTouchEvent*, void> _SendTouchEvent;
 
   /// <summary>
   /// Send a capture lost event to the browser.
   /// <c>void(CEF_CALLBACK* send_capture_lost_event)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _SendCaptureLostEvent;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _SendCaptureLostEvent;
 
   /// <summary>
   /// Notify the browser that the window hosting it is about to be moved or
   /// resized. This function is only used on Windows and Linux.
   /// <c>void(CEF_CALLBACK* notify_move_or_resize_started)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _NotifyMoveOrResizeStarted;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _NotifyMoveOrResizeStarted;
 
   /// <summary>
   /// Returns the maximum rate in frames per second (fps) that
@@ -431,7 +431,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// (default 30). This function can only be called on the UI thread.
   /// <c>int(CEF_CALLBACK* get_windowless_frame_rate)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _GetWindowlessFrameRate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _GetWindowlessFrameRate;
 
   /// <summary>
   /// Set the maximum rate in frames per second (fps) that
@@ -442,7 +442,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// cef_browser_tSettings.windowless_frame_rate.
   /// <c>void(CEF_CALLBACK* set_windowless_frame_rate)(struct _cef_browser_host_t* self, int frame_rate);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetWindowlessFrameRate;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetWindowlessFrameRate;
 
   /// <summary>
   /// Begins a new composition or updates the existing composition. Blink has a
@@ -470,7 +470,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// This function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* ime_set_composition)(struct _cef_browser_host_t* self, const cef_string_t* text, size_t underlinesCount, cef_composition_underline_t const* underlines, const cef_range_t* replacement_range, const cef_range_t* selection_range);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, nuint, CefCompositionUnderline*, CefRange*, CefRange*, void> _ImeSetComposition;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, nuint, CefCompositionUnderline*, CefRange*, CefRange*, void> _ImeSetComposition;
 
   /// <summary>
   /// Completes the existing composition by optionally inserting the specified
@@ -482,7 +482,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* ime_commit_text)(struct _cef_browser_host_t* self, const cef_string_t* text, const cef_range_t* replacement_range, int relative_cursor_pos);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, CefRange*, int, void> _ImeCommitText;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefString*, CefRange*, int, void> _ImeCommitText;
 
   /// <summary>
   /// Completes the existing composition by applying the current composition
@@ -491,7 +491,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* ime_finish_composing_text)(struct _cef_browser_host_t* self, int keep_selection);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _ImeFinishComposingText;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _ImeFinishComposingText;
 
   /// <summary>
   /// Cancels the existing composition and discards the composition node
@@ -499,7 +499,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// usage. This function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* ime_cancel_composition)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _ImeCancelComposition;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _ImeCancelComposition;
 
   /// <summary>
   /// Call this function when the user drags the mouse into the web view (before
@@ -511,7 +511,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// window rendering is disabled.
   /// <c>void(CEF_CALLBACK* drag_target_drag_enter)(struct _cef_browser_host_t* self, struct _cef_drag_data_t* drag_data, const cef_mouse_event_t* event, cef_drag_operations_mask_t allowed_ops);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefDragData*, CefMouseEvent*, CefDragOperationsMask, void> _DragTargetDragEnter;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefDragData*, CefMouseEvent*, CefDragOperationsMask, void> _DragTargetDragEnter;
 
   /// <summary>
   /// Call this function each time the mouse is moved across the web view during
@@ -520,7 +520,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// window rendering is disabled.
   /// <c>void(CEF_CALLBACK* drag_target_drag_over)(struct _cef_browser_host_t* self, const cef_mouse_event_t* event, cef_drag_operations_mask_t allowed_ops);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, CefDragOperationsMask, void> _DragTargetDragOver;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, CefDragOperationsMask, void> _DragTargetDragOver;
 
   /// <summary>
   /// Call this function when the user drags the mouse out of the web view
@@ -528,7 +528,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// window rendering is disabled.
   /// <c>void(CEF_CALLBACK* drag_target_drag_leave)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _DragTargetDragLeave;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _DragTargetDragLeave;
 
   /// <summary>
   /// Call this function when the user completes the drag operation by dropping
@@ -538,7 +538,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// is disabled.
   /// <c>void(CEF_CALLBACK* drag_target_drop)(struct _cef_browser_host_t* self, const cef_mouse_event_t* event);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, void> _DragTargetDrop;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefMouseEvent*, void> _DragTargetDrop;
 
   /// <summary>
   /// Call this function when the drag operation started by a
@@ -550,7 +550,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// disabled.
   /// <c>void(CEF_CALLBACK* drag_source_ended_at)(struct _cef_browser_host_t* self, int x, int y, cef_drag_operations_mask_t op);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, int, CefDragOperationsMask, void> _DragSourceEndedAt;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, int, CefDragOperationsMask, void> _DragSourceEndedAt;
 
   /// <summary>
   /// Call this function when the drag operation started by a
@@ -561,14 +561,14 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// mthods. This function is only used when window rendering is disabled.
   /// <c>void(CEF_CALLBACK* drag_source_system_drag_ended)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _DragSourceSystemDragEnded;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, void> _DragSourceSystemDragEnded;
 
   /// <summary>
   /// Returns the current visible navigation entry for this browser. This
   /// function can only be called on the UI thread.
   /// <c>struct _cef_navigation_entry_t*(CEF_CALLBACK* get_visible_navigation_entry)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefNavigationEntry*> _GetVisibleNavigationEntry;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefNavigationEntry*> _GetVisibleNavigationEntry;
 
   /// <summary>
   /// Set accessibility state for all frames. |accessibility_state| may be
@@ -596,7 +596,7 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// accessibility objects using CefAccessibiltyHandler callbacks if desired.
   /// <c>void(CEF_CALLBACK* set_accessibility_state)(struct _cef_browser_host_t* self, cef_state_t accessibility_state);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefState, void> _SetAccessibilityState;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefState, void> _SetAccessibilityState;
 
   /// <summary>
   /// Enable notifications of auto resize via
@@ -604,14 +604,14 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// default. |min_size| and |max_size| define the range of allowed sizes.
   /// <c>void(CEF_CALLBACK* set_auto_resize_enabled)(struct _cef_browser_host_t* self, int enabled, const cef_size_t* min_size, const cef_size_t* max_size);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, CefSize*, CefSize*, void> _SetAutoResizeEnabled;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, CefSize*, CefSize*, void> _SetAutoResizeEnabled;
 
   /// <summary>
   /// Returns the extension hosted in this browser or NULL if no extension is
   /// hosted. See cef_request_context_t::LoadExtension for details.
   /// <c>struct _cef_extension_t*(CEF_CALLBACK* get_extension)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefExtension*> _GetExtension;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, CefExtension*> _GetExtension;
 
   /// <summary>
   /// Returns true (1) if this browser is hosting an extension background
@@ -619,19 +619,19 @@ public struct CefBrowserHost : ICefRefCountedBase<CefBrowserHost> {
   /// cef_request_context_t::LoadExtension for details.
   /// <c>int(CEF_CALLBACK* is_background_host)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsBackgroundHost;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsBackgroundHost;
 
   /// <summary>
   /// Set whether the browser's audio is muted.
   /// <c>void(CEF_CALLBACK* set_audio_muted)(struct _cef_browser_host_t* self,int mute);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetAudioMuted;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int, void> _SetAudioMuted;
 
   /// <summary>
   /// Returns true (1) if the browser's audio is muted.  This function can only
   /// be called on the UI thread.
   /// <c>int(CEF_CALLBACK* is_audio_muted)(struct _cef_browser_host_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsAudioMuted;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefBrowserHost*, int> _IsAudioMuted;
 
 }

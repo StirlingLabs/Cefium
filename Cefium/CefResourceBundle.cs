@@ -37,7 +37,7 @@ public struct CefResourceBundle : ICefRefCountedBase<CefResourceBundle> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_localized_string)(struct _cef_resource_bundle_t* self, int string_id);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefStringUserFree*> _GetLocalizedString;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefStringUserFree*> _GetLocalizedString;
 
   /// <summary>
   /// Returns a cef_binary_value_t containing the decompressed contents of the
@@ -45,7 +45,7 @@ public struct CefResourceBundle : ICefRefCountedBase<CefResourceBundle> {
   /// cef_pack_resources.h for a listing of valid resource ID values.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_data_resource)(struct _cef_resource_bundle_t* self, int resource_id);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefBinaryValue*> _GetDataResource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefBinaryValue*> _GetDataResource;
 
   /// <summary>
   /// Returns a cef_binary_value_t containing the decompressed contents of the
@@ -55,6 +55,6 @@ public struct CefResourceBundle : ICefRefCountedBase<CefResourceBundle> {
   /// cef_pack_resources.h for a listing of valid resource ID values.
   /// <c>struct _cef_binary_value_t*(CEF_CALLBACK* get_data_resource_for_scale)(struct _cef_resource_bundle_t* self, int resource_id, cef_scale_factor_t scale_factor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefScaleFactor, CefBinaryValue*> _GetDataResourceForScale;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefResourceBundle*, int, CefScaleFactor, CefBinaryValue*> _GetDataResourceForScale;
 
 }

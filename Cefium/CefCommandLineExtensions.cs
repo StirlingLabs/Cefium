@@ -5,63 +5,127 @@ namespace Cefium;
 public static class CefCommandLineExtensions {
 
   /// <inheritdoc cref="CefCommandLine._IsValid"/>
-  public static unsafe bool IsValid(ref this CefCommandLine self) => self._IsValid(self.AsPointer()) != 0;
+  public static unsafe bool IsValid(ref this CefCommandLine self)
+    => self._IsValid is not null && self._IsValid(self.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefCommandLine._IsReadOnly"/>
-  public static unsafe bool IsReadOnly(ref this CefCommandLine self) => self._IsReadOnly(self.AsPointer()) != 0;
+  public static unsafe bool IsReadOnly(ref this CefCommandLine self)
+    => self._IsReadOnly is not null && self._IsReadOnly(self.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefCommandLine._Copy"/>
-  public static unsafe CefCommandLine* Copy(ref this CefCommandLine self) => self._Copy(self.AsPointer());
+  public static unsafe CefCommandLine* Copy(ref this CefCommandLine self)
+    => self._Copy is not null ? self._Copy(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefCommandLine._InitFromArgv"/>
-  public static unsafe void InitFromArgv(ref this CefCommandLine self, int argc, char** argv) => self._InitFromArgv(self.AsPointer(), argc, argv);
+  public static unsafe bool InitFromArgv(ref this CefCommandLine self, int argc, char** argv) {
+    if (self._InitFromArgv is null) return false;
+
+    self._InitFromArgv(self.AsPointer(), argc, argv);
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._InitFromString"/>
-  public static unsafe void InitFromString(ref this CefCommandLine self, ref CefString commandLine) => self._InitFromString(self.AsPointer(), commandLine.AsPointer());
+  public static unsafe bool InitFromString(ref this CefCommandLine self, ref CefString commandLine) {
+    if (self._InitFromString is null) return false;
+
+    self._InitFromString(self.AsPointer(), commandLine.AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._Reset"/>
-  public static unsafe void Reset(ref this CefCommandLine self) => self._Reset(self.AsPointer());
+  public static unsafe bool Reset(ref this CefCommandLine self) {
+    if (self._Reset is null) return false;
+
+    self._Reset(self.AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._GetArgv"/>
-  public static unsafe void GetArgv(ref this CefCommandLine self, ref CefStringList argv) => self._GetArgv(self.AsPointer(), argv.AsPointer());
+  public static unsafe bool GetArgv(ref this CefCommandLine self, ref CefStringList argv) {
+    if (self._GetArgv is null) return false;
+
+    self._GetArgv(self.AsPointer(), argv.AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._GetCommandLineString"/>
-  public static unsafe CefStringUserFree* GetCommandLineString(ref this CefCommandLine self) => self._GetCommandLineString(self.AsPointer());
+  public static unsafe CefStringUserFree* GetCommandLineString(ref this CefCommandLine self)
+    => self._GetCommandLineString is not null ? self._GetCommandLineString(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefCommandLine._GetProgram"/>
-  public static unsafe CefStringUserFree* GetProgram(ref this CefCommandLine self) => self._GetProgram(self.AsPointer());
+  public static unsafe CefStringUserFree* GetProgram(ref this CefCommandLine self)
+    => self._GetProgram is not null ? self._GetProgram(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefCommandLine._SetProgram"/>
-  public static unsafe void SetProgram(ref this CefCommandLine self, ref CefString program) => self._SetProgram(self.AsPointer(), program.AsPointer());
+  public static unsafe bool SetProgram(ref this CefCommandLine self, ref CefString program) {
+    if (self._SetProgram is null) return false;
+
+    self._SetProgram(self.AsPointer(), program.AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._HasSwitches"/>
-  public static unsafe bool HasSwitches(ref this CefCommandLine self) => self._HasSwitches(self.AsPointer()) != 0;
+  public static unsafe bool HasSwitches(ref this CefCommandLine self)
+    => self._HasSwitches is not null && self._HasSwitches(self.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefCommandLine._HasSwitch"/>
-  public static unsafe bool HasSwitch(ref this CefCommandLine self, ref CefString name) => self._HasSwitch(self.AsPointer(), name.AsPointer()) != 0;
+  public static unsafe bool HasSwitch(ref this CefCommandLine self, ref CefString name)
+    => self._HasSwitch is not null && self._HasSwitch(self.AsPointer(), name.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefCommandLine._GetSwitchValue"/>
-  public static unsafe CefStringUserFree* GetSwitchValue(ref this CefCommandLine self, ref CefString name) => self._GetSwitchValue(self.AsPointer(), name.AsPointer());
+  public static unsafe CefStringUserFree* GetSwitchValue(ref this CefCommandLine self, ref CefString name)
+    => self._GetSwitchValue is not null ? self._GetSwitchValue(self.AsPointer(), name.AsPointer()) : default;
 
   /// <inheritdoc cref="CefCommandLine._GetSwitches"/>
-  public static unsafe void GetSwitches(ref this CefCommandLine self, CefStringMap* switches) => self._GetSwitches(self.AsPointer(), switches);
+  public static unsafe bool GetSwitches(ref this CefCommandLine self, CefStringMap* switches) {
+    if (self._GetSwitches is null) return false;
+
+    self._GetSwitches(self.AsPointer(), switches);
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._AppendSwitch"/>
-  public static unsafe void AppendSwitch(ref this CefCommandLine self, ref CefString name) => self._AppendSwitch(self.AsPointer(), name.AsPointer());
+  public static unsafe bool AppendSwitch(ref this CefCommandLine self, in CefString name) {
+    if (self._AppendSwitch is null) return false;
+
+    self._AppendSwitch(self.AsPointer(), Unsafe.AsRef(name).AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._AppendSwitchWithValue"/>
-  public static unsafe void AppendSwitchWithValue(ref this CefCommandLine self, ref CefString name, ref CefString value) => self._AppendSwitchWithValue(self.AsPointer(), name.AsPointer(), value.AsPointer());
+  public static unsafe bool AppendSwitchWithValue(ref this CefCommandLine self, in CefString name, in CefString value) {
+    if (self._AppendSwitchWithValue is null) return false;
+
+    self._AppendSwitchWithValue(self.AsPointer(), Unsafe.AsRef(name).AsPointer(), Unsafe.AsRef(value).AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._HasArguments"/>
-  public static unsafe bool HasArguments(ref this CefCommandLine self) => self._HasArguments(self.AsPointer()) != 0;
+  public static unsafe bool HasArguments(ref this CefCommandLine self)
+    => self._HasArguments is not null && self._HasArguments(self.AsPointer()) != 0;
 
   /// <inheritdoc cref="CefCommandLine._GetArguments"/>
-  public static unsafe void GetArguments(ref this CefCommandLine self, CefStringList* arguments) => self._GetArguments(self.AsPointer(), arguments);
+  public static unsafe bool GetArguments(ref this CefCommandLine self, CefStringList* arguments) {
+    if (self._GetArguments is null) return false;
+
+    self._GetArguments(self.AsPointer(), arguments);
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._AppendArgument"/>
-  public static unsafe void AppendArgument(ref this CefCommandLine self, ref CefString argument) => self._AppendArgument(self.AsPointer(), argument.AsPointer());
+  public static unsafe bool AppendArgument(ref this CefCommandLine self, ref CefString argument) {
+    if (self._AppendArgument is null) return false;
+
+    self._AppendArgument(self.AsPointer(), argument.AsPointer());
+    return true;
+  }
 
   /// <inheritdoc cref="CefCommandLine._PrependWrapper"/>
-  public static unsafe void PrependWrapper(ref this CefCommandLine self, ref CefString wrapper) => self._PrependWrapper(self.AsPointer(), wrapper.AsPointer());
+  public static unsafe bool PrependWrapper(ref this CefCommandLine self, ref CefString wrapper) {
+    if (self._PrependWrapper is null) return false;
+
+    self._PrependWrapper(self.AsPointer(), wrapper.AsPointer());
+    return true;
+  }
 
 }

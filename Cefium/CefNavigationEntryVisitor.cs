@@ -26,6 +26,6 @@ public struct CefNavigationEntryVisitor : ICefRefCountedBase<CefNavigationEntryV
   /// is the total number of entries.
   /// <c>int(CEF_CALLBACK* visit)(struct _cef_navigation_entry_visitor_t* self, struct _cef_navigation_entry_t* entry, int current, int index, int total);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefNavigationEntryVisitor*, CefNavigationEntry*, int, int, int, int> _Visit;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefNavigationEntryVisitor*, CefNavigationEntry*, int, int, int, int> _Visit;
 
 }

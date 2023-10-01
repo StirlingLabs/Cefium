@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        
+        <LangVersion>11</LangVersion>
         <UseWpf>true</UseWpf>
         <UseWindowsForms>true</UseWindowsForms>
         <RootNamespace>Cefium.Tests</RootNamespace>

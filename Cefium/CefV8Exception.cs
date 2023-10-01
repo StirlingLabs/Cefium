@@ -25,7 +25,7 @@ public struct CefV8Exception : ICefRefCountedBase<CefV8Exception> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_message)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetMessage;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetMessage;
 
   /// <summary>
   /// Returns the line of source code that the exception occurred within.
@@ -33,7 +33,7 @@ public struct CefV8Exception : ICefRefCountedBase<CefV8Exception> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_source_line)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetSourceLine;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetSourceLine;
 
   /// <summary>
   /// Returns the resource name for the script from where the function causing
@@ -42,41 +42,41 @@ public struct CefV8Exception : ICefRefCountedBase<CefV8Exception> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_script_resource_name)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetScriptResourceName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, CefStringUserFree*> _GetScriptResourceName;
 
   /// <summary>
   /// Returns the 1-based number of the line where the error occurred or 0 if
   /// the line number is unknown.
   /// <c>int(CEF_CALLBACK* get_line_number)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetLineNumber;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetLineNumber;
 
   /// <summary>
   /// Returns the index within the script of the first character where the error
   /// occurred.
   /// <c>int(CEF_CALLBACK* get_start_position)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetStartPosition;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetStartPosition;
 
   /// <summary>
   /// Returns the index within the script of the last character where the error
   /// occurred.
   /// <c>int(CEF_CALLBACK* get_end_position)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetEndPosition;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetEndPosition;
 
   /// <summary>
   /// Returns the index within the line of the first character where the error
   /// occurred.
   /// <c>int(CEF_CALLBACK* get_start_column)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetStartColumn;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetStartColumn;
 
   /// <summary>
   /// Returns the index within the line of the last character where the error
   /// occurred.
   /// <c>int(CEF_CALLBACK* get_end_column)(struct _cef_v8exception_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetEndColumn;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefV8Exception*, int> _GetEndColumn;
 
 }

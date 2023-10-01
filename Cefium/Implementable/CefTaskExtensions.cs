@@ -5,6 +5,11 @@
 public static class CefTaskExtensions {
 
   /// <inheritdoc cref="CefTask._Execute"/>
-  public static unsafe void Execute(ref this CefTask self) => self._Execute(self.AsPointer());
+  public static unsafe bool Execute(ref this CefTask self) {
+    if (self._Execute is null) return false;
+
+    self._Execute(self.AsPointer());
+    return true;
+  }
 
 }

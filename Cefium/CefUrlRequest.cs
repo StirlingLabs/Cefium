@@ -45,26 +45,26 @@ public struct CefUrlRequest : ICefRefCountedBase<CefUrlRequest> {
   /// object is read-only and should not be modified.
   /// <c>struct _cef_request_t*(CEF_CALLBACK* get_request)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefRequest*> _GetRequest;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefRequest*> _GetRequest;
 
   /// <summary>
   /// Returns the client.
   /// <c>struct _cef_urlrequest_client_t*(CEF_CALLBACK* get_client)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefUrlRequestClient*> _GetClient;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefUrlRequestClient*> _GetClient;
 
   /// <summary>
   /// Returns the request status.
   /// <c>cef_urlrequest_status_t(CEF_CALLBACK* get_request_status)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefUrlRequestStatus> _GetRequestStatus;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefUrlRequestStatus> _GetRequestStatus;
 
   /// <summary>
   /// Returns the request error if status is UR_CANCELED or UR_FAILED, or 0
   /// otherwise.
   /// <c>cef_errorcode_t(CEF_CALLBACK* get_request_error)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefErrorCode> _GetRequestError;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefErrorCode> _GetRequestError;
 
   /// <summary>
   /// Returns the response, or NULL if no response information is available.
@@ -72,19 +72,19 @@ public struct CefUrlRequest : ICefRefCountedBase<CefUrlRequest> {
   /// completed. The returned object is read-only and should not be modified.
   /// <c>struct _cef_response_t*(CEF_CALLBACK* get_response)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefResponse*> _GetResponse;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, CefResponse*> _GetResponse;
 
   /// <summary>
   /// Returns true (1) if the response body was served from the cache. This
   /// includes responses for which revalidation was required.
   /// <c>int(CEF_CALLBACK* response_was_cached)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, int> _ResponseWasCached;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, int> _ResponseWasCached;
 
   /// <summary>
   /// Cancel the request.
   /// <c>void(CEF_CALLBACK* cancel)(struct _cef_urlrequest_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, void> _Cancel;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefUrlRequest*, void> _Cancel;
 
 }

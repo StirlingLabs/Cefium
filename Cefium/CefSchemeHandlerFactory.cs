@@ -66,6 +66,6 @@ public struct CefSchemeHandlerFactory : ICefRefCountedBase<CefSchemeHandlerFacto
   /// object passed to this function cannot be modified.
   /// <c>struct _cef_resource_handler_t*(CEF_CALLBACK* create)(struct _cef_scheme_handler_factory_t* self, struct _cef_browser_t* browser, struct _cef_frame_t* frame, const cef_string_t* scheme_name, struct _cef_request_t* request);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSchemeHandlerFactory*, CefBrowser*, CefFrame*, CefString*, CefRequest*, CefResourceHandler*> _Create;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefSchemeHandlerFactory*, CefBrowser*, CefFrame*, CefString*, CefRequest*, CefResourceHandler*> _Create;
 
 }

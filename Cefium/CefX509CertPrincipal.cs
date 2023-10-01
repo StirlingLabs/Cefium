@@ -25,7 +25,7 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_display_name)(struct _cef_x509cert_principal_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetDisplayName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetDisplayName;
 
   /// <summary>
   /// Returns the common name.
@@ -33,7 +33,7 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_common_name)(struct _cef_x509cert_principal_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetCommonName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetCommonName;
 
   /// <summary>
   /// Returns the locality name.
@@ -41,7 +41,7 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_locality_name)(struct _cef_x509cert_principal_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetLocalityName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetLocalityName;
 
   /// <summary>
   /// Returns the state or province name.
@@ -49,7 +49,7 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_state_or_province_name)(struct _cef_x509cert_principal_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetStateOrProvinceName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetStateOrProvinceName;
 
   /// <summary>
   /// Returns the country name.
@@ -57,34 +57,34 @@ public struct CefX509CertPrincipal : ICefRefCountedBase<CefX509CertPrincipal> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_country_name)(struct _cef_x509cert_principal_t* self)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetCountryName;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringUserFree*> _GetCountryName;
 
   /*
   /// <summary>
   /// Retrieve the list of street addresses.
   /// <c>void(CEF_CALLBACK* get_street_addresses)(struct _cef_x509cert_principal_t* self, cef_string_list_t addresses)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetStreetAddresses;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetStreetAddresses;
   */
 
   /// <summary>
   /// Retrieve the list of organization names.
   /// <c>void(CEF_CALLBACK* get_organization_names)(struct _cef_x509cert_principal_t* self, cef_string_list_t names)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetOrganizationNames;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetOrganizationNames;
 
   /// <summary>
   /// Retrieve the list of organization unit names.
   /// <c>void(CEF_CALLBACK* get_organization_unit_names)(struct _cef_x509cert_principal_t* self, cef_string_list_t names)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetOrganizationUnitNames;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetOrganizationUnitNames;
 
   /*
   /// <summary>
   /// Retrieve the list of domain components.
   /// <c>void(CEF_CALLBACK* get_domain_components)(struct _cef_x509cert_principal_t* self, cef_string_list_t components)</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetDomainComponents;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefX509CertPrincipal*, CefStringList*> _GetDomainComponents;
   */
 
 }

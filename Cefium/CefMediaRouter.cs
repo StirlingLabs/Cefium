@@ -35,7 +35,7 @@ public struct CefMediaRouter : ICefRefCountedBase<CefMediaRouter> {
   /// registered until the returned Registration object is destroyed.
   /// <c>struct _cef_registration_t*(CEF_CALLBACK* add_observer)(struct _cef_media_router_t* self, struct _cef_media_observer_t* observer);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefMediaObserver*, CefRegistration*> _AddObserver;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefMediaObserver*, CefRegistration*> _AddObserver;
 
   /// <summary>
   /// Returns a MediaSource object for the specified media source URN. Supported
@@ -43,14 +43,14 @@ public struct CefMediaRouter : ICefRefCountedBase<CefMediaRouter> {
   /// client application (e.g. "cast:&lt;appId>?clientId=&amp;lt;clientId>").
   /// <c>struct _cef_media_source_t*(CEF_CALLBACK* get_source)(struct _cef_media_router_t* self, const cef_string_t* urn);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefString*, CefMediaSource*> _GetSource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefString*, CefMediaSource*> _GetSource;
 
   /// <summary>
   /// Trigger an asynchronous call to cef_media_observer_t::OnSinks on all
   /// registered observers.
   /// <c>void(CEF_CALLBACK* notify_current_sinks)(struct _cef_media_router_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, void> _NotifyCurrentSinks;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, void> _NotifyCurrentSinks;
 
   /// <summary>
   /// Create a new route between |source| and |sink|. Source and sink must be
@@ -61,13 +61,13 @@ public struct CefMediaRouter : ICefRefCountedBase<CefMediaRouter> {
   /// observers.
   /// <c>void(CEF_CALLBACK* create_route)(struct _cef_media_router_t* self, struct _cef_media_source_t* source, struct _cef_media_sink_t* sink, struct _cef_media_route_create_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefMediaSource*, CefMediaSink*, CefMediaRouteCreateCallback*, void> _CreateRoute;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, CefMediaSource*, CefMediaSink*, CefMediaRouteCreateCallback*, void> _CreateRoute;
 
   /// <summary>
   /// Trigger an asynchronous call to cef_media_observer_t::OnRoutes on all
   /// registered observers.
   /// <c>void(CEF_CALLBACK* notify_current_routes)(struct _cef_media_router_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, void> _NotifyCurrentRoutes;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaRouter*, void> _NotifyCurrentRoutes;
 
 }

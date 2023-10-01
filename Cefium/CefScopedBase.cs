@@ -17,6 +17,6 @@ public struct CefScopedBase {
   /// Called to delete this object. May be NULL if the object is not owned.
   /// <c>void(CEF_CALLBACK* del)(struct _cef_base_scoped_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefScopedBase*, void> _Delete;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefScopedBase*, void> _Delete;
 
 }

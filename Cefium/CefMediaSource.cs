@@ -26,18 +26,18 @@ public struct CefMediaSource : ICefRefCountedBase<CefMediaSource> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_id)(struct _cef_media_source_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, CefStringUserFree*> _GetId;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, CefStringUserFree*> _GetId;
 
   /// <summary>
   /// Returns true (1) if this source outputs its content via Cast.
   /// <c>int(CEF_CALLBACK* is_cast_source)(struct _cef_media_source_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, int> _IsCastSource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, int> _IsCastSource;
 
   /// <summary>
   /// Returns true (1) if this source outputs its content via DIAL.
   /// <c>int(CEF_CALLBACK* is_dial_source)(struct _cef_media_source_t* self);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, int> _IsDialSource;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefMediaSource*, int> _IsDialSource;
 
 }

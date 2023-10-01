@@ -36,7 +36,7 @@ public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
   /// cannot be accessed.
   /// <c>int(CEF_CALLBACK* visit_all_cookies)(struct _cef_cookie_manager_t* self, struct _cef_cookie_visitor_t* visitor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefCookieVisitor*, int> _VisitAllCookies;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefCookieVisitor*, int> _VisitAllCookies;
 
   /// <summary>
   /// Visit a subset of cookies on the UI thread. The results are filtered by
@@ -46,7 +46,7 @@ public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
   /// Returns false (0) if cookies cannot be accessed.
   /// <c>int(CEF_CALLBACK* visit_url_cookies)(struct _cef_cookie_manager_t* self, const cef_string_t* url, int includeHttpOnly, struct _cef_cookie_visitor_t* visitor);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, int, CefCookieVisitor*, int> _VisitUrlCookies;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, int, CefCookieVisitor*, int> _VisitUrlCookies;
 
   /// <summary>
   /// Sets a cookie given a valid URL and explicit user-provided cookie
@@ -58,7 +58,7 @@ public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
   /// false (0) if an invalid URL is specified or if cookies cannot be accessed.
   /// <c>int(CEF_CALLBACK* set_cookie)(struct _cef_cookie_manager_t* self, const cef_string_t* url, const struct _cef_cookie_t* cookie, struct _cef_set_cookie_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, CefCookie*, CefSetCookieCallback*, int> _SetCookie;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, CefCookie*, CefSetCookieCallback*, int> _SetCookie;
 
   /// <summary>
   /// Delete all cookies that match the specified parameters. If both |url| and
@@ -72,7 +72,7 @@ public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
   /// deleted using the Visit*Cookies() functions.
   /// <c>int(CEF_CALLBACK* delete_cookies)(struct _cef_cookie_manager_t* self, const cef_string_t* url, const cef_string_t* cookie_name, struct _cef_delete_cookies_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, CefString*, CefDeleteCookiesCallback*, int> _DeleteCookies;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefString*, CefString*, CefDeleteCookiesCallback*, int> _DeleteCookies;
 
   /// <summary>
   /// Flush the backing store (if any) to disk. If |callback| is non-NULL it
@@ -80,6 +80,6 @@ public struct CefCookieManager : ICefRefCountedBase<CefCookieManager> {
   /// complete. Returns false (0) if cookies cannot be accessed.
   /// <c>int(CEF_CALLBACK* flush_store)(struct _cef_cookie_manager_t* self, struct _cef_completion_callback_t* callback);</c>
   /// </summary>
-  internal unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefCompletionCallback*, int> _FlushStore;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefCookieManager*, CefCompletionCallback*, int> _FlushStore;
 
 }
