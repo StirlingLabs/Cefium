@@ -81,14 +81,14 @@ public static class CefRequestExtensions {
   }
 
   /// <inheritdoc cref="CefRequest._GetFlags"/>
-  public static unsafe int GetFlags(ref this CefRequest self)
-    => self._GetFlags is not null ? self._GetFlags(self.AsPointer()) : default;
+  public static unsafe CefUrlRequestFlags GetFlags(ref this CefRequest self)
+    => self._GetFlags is not null ? (CefUrlRequestFlags)self._GetFlags(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefRequest._SetFlags"/>
-  public static unsafe bool SetFlags(ref this CefRequest self, int flags) {
+  public static unsafe bool SetFlags(ref this CefRequest self, CefUrlRequestFlags flags) {
     if (self._SetFlags is null) return false;
 
-    self._SetFlags(self.AsPointer(), flags);
+    self._SetFlags(self.AsPointer(), (int)flags);
     return true;
   }
 

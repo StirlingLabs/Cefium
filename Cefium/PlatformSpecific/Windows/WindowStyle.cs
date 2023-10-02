@@ -8,7 +8,7 @@ namespace Cefium;
 /// <remarks>
 /// After the window has been created, these styles cannot be modified, except as noted.
 /// </remarks>
-[PublicAPI, SupportedOSPlatform("windows")]
+[PublicAPI, SupportedOSPlatform("windows"), Flags]
 public enum WindowStyle : uint {
 
   /// <summary>

@@ -22,7 +22,7 @@ public struct CefStringMultimap {
   public static extern unsafe CefStringMultimap* Alloc();
 
   /// <summary>
-  /// Allocate a new string multimap.
+  /// Return the number of elements in the string multimap.
   /// <c>CEF_EXPORT size_t cef_string_multimap_size(cef_string_multimap_t map);</c>
   /// </summary>
   [DllImport("cef", EntryPoint = "cef_string_multimap_size", CallingConvention = CallingConvention.Cdecl)]

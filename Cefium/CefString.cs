@@ -1,6 +1,7 @@
 ﻿using System.Buffers;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Text;
 
 namespace Cefium;
 
@@ -38,15 +39,36 @@ public unsafe struct CefString {
     _Dtor = dtor;
   }
 
+  public static CefString* CreateEmpty()
+    => (CefString*) NativeMemory.AllocZeroed((nuint) sizeof(CefString));
+
+  public static CefString* Create(string str)
+    => Create((ReadOnlySpan<char>) str);
+
+  public static CefString* Create(ReadOnlySpan<char> charSpan) {
+    var strLength = charSpan.Length;
+    var offset = sizeof(CefString);
+    var mem = NativeMemory.Alloc((nuint) (offset + (strLength + 1) * 2));
+    var memSpan = new Span<char>((void*) ((nint) mem + offset), strLength);
+    charSpan.CopyTo(memSpan);
+    var cefStr = (CefString*) mem;
+    *cefStr = new(
+      (void*) ((nint) mem + offset),
+      (nuint) strLength,
+      &CallNativeMemoryFree
+    );
+    return cefStr;
+  }
+
   [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl), typeof(CallConvSuppressGCTransition)})]
   private static void CallNativeMemoryFree(void* p)
     => NativeMemory.Free(p);
 
   public static CefString CreateViaCopy(string str) {
-    var strLength = str.Length;
+    var charSpan = (ReadOnlySpan<char>) str;
+    var strLength = charSpan.Length;
     var mem = NativeMemory.Alloc((nuint) ((strLength + 1) * 2));
     var memSpan = new Span<char>(mem, strLength);
-    var charSpan = (ReadOnlySpan<char>) str;
     charSpan.CopyTo(memSpan);
     var cefStr = new CefString(mem, (nuint) strLength, &CallNativeMemoryFree);
 
@@ -109,5 +131,12 @@ public unsafe struct CefString {
     get => AsCharSpan().ToString();
   }
 #endif
+
+  public override string? ToString()
+    => Str == default
+      ? null
+      : Length == 0
+        ? ""
+        : new(AsCharSpan());
 
 }

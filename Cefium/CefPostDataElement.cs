@@ -63,7 +63,7 @@ public struct CefPostDataElement : ICefRefCountedBase<CefPostDataElement> {
   /// The resulting string must be freed by calling cef_string_userfree_free().
   /// <c>cef_string_userfree_t(CEF_CALLBACK* get_file)(struct _cef_post_data_element_t* self);</c>
   /// </summary>
-  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPostDataElement*, CefStringUserFree> _GetFile;
+  public unsafe delegate * unmanaged[Stdcall, SuppressGCTransition]<CefPostDataElement*, CefStringUserFree*> _GetFile;
 
   /// <summary>
   /// Return the number of bytes.

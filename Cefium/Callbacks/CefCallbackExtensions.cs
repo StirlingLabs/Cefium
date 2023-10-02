@@ -12,4 +12,13 @@ public static class CefCallbackExtensions {
     return true;
   }
 
+
+  /// <inheritdoc cref="CefCallback._Cancel"/>
+  public static unsafe bool Cancel(ref this CefCallback self) {
+    if (self._Cancel is null) return false;
+
+    self._Cancel(self.AsPointer());
+    return true;
+  }
+
 }

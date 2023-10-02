@@ -43,4 +43,11 @@ public unsafe struct CefStringUserFree {
   [DllImport("cef", EntryPoint = "cef_string_userfree_utf16_free", CallingConvention = CallingConvention.Cdecl)]
   public static extern void Free(CefStringUserFree* str);
 
+
+  public override string? ToString()
+    => Str == default
+      ? null
+      : Length == 0
+        ? ""
+        : new(AsCharSpan());
 }

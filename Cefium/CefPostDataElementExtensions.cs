@@ -43,11 +43,11 @@ public static class CefPostDataElementExtensions {
   }
 
   /// <inheritdoc cref="CefPostDataElement._GetType"/>
-  public static unsafe CefPostDataElementType GetType(ref this CefPostDataElement self)
+  public static unsafe CefPostDataElementType GetElementType(ref this CefPostDataElement self)
     => self._GetType is not null ? self._GetType(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefPostDataElement._GetFile"/>
-  public static unsafe CefStringUserFree GetFile(ref this CefPostDataElement self)
+  public static unsafe CefStringUserFree* GetFile(ref this CefPostDataElement self)
     => self._GetFile is not null ? self._GetFile(self.AsPointer()) : default;
 
   /// <inheritdoc cref="CefPostDataElement._GetBytesCount"/>

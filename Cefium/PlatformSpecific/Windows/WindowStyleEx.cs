@@ -5,7 +5,7 @@ namespace Cefium;
 /// <summary>
 /// Windows extended window styles.
 /// </summary>
-[PublicAPI, SupportedOSPlatform("windows")]
+[PublicAPI, SupportedOSPlatform("windows"), Flags]
 public enum WindowStyleEx : uint {
 
   /// <summary>
