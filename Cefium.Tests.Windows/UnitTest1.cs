@@ -9,10 +9,11 @@ using System.Text.Unicode;
 using Cysharp.Text;
 using FluentAssertions;
 using static Cefium.Cef;
+using Point = System.Windows.Point;
 
 namespace Cefium.Tests;
 
-public class Tests {
+public partial class Tests {
 
   [StructLayout(LayoutKind.Sequential)]
   private struct CefTestApp : ICefRefCountedBase<CefTestApp> {
@@ -43,8 +44,17 @@ public class Tests {
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnWindowChanged(CefViewDelegate* _self, CefView* view, int added) {
         var self = (CefTestBrowserViewDelegate*) _self;
-        if (added != 0)
+        if (added != 0) {
           self->Window = view->GetWindow();
+
+          if (view->_SetBackgroundColor is not null)
+            view->_SetBackgroundColor(view, 0x00000000);
+
+          [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
+          static uint GetBackgroundColor(CefView* _) => 0;
+          view->_GetBackgroundColor = &GetBackgroundColor;
+          self->Window->Base.Base._GetBackgroundColor = &GetBackgroundColor;
+        }
         else
           self->Window = null;
       }
@@ -54,6 +64,9 @@ public class Tests {
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnBrowserCreated(CefBrowserViewDelegate* _self, CefBrowserView* view, CefBrowser* browser) {
         var self = (CefTestBrowserViewDelegate*) _self;
+
+        if (view->Base._SetBackgroundColor is not null)
+          view->Base._SetBackgroundColor(&view->Base, 0x00000000);
         self->Browser = browser;
         if (browser is null)
           return;
@@ -88,6 +101,12 @@ public class Tests {
 
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnWindowCreated(CefWindowDelegate* self, CefWindow* window) {
+        if (window->Base.Base._SetBackgroundColor is not null)
+          window->Base.Base._SetBackgroundColor(&window->Base.Base, 0x00000000);
+        [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
+        static uint GetBackgroundColor(CefView* _) => 0;
+        window->Base.Base._GetBackgroundColor = &GetBackgroundColor;
+
         var v8Context = CefV8Context.GetCurrentContext();
         if (v8Context is not null) {
           v8Context->Enter();
@@ -106,7 +125,7 @@ public class Tests {
       [UnmanagedCallersOnly(CallConvs = new[] {typeof(CallConvCdecl)})]
       static void OnWindowDestroyed(CefWindowDelegate* self, CefWindow* window) {
         var view = ((CefTestWindowDelegate*) self)->BrowserView;
-        view->Base.Base.Size.Should().Be((uint)Unsafe.SizeOf<CefBrowserView>());
+        view->Base.Base.Size.Should().Be((uint) Unsafe.SizeOf<CefBrowserView>());
         view->Release();
       }
 
@@ -428,7 +447,8 @@ public class Tests {
       //WindowName = "",
       Bounds = ((0, 0), (640, 480)),
       ForWindows = {
-        Style = WindowStyle.PopupWindow
+        Style = WindowStyle.PopupWindow,
+        ExStyle = WindowStyleEx.Transparent | WindowStyleEx.Layered | WindowStyleEx.Composited
       }
     };
 
@@ -1542,13 +1562,6 @@ public class Tests {
 
     Thread.Sleep(125);
 
-    CefWindowInfo windowInfo = new() {
-      WindowlessRenderingEnabled = false,
-      //SharedTextureEnabled = true,
-      //WindowName = "",
-      Bounds = ((0, 0), (640, 480)),
-    };
-
     var browserSettings = new CefBrowserSettings {
       EnableDatabases = CefState.Disabled,
       EnableLocalStorage = CefState.Disabled,
@@ -1560,7 +1573,8 @@ public class Tests {
       EnableJavascriptDomPaste = CefState.Enabled,
       EnableJavascript = CefState.Enabled,
       EnableImageLoading = CefState.Enabled,
-      EnableWebGL = CefState.Enabled
+      EnableWebGL = CefState.Enabled,
+      BackgroundColor = 0x00000000,
     };
     //browserSettings.InitializeBase();
     browserSettings.Size.Should().NotBe(0);
@@ -1729,6 +1743,21 @@ public class Tests {
       var window = CefWindow.CreateTopLevel(&dlgWnd.Pointer->Base);
       window->Base.AddChildView(&view->Base);
       window->Show();
+
+      var hWnd = window->GetWindowHandle();
+
+      /*
+      var blurBehind = new DwmBlurBehind {
+        Flags = DwmBlurBehindFlags.Enable,
+        Enable = true,
+        HRgnBlur = null
+      };
+      DwmEnableBlurBehindWindow(hWnd, &blurBehind);
+
+      var margins = new WindowMargins {Left = -1, Right = -1, Top = -1, Bottom = -1};
+      DwmExtendFrameIntoClientArea(hWnd, &margins);
+      */
+
       //view->Base._RequestFocus(&view->Base);
 
       var cts = new CancellationTokenSource();
